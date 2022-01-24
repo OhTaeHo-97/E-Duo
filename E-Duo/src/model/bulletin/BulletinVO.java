@@ -1,24 +1,33 @@
-package model.board;
+package model.bulletin;
 
-public class BoardVO {
-	private int index;
+public class BulletinVO {
+	private int bul_id;
 	private String stu_id;
-	private String sort_title;
+	private String category;
 	private String title;
 	private String content;
 	private String image;
+	private String regdate;
 	
+	
+	
+	public int getBul_id() {
+		return bul_id;
+	}
+	public void setBul_id(int bul_id) {
+		this.bul_id = bul_id;
+	}
 	public String getStu_id() {
 		return stu_id;
 	}
 	public void setStu_id(String stu_id) {
 		this.stu_id = stu_id;
 	}
-	public String getSort_title() {
-		return sort_title;
+	public String getCategory() {
+		return category;
 	}
-	public void setSort_title(String sort_title) {
-		this.sort_title = sort_title;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getTitle() {
 		return title;
@@ -38,4 +47,11 @@ public class BoardVO {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	
 }
