@@ -1,23 +1,73 @@
 package model.student;
 
+import java.sql.Date;
+
 public class StudentVO {
-	private String id;
 	private String name;
 	private String stu_id;
-	private String tel;
+	private String cellphone;
+	private int postcode;
 	private String address;
-	private String sch_id;
+	private String detail_address;
+	private String refernece;
+	private int uni_id;
 	private String email;
-	private boolean gender;
-	private String birth;
-	private String grade;
-	private String semester;
-	public String getId() {
-		return id;
+	private String gender;
+	private Date birth;
+	private int grade;
+	private int semester;
+	private float obj_credit;
+	private int graduate_credit;
+	
+	public String getCellphone() {
+		return cellphone;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
+	public int getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(int postcode) {
+		this.postcode = postcode;
+	}
+	public String getDetail_address() {
+		return detail_address;
+	}
+	public void setDetail_address(String detail_address) {
+		this.detail_address = detail_address;
+	}
+	public String getRefernece() {
+		return refernece;
+	}
+	public void setRefernece(String refernece) {
+		this.refernece = refernece;
+	}
+	public int getUni_id() {
+		return uni_id;
+	}
+	public void setUni_id(int uni_id) {
+		this.uni_id = uni_id;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public float getObj_credit() {
+		return obj_credit;
+	}
+	public void setObj_credit(float obj_credit) {
+		this.obj_credit = obj_credit;
+	}
+	public int getGraduate_credit() {
+		return graduate_credit;
+	}
+	public void setGraduate_credit(int graduate_credit) {
+		this.graduate_credit = graduate_credit;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -30,23 +80,11 @@ public class StudentVO {
 	public void setStu_id(String stu_id) {
 		this.stu_id = stu_id;
 	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public String getSch_id() {
-		return sch_id;
-	}
-	public void setSch_id(String sch_id) {
-		this.sch_id = sch_id;
 	}
 	public String getEmail() {
 		return email;
@@ -54,30 +92,24 @@ public class StudentVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public boolean isGender() {
-		return gender;
-	}
-	public void setGender(boolean gender) {
-		this.gender = gender;
-	}
-	public String getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
-	public void setBirth(String birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public String getSemester() {
+	public int getSemester() {
 		return semester;
 	}
-	public void setSemester(String semester) {
+	public void setSemester(int semester) {
 		this.semester = semester;
 	}
-	
+
 	
 }
