@@ -1,23 +1,42 @@
 package model.subject;
 
+import java.sql.Date;
+
 public class SubjectVO {
-	private String sub_id;
-	private String sch_id;
+	private int sub_id;
+	private int academic_number;
+	private int uni_id;
+	private String subject_name;
 	private String professor;
-	private String start_time;
-	private String finish_time;
-	
-	public String getSub_id() {
+	private int credit_num;
+	private String classroom;
+	private Date start_time;
+	private Date end_time;
+
+
+	public int getSub_id() {
 		return sub_id;
 	}
-	public void setSub_id(String sub_id) {
+	public void setSub_id(int sub_id) {
 		this.sub_id = sub_id;
 	}
-	public String getSch_id() {
-		return sch_id;
+	public int getAcademic_number() {
+		return academic_number;
 	}
-	public void setSch_id(String sch_id) {
-		this.sch_id = sch_id;
+	public void setAcademic_number(int academic_number) {
+		this.academic_number = academic_number;
+	}
+	public int getUni_id() {
+		return uni_id;
+	}
+	public void setUni_id(int uni_id) {
+		this.uni_id = uni_id;
+	}
+	public String getSubject_name() {
+		return subject_name;
+	}
+	public void setSubject_name(String subject_name) {
+		this.subject_name = subject_name;
 	}
 	public String getProfessor() {
 		return professor;
@@ -25,18 +44,33 @@ public class SubjectVO {
 	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
-	public String getStart_time() {
+	public int getCredit_num() {
+		return credit_num;
+	}
+	public void setCredit_num(int credit_num) {
+		this.credit_num = credit_num;
+	}
+	public String getClassroom() {
+		return classroom;
+	}
+	public void setClassroom(String classroom) {
+		this.classroom = classroom;
+	}
+	public Date getStart_time() {
 		return start_time;
 	}
-	public void setStart_time(String start_time) {
+	public void setStart_time(Date start_time) {
 		this.start_time = start_time;
 	}
-	public String getFinish_time() {
-		return finish_time;
+	public Date getEnd_time() {
+		return end_time;
 	}
-	public void setFinish_time(String finish_time) {
-		this.finish_time = finish_time;
+	public void setEnd_time(Date end_time) {
+		this.end_time = end_time;
 	}
+	
+	
+	
 	
 	
 }

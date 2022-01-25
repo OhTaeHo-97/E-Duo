@@ -101,7 +101,7 @@ public class StudentDAO {
 			pstmt.setInt(9, vo.getSemester());
 			pstmt.setFloat(10, vo.getObj_credit());
 			pstmt.setInt(11, vo.getGraduate_credit());
-			pstmt.setString(2, vo.getStu_id());
+			pstmt.setString(12, vo.getStu_id());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Student Update문 에러 : " + e);
