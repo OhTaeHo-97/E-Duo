@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.common.JDBCUtil;
 
@@ -16,7 +17,7 @@ public class SubjectDAO {
 	private String sql_select = "SELECT * FROM subject WHERE sub_id=?"; 
 	private String sql_update = "UPDATE subject SET academic_number=?, subject_name=?, professor=?, credit_num=?, classroom=?, start_time=?, end_time=? WHERE sub_id=?";
 	private String sql_delete = "DELETE FROM subject WHERE sub_id=?";
-	private String sql_selectAll = "SELECT * FROM bulletin";
+	private String sql_selectAll = "SELECT * FROM bulletin";	// 관리자가 회원 전체볼 때 필요할 수 있을 것 같아서?
 	private String sql_selectFilter = "";
 	
 	public boolean insert(SubjectVO vo) {
@@ -113,6 +114,37 @@ public class SubjectDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return result == 1;
+	}
+	
+	public ArrayList<SubjectVO> selectAll() {
+		ArrayList<SubjectVO> sub_datas = new ArrayList<SubjectVO>();
+		SubjectVO sub_data = null;
+		
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_selectAll);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				sub_data = new SubjectVO();
+				sub_data.setAcademic_number(rs.getInt("academic_number"));
+				sub_data.setClassroom(rs.getString("classroom"));
+				sub_data.setCredit_num(rs.getInt("credit_num"));
+				sub_data.setEnd_time(rs.getDate("end_time"));
+				sub_data.setProfessor(rs.getString("professor"));
+				sub_data.setStart_time(rs.getDate("start_time"));
+				sub_data.setSub_id(rs.getInt("sub_id"));
+				sub_data.setSubject_name(rs.getString("subject_name"));
+				sub_data.setUni_id(rs.getInt("uni_id"));
+				sub_datas.add(sub_data);
+			}
+		} catch (SQLException e) {
+			System.out.println("Subject selectAll문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		
+		return sub_datas;
 	}
 	
 }
