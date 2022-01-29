@@ -1,5 +1,7 @@
 package model.bulletin;
 
+import java.sql.Date;
+
 public class BulletinVO {
 	private int bul_id;
 	private String stu_id;
@@ -7,7 +9,7 @@ public class BulletinVO {
 	private String title;
 	private String content;
 	private String image;
-	private String regdate;
+	private String regDate;
 	
 	
 	
@@ -47,11 +49,11 @@ public class BulletinVO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getRegdate() {
-		return regdate;
+	public String getRegDate() {
+		return regDate;
 	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
-	
+
 }

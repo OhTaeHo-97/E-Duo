@@ -14,7 +14,7 @@ public class StudentDAO {
 	
 	private String sql_insert = "INSERT INTO Student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	private String sql_select = "SELECT * FROM student WHERE stu_id=?"; 
-	private String sql_update = "UPDATE student SET cellphone=?, postcode=?, address=?, detail_address=?, "
+	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
 			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=? WHERE stu_id = ?";   
 	private String sql_delete = "DELETE FROM member WHERE mid=? AND mpw=?";
 	
@@ -90,18 +90,19 @@ public class StudentDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_update);
-			pstmt.setString(1, vo.getCellphone());
-			pstmt.setInt(2, vo.getPostcode());
-			pstmt.setString(3, vo.getAddress());
-			pstmt.setString(4, vo.getDetail_address());
-			pstmt.setString(5, vo.getRefernece());
-			pstmt.setInt(6, vo.getUni_id());
-			pstmt.setString(7, vo.getEmail());
-			pstmt.setInt(8, vo.getGrade());
-			pstmt.setInt(9, vo.getSemester());
-			pstmt.setFloat(10, vo.getObj_credit());
-			pstmt.setInt(11, vo.getGraduate_credit());
-			pstmt.setString(12, vo.getStu_id());
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getCellphone());
+			pstmt.setInt(3, vo.getPostcode());
+			pstmt.setString(4, vo.getAddress());
+			pstmt.setString(5, vo.getDetail_address());
+			pstmt.setString(6, vo.getRefernece());
+			pstmt.setInt(7, vo.getUni_id());
+			pstmt.setString(8, vo.getEmail());
+			pstmt.setInt(9, vo.getGrade());
+			pstmt.setInt(10, vo.getSemester());
+			pstmt.setFloat(11, vo.getObj_credit());
+			pstmt.setInt(12, vo.getGraduate_credit());
+			pstmt.setString(13, vo.getStu_id());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Student Update문 에러 : " + e);
@@ -111,6 +112,7 @@ public class StudentDAO {
 		}
 		return result == 1;
 	}
+	
 	
 /*	public boolean delete() {		//인자로 login_info를 받을 예정
 		int result = 0;

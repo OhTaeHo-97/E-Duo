@@ -14,7 +14,8 @@ public class UniversityDAO {
 	ResultSet rs;
 	
 	private String sql_insert = "INSERT INTO university VALUES(?,?)"; 
-	private String sql_select = "SELECT * FROM university WHERE uni_id=?"; 
+	private String sql_select = "SELECT * FROM university WHERE uni_id=?";
+	private String sql_selectUniv = "SELECT * FROM uni_id WHERE uni_name=?"; 
 	private String sql_update = "UPDATE university SET uni_id=?, uni_name=? WHERE uni_id=?";
 	private String sql_delete = "DELETE FROM university WHERE uni_id=?";
 	private String sql_selectAll = "SELECT * FROM university";	
@@ -118,5 +119,25 @@ public class UniversityDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return uni_datas;
+	}
+	
+	public UniversityVO selectUniv(UniversityVO vo) {
+		UniversityVO uni_data = null;
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_selectUniv);
+			pstmt.setInt(1, vo.getUni_id());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				uni_data = new UniversityVO();
+				uni_data.setUni_id(rs.getInt("uni_id"));
+				uni_data.setUni_name(rs.getString("uni_name"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("University selectUniv문 에러 : " + e);
+			e.printStackTrace();
+		}
+		return uni_data;
 	}
 }
