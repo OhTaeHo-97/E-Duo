@@ -7,7 +7,7 @@ import controller.Action;
 import controller.ActionForward;
 import model.bulletin.BulletinDAO;
 import model.bulletin.BulletinSet;
-import model.bulletin.BulletinVO; 
+import model.bulletin.BulletinVO;
 
 public class SelectOneAction implements Action {
 
