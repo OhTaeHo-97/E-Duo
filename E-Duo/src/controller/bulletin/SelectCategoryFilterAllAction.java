@@ -1,31 +1,35 @@
 package controller.bulletin;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Action;
 import controller.ActionForward;
 import model.bulletin.BulletinDAO;
-import model.bulletin.BulletinSet;
 import model.bulletin.BulletinVO;
 
-public class SelectOneAction implements Action {
+public class SelectCategoryFilterAllAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
-		BulletinSet bul_data = null;
-		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));
-		bul_data = dao.selectOne(vo);
-		
+		vo.setCategory(request.getParameter("category"));
+		ArrayList<BulletinVO> bul_datas = dao.selectCategoryFilterAll(vo);
 		ActionForward forward = null;
-		if(bul_data != null) {
+		if(bul_datas.size() != 0) {
 			forward = new ActionForward();
-			forward.setPath("#");	// 글 하나 세부로 보는 bulletin 세부 페이지로 갈 예정
+			forward.setPath("bulletin_sort.jsp");
 			forward.setRedirect(false);
+		} else {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('데이터를 불러오는 도중 문제가 발생하였습니다.'); history.back(-1);</script>");
 		}
 		return forward;
 	}
-
+	
 }

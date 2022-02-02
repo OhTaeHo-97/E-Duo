@@ -5,24 +5,26 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import controller.ActionForward;
 import model.bulletin.BulletinDAO;
 import model.bulletin.BulletinVO;
 
-public class SelectFilterAllAction implements Action {
+public class SelectMyTextAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
-		vo.setCategory(request.getParameter("category"));
-		ArrayList<BulletinVO> bul_datas = dao.selectFilterAll(vo);
+		HttpSession session = request.getSession();
+		vo.setStu_id((String) session.getAttribute("stu_id"));	// Session에 저장된 id 객체를 String 타입으로 형 변환해서 가져온다.
+		ArrayList<BulletinVO> bul_datas = dao.selectMyText(vo);
 		ActionForward forward = null;
 		if(bul_datas.size() != 0) {
 			forward = new ActionForward();
-			forward.setPath("bulletin_sort.jsp");
+			forward.setPath("myBoardText.jsp");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
@@ -31,5 +33,5 @@ public class SelectFilterAllAction implements Action {
 		}
 		return forward;
 	}
-	
+
 }

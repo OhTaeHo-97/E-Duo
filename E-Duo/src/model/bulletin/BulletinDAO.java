@@ -25,6 +25,9 @@ public class BulletinDAO {
 	private String sql_selectAllReply = "select * from Reply where bul_id = ? order by regDate desc";
 	private String sql_selectMyText = "SELECT * FROM bulletin WHERE stu_id = ?";
 	private String sql_selectFilterAll = "SELECT * FROM bulletin where category = ?";
+	private String sql_searchBulletinByTitle = "SELECT * FROM bulletin where category = ? and title LIKE '%'||?||'%'";
+	private String sql_searchBulletinByContent = "SELECT * FROM bulletin where category = ? and content LIKE '%'||?||'%'";
+	private String sql_searchBulletinByContent_Title = "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%'";
 	
 	public boolean insert(BulletinVO vo) {
 		int result = 0;
@@ -80,7 +83,7 @@ public class BulletinDAO {
 		
 	}
 	
-	public ArrayList<BulletinVO> selectFilterAll(BulletinVO vo) {
+	public ArrayList<BulletinVO> selectCategoryFilterAll(BulletinVO vo) {
 		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
 		BulletinVO bdata = null;
 		
@@ -198,21 +201,23 @@ public class BulletinDAO {
 	
 	public ArrayList<BulletinVO> selectMyText(BulletinVO vo) {
 		conn = JDBCUtil.connect();
-		ArrayList<BulletinVO> datas = new ArrayList<BulletinVO>();
+		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
+		BulletinVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_selectMyText);
 			pstmt.setString(1, vo.getStu_id());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				BulletinVO data = new BulletinVO();
+				data = new BulletinVO();
 				data.setBul_id(rs.getInt("bul_id"));
 				data.setCategory(rs.getString("category"));
 				data.setContent(rs.getString("content"));
 				data.setImage(rs.getString("image"));
 				data.setRegDate(rs.getString("regDate"));
+				data.setStu_id(rs.getString("stu_id"));
 				data.setTitle(rs.getString("title"));
 				
-				datas.add(data);
+				bul_datas.add(data);
 			}
 		} catch (SQLException e) {
 			System.out.println("Student selectMyText문 에러 : " + e);
@@ -221,8 +226,101 @@ public class BulletinDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		
-		return datas;
+		return bul_datas;
 	}
 	
+	public ArrayList<BulletinVO> searchBulletinByTitle(BulletinVO vo) {
+		// 제목 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 제목 검색인 셈
+		conn = JDBCUtil.connect();
+		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
+		BulletinVO data = null;
+		try {
+			pstmt = conn.prepareStatement(sql_searchBulletinByTitle);
+			pstmt.setString(1, vo.getCategory());
+			pstmt.setString(2, vo.getTitle());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				data = new BulletinVO();
+				data.setBul_id(rs.getInt("bul_id"));
+				data.setCategory(rs.getString("category"));
+				data.setContent(rs.getString("content"));
+				data.setImage(rs.getString("image"));
+				data.setRegDate(rs.getString("regDate"));
+				data.setStu_id(rs.getString("stu_id"));
+				data.setTitle(rs.getString("title"));
+				
+				bul_datas.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("SearchBulletinByTitle문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return bul_datas;
+		
+	}
 	
+	public ArrayList<BulletinVO> searchBulletinByContent(BulletinVO vo) {
+		// 내용 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 제목 검색인 셈
+		conn = JDBCUtil.connect();
+		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
+		BulletinVO data = null;
+		try {
+			pstmt = conn.prepareStatement(sql_searchBulletinByContent);
+			pstmt.setString(1, vo.getCategory());
+			pstmt.setString(2, vo.getContent());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				data = new BulletinVO();
+				data.setBul_id(rs.getInt("bul_id"));
+				data.setCategory(rs.getString("category"));
+				data.setContent(rs.getString("content"));
+				data.setImage(rs.getString("image"));
+				data.setRegDate(rs.getString("regDate"));
+				data.setStu_id(rs.getString("stu_id"));
+				data.setTitle(rs.getString("title"));
+				
+				bul_datas.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("SearchContentByContent문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return bul_datas;
+	}
+	public ArrayList<BulletinVO> searchBulletinByContent_Title(BulletinVO vo) {
+		// 내용 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 제목 검색인 셈
+		//  "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%'";
+		conn = JDBCUtil.connect();
+		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
+		BulletinVO data = null;
+		try {
+			pstmt = conn.prepareStatement(sql_searchBulletinByContent_Title);
+			pstmt.setString(1, vo.getCategory());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setString(3, vo.getTitle());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				data = new BulletinVO();
+				data.setBul_id(rs.getInt("bul_id"));
+				data.setCategory(rs.getString("category"));
+				data.setContent(rs.getString("content"));
+				data.setImage(rs.getString("image"));
+				data.setRegDate(rs.getString("regDate"));
+				data.setStu_id(rs.getString("stu_id"));
+				data.setTitle(rs.getString("title"));
+				
+				bul_datas.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("SearchContentByContent_Title문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return bul_datas;
+	}
 }
