@@ -1,4 +1,4 @@
-package controller.bulletin;
+package controller.enquiry;
 
 import java.io.PrintWriter;
 
@@ -7,24 +7,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Action;
 import controller.ActionForward;
-import model.bulletin.BulletinDAO;
-import model.bulletin.BulletinSet;
-import model.bulletin.BulletinVO;
+import model.enquiry.EnquiryDAO;
+import model.enquiry.EnquiryVO;
 
-public class SelectOneAction implements Action {
+public class SelectEnquiryAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		BulletinDAO dao = new BulletinDAO();
-		BulletinVO vo = new BulletinVO();
-		BulletinSet bul_data = null;
-		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));
-		bul_data = dao.selectOne(vo);
+		EnquiryDAO dao = new EnquiryDAO();
+		EnquiryVO vo = new EnquiryVO();
+		EnquiryVO enq_data = null;
+		vo.setEid(Integer.parseInt(request.getParameter("eid")));
+		enq_data = dao.selectOne(vo);
 		
 		ActionForward forward = null;
-		if(bul_data != null) {
+		
+		if(enq_data != null) {
 			forward = new ActionForward();
-			forward.setPath("#");	// 글 하나 세부로 보는 bulletin 세부 페이지로 갈 예정
+			forward.setPath("#"); 	// 문의사항 세부 보기 페이지로 이동 아직 존재하지 않음
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

@@ -1,4 +1,4 @@
-package model;
+package model.enquiry;
 
 public class EnquiryVO {
 	private int eid;

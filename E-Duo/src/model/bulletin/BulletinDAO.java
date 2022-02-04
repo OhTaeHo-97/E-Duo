@@ -18,7 +18,7 @@ public class BulletinDAO {
 	private String sql_insert = "INSERT INTO bulletin(bul_id, stu_id, category, title, content, image, regdate)"
 			+ "VALUES"
 			+ "(bulletin_seq.NEXTVAL,?,?,?,?,?,?)"; 
-	private String sql_select = "SELECT * FROM member WHERE bul_id=?"; 
+	private String sql_select = "SELECT * FROM bulletin WHERE bul_id=?"; 
 	private String sql_update = "UPDATE bulletin SET category=?, title=?, content=?, image=?, regdate=? WHERE bul_id=?";
 	private String sql_delete = "DELETE FROM bulletin WHERE bul_id=?";
 	private String sql_selectAll = "SELECT * FROM bulletin";
@@ -145,6 +145,7 @@ public class BulletinDAO {
 					rep_data.setRegDate(rs.getString("regDate"));
 					rep_data.setRep_id(rs.getInt("rep_id"));
 					rep_data.setStu_id(rs.getString("stu_id"));
+					rep_data.setAnonymity(rs.getString("anonymity"));
 					rep_datas.add(rep_data);
 				}
 				

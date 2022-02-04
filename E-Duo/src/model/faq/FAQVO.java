@@ -1,4 +1,4 @@
-package model;
+package model.faq;
 
 public class FAQVO {
 	private int fid;

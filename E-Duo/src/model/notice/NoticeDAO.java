@@ -1,4 +1,4 @@
-package model;
+package model.notice;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,7 +34,7 @@ public class NoticeDAO {
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO selectAll() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("NoticeDAO selectAll() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -58,7 +58,7 @@ public class NoticeDAO {
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO selectOne() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("NoticeDAO selectOne() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -75,7 +75,7 @@ public class NoticeDAO {
 			pstmt.setString(2, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO insert() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("NoticeDAO insert() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -92,7 +92,7 @@ public class NoticeDAO {
 			pstmt.setInt(1, vo.getNid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO delete() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("NoticeDAO delete() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -111,7 +111,7 @@ public class NoticeDAO {
 			pstmt.setInt(3, vo.getNid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO update() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("NoticeDAO update() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

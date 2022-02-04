@@ -8,6 +8,13 @@ public class ReplyVO {
 	private int bul_id;
 	private String content;
 	private String regDate;
+	private String anonymity;
+	public String getAnonymity() {
+		return anonymity;
+	}
+	public void setAnonymity(String anonymity) {
+		this.anonymity = anonymity;
+	}
 	public int getRep_id() {
 		return rep_id;
 	}

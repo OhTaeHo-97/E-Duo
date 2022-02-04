@@ -1,4 +1,4 @@
-package model;
+package model.faq;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,7 +34,7 @@ public class FAQDAO {
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("FAQDAO selectAll() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -58,7 +58,7 @@ public class FAQDAO {
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("FAQDAO selectAll() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -76,7 +76,7 @@ public class FAQDAO {
 			pstmt.setString(3, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO insert() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("FAQDAO insert() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -93,7 +93,7 @@ public class FAQDAO {
 			pstmt.setInt(1, vo.getFid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO delete() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("FAQDAO delete() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -113,7 +113,7 @@ public class FAQDAO {
 			pstmt.setInt(4, vo.getFid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO update() ½ÇÇà Áß ¹®Á¦ ¹ß»ý");
+			System.out.println("FAQDAO update() ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

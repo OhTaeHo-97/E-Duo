@@ -13,7 +13,7 @@ public class ReplyDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO reply VALUES (select nvl(MAX(rep_id),0)+1,?,?,?,?)";  
+	private String sql_insert = "INSERT INTO reply VALUES (select nvl(MAX(rep_id),0)+1,?,?,?,?,?)";  
 	private String sql_update = "UPDATE reply SET content=?, regDate=? WHERE rep_id=?";
 	private String sql_delete = "DELETE FROM reply WHERE rep_id=?";
 	private String sql_selectAll = "SELECT * FROM reply";
@@ -30,6 +30,7 @@ public class ReplyDAO {
 			pstmt.setInt(2, vo.getBul_id());
 			pstmt.setString(3, vo.getContent());
 			pstmt.setString(4, vo.getRegDate());
+			pstmt.setString(5, vo.getAnonymity());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Reply insert문 에러 : " + e);

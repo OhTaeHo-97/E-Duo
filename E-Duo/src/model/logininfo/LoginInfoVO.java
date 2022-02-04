@@ -1,4 +1,4 @@
-package model;
+package model.logininfo;
 
 public class LoginInfoVO {
 	private String id;
