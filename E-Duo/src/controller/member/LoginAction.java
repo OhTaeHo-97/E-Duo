@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import controller.ActionForward;
-import model.LoginInfoDAO;
-import model.LoginInfoVO;
+import model.loginInfo.LoginInfoDAO;
+import model.loginInfo.LoginInfoVO;
 
 public class LoginAction implements Action {
 

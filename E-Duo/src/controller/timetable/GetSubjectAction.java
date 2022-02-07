@@ -14,7 +14,7 @@ import model.student.StudentVO;
 import model.subject.SubjectDAO;
 import model.subject.SubjectVO;
 
-public class getSubjectAction implements Action {
+public class GetSubjectAction implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

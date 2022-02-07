@@ -1,4 +1,4 @@
-package model;
+package model.loginInfo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
