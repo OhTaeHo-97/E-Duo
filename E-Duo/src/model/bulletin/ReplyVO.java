@@ -7,7 +7,7 @@ public class ReplyVO {
 	private String stu_id;
 	private int bul_id;
 	private String content;
-	private Date regDate;
+	private String regDate;
 	public int getRep_id() {
 		return rep_id;
 	}
@@ -32,10 +32,10 @@ public class ReplyVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 	

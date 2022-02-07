@@ -34,7 +34,7 @@ public class FAQDAO {
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ½ÇÇà Áß ¹®Á¦ ¹ß»ı");
+			System.out.println("FAQDAO selectAll() ìˆ˜í–‰ ì¤‘ ë¬¸ì œ ë°œìƒ");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -58,7 +58,7 @@ public class FAQDAO {
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ½ÇÇà Áß ¹®Á¦ ¹ß»ı");
+			System.out.println("FAQDAO selectAll() ìˆ˜í–‰ ì¤‘ ë¬¸ì œ ë°œìƒ");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -76,7 +76,7 @@ public class FAQDAO {
 			pstmt.setString(3, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO insert() ½ÇÇà Áß ¹®Á¦ ¹ß»ı");
+			System.out.println("FAQDAO insert() ìˆ˜í–‰ ì¤‘ ë¬¸ì œ ë°œìƒ");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -93,7 +93,7 @@ public class FAQDAO {
 			pstmt.setInt(1, vo.getFid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO delete() ½ÇÇà Áß ¹®Á¦ ¹ß»ı");
+			System.out.println("FAQDAO delete() ìˆ˜í–‰ ì¤‘ ë¬¸ì œ ë°œìƒ");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -113,7 +113,7 @@ public class FAQDAO {
 			pstmt.setInt(4, vo.getFid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO update() ½ÇÇà Áß ¹®Á¦ ¹ß»ı");
+			System.out.println("FAQDAO update() ìˆ˜í–‰ ì¤‘ ë¬¸ì œ ë°œìƒ");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

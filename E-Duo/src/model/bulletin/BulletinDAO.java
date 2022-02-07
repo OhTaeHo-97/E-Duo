@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.common.JDBCUtil;
+import model.student.StudentVO;
 
 public class BulletinDAO {
 	Connection conn;
@@ -22,6 +23,7 @@ public class BulletinDAO {
 	private String sql_delete = "DELETE FROM bulletin WHERE bul_id=?";
 	private String sql_selectAll = "SELECT * FROM bulletin";
 	private String sql_selectAllReply = "select * from Reply where bul_id = ? order by regDate desc";
+	private String sql_selectMyBulletin = "SELECT * FROM bulletin WHERE stu_id = ?";
 	
 	public boolean insert(BulletinVO vo) {
 		int result = 0;
@@ -34,7 +36,8 @@ public class BulletinDAO {
 			pstmt.setString(3, vo.getTitle());
 			pstmt.setString(4, vo.getTitle());
 			pstmt.setString(5, vo.getImage());
-			pstmt.setDate(6, vo.getRegDate());
+			pstmt.setString(6, vo.getRegDate());
+
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Bulletin Update문 에러 : " + e);
@@ -61,7 +64,7 @@ public class BulletinDAO {
 				bdata.setCategory(rs.getString("category"));
 				bdata.setContent(rs.getString("content"));
 				bdata.setImage(rs.getString("image"));
-				bdata.setRegDate(rs.getDate("regDate"));
+				bdata.setRegDate(rs.getString("regDate"));
 				bdata.setStu_id(rs.getString("stu_id"));
 				bdata.setTitle(rs.getString("title"));
 				
@@ -79,7 +82,7 @@ public class BulletinDAO {
 	
 	public BulletinSet selectOne(BulletinVO vo) {	// 수정 필요, 한 개의 게시물을 눌렀을 경우 reply들이 보이도록 해야 함 reply와 연동 후 수정
 		
-		BulletinSet data = new BulletinSet();
+		BulletinSet data = null;
 		
 		conn = JDBCUtil.connect();
 		try {
@@ -87,6 +90,7 @@ public class BulletinDAO {
 			pstmt.setInt(1, vo.getBul_id());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				data = new BulletinSet();
 				BulletinVO bul_data = new BulletinVO();
 				ArrayList<ReplyVO> rep_datas = new ArrayList<ReplyVO>();
 				
@@ -94,7 +98,7 @@ public class BulletinDAO {
 				bul_data.setCategory(rs.getString("category"));
 				bul_data.setContent(rs.getString("content"));
 				bul_data.setImage(rs.getString("image"));
-				bul_data.setRegDate(rs.getDate("regDate"));
+				bul_data.setRegDate(rs.getString("regDate"));
 				bul_data.setStu_id(rs.getString("stu_id"));
 				bul_data.setTitle(rs.getString("title"));
 				
@@ -105,7 +109,7 @@ public class BulletinDAO {
 					ReplyVO rep_data = new ReplyVO();
 					rep_data.setBul_id(rs2.getInt("bul_id"));
 					rep_data.setContent(rs.getString("content"));
-					rep_data.setRegDate(rs.getDate("regDate"));
+					rep_data.setRegDate(rs.getString("regDate"));
 					rep_data.setRep_id(rs.getInt("rep_id"));
 					rep_data.setStu_id(rs.getString("stu_id"));
 					rep_datas.add(rep_data);
@@ -158,5 +162,32 @@ public class BulletinDAO {
 		return true;
 	}
 	
+	public ArrayList<BulletinVO> selectMyBulletin(BulletinVO vo) {
+		conn = JDBCUtil.connect();
+		ArrayList<BulletinVO> datas = new ArrayList<BulletinVO>();
+		try {
+			pstmt = conn.prepareStatement(sql_selectMyBulletin);
+			pstmt.setString(1, vo.getStu_id());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BulletinVO data = new BulletinVO();
+				data.setBul_id(rs.getInt("bul_id"));
+				data.setCategory(rs.getString("category"));
+				data.setContent(rs.getString("content"));
+				data.setImage(rs.getString("image"));
+				data.setRegDate(rs.getString("regDate"));
+				data.setTitle(rs.getString("title"));
+				
+				datas.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("BulletinDAO selectMyBulletin문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		
+		return datas;
+	}
 	
 }

@@ -34,7 +34,7 @@ public class LoginInfoDAO {
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("LoginInfoDAO selectAll() ���� �� ���� �߻�");
+			System.out.println("LoginInfoDAO selectAll() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -58,7 +58,7 @@ public class LoginInfoDAO {
 				data.setPassword(rs.getString("password"));
 			}
 		} catch (SQLException e) {
-			System.out.println("LoginInfoDAO loginUser() ���� �� ���� �߻�");
+			System.out.println("LoginInfoDAO loginUser() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -82,7 +82,7 @@ public class LoginInfoDAO {
 				data.setAuth(rs.getString("auth"));
 			}
 		} catch (SQLException e) {
-			System.out.println("LoginInfoVo loginAdmin() ���� �� ���� �߻�");
+			System.out.println("LoginInfoVo loginAdmin() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -99,7 +99,7 @@ public class LoginInfoDAO {
 			pstmt.setString(2, vo.getPassword());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("LoginInfoVo insert() ���� �� ���� �߻�");
+			System.out.println("LoginInfoVo insert() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -116,7 +116,7 @@ public class LoginInfoDAO {
 			pstmt.setString(1, vo.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("LoginInfoVo delete() ���� �� ���� �߻�");
+			System.out.println("LoginInfoVo delete() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -134,7 +134,7 @@ public class LoginInfoDAO {
 			pstmt.setString(2, vo.getId());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("LoginInfoVo update() ���� �� ���� �߻�");
+			System.out.println("LoginInfoVo update() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
