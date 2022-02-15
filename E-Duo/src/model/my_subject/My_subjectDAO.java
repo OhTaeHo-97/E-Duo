@@ -18,8 +18,8 @@ public class My_subjectDAO {
 	private String sql_select = "SELECT * FROM my_subject WHERE my_sub_id=?"; 
 	private String sql_update = "UPDATE my_subject SET academic_number=?, credit=?, grade=?, semester=? WHERE my_sub_id=?";
 	private String sql_delete = "DELETE FROM my_subject WHERE my_sub_id=?";
-	private String sql_selectAll = "SELECT * FROM my_subject";	
-	private String sql_selectFilter = "";
+	private String sql_selectAllMy_subject = "SELECT * FROM my_subject where stu_id=?";	
+	private String sql_selectFilterBySemester = "SELECT * FROM my_subject WHERE stu_id=? and grade=? and semester=?";
 	
 	public boolean insert(My_subjectVO vo) {
 		int result = 0;
@@ -106,13 +106,14 @@ public class My_subjectDAO {
 		}
 		return result == 1;
 	}
-	public ArrayList<My_subjectVO> selectAll() {
+	public ArrayList<My_subjectVO> selectAllMy_subject(My_subjectVO vo) {
 		ArrayList<My_subjectVO> my_sub_datas = new ArrayList<My_subjectVO>();
 		My_subjectVO my_sub_data = null;
 		
 		conn = JDBCUtil.connect();
 		try {
-			pstmt = conn.prepareStatement(sql_selectAll);
+			pstmt = conn.prepareStatement(sql_selectAllMy_subject);
+			pstmt.setString(1, vo.getStu_id());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				my_sub_data = new My_subjectVO();
@@ -126,6 +127,36 @@ public class My_subjectDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println("My_subject selectAll문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return my_sub_datas;
+	}
+	// private String sql_selectFilterBySemester = "SELECT * FROM my_subject WHERE stu_id=? and grade=? and semester=?";
+	public ArrayList<My_subjectVO> selectFilterBySemester(My_subjectVO vo) {
+		ArrayList<My_subjectVO> my_sub_datas = new ArrayList<My_subjectVO>();
+		My_subjectVO my_sub_data = null;
+		
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_selectFilterBySemester);
+			pstmt.setString(1, vo.getStu_id());
+			pstmt.setInt(2, vo.getGrade());
+			pstmt.setInt(3, vo.getSemester());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				my_sub_data = new My_subjectVO();
+				my_sub_data.setAcademic_number(rs.getInt("academic_number"));
+				my_sub_data.setCredit(rs.getFloat("credit"));
+				my_sub_data.setGrade(rs.getInt("grade"));
+				my_sub_data.setMy_sub_id(rs.getInt("my_sub_id"));
+				my_sub_data.setSemester(rs.getInt("semester"));
+				my_sub_data.setStu_id(rs.getString("stu_id"));
+				my_sub_datas.add(my_sub_data);
+			}
+		} catch (SQLException e) {
+			System.out.println("My_subject selectFilter문 에러 : " + e);
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.disconnect(pstmt, conn);
