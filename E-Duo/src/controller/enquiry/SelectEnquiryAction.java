@@ -23,6 +23,7 @@ public class SelectEnquiryAction implements Action {
 		ActionForward forward = null;
 		
 		if(enq_data != null) {
+			request.setAttribute("enq_data", enq_data);
 			forward = new ActionForward();
 			forward.setPath("#"); 	// 문의사항 세부 보기 페이지로 이동 아직 존재하지 않음
 			forward.setRedirect(false);

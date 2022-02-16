@@ -34,7 +34,7 @@ public class NoticeDAO {
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO selectAll() ���� �� ���� �߻�");
+			System.out.println("NoticeDAO selectAll() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -58,7 +58,7 @@ public class NoticeDAO {
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO selectOne() ���� �� ���� �߻�");
+			System.out.println("NoticeDAO selectOne() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -75,7 +75,7 @@ public class NoticeDAO {
 			pstmt.setString(2, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO insert() ���� �� ���� �߻�");
+			System.out.println("NoticeDAO insert() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -92,7 +92,7 @@ public class NoticeDAO {
 			pstmt.setInt(1, vo.getNid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO delete() ���� �� ���� �߻�");
+			System.out.println("NoticeDAO delete() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -111,7 +111,7 @@ public class NoticeDAO {
 			pstmt.setInt(3, vo.getNid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("NoticeDAO update() ���� �� ���� �߻�");
+			System.out.println("NoticeDAO update() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

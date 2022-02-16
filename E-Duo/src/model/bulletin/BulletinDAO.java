@@ -28,6 +28,8 @@ public class BulletinDAO {
 	private String sql_searchBulletinByTitle = "SELECT * FROM bulletin where category = ? and title LIKE '%'||?||'%'";
 	private String sql_searchBulletinByContent = "SELECT * FROM bulletin where category = ? and content LIKE '%'||?||'%'";
 	private String sql_searchBulletinByContent_Title = "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%'";
+	private String sql_selectMyBulletin = "SELECT * FROM bulletin WHERE stu_id = ?";
+
 	
 	public boolean insert(BulletinVO vo) {
 		int result = 0;
@@ -323,5 +325,32 @@ public class BulletinDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return bul_datas;
+	}
+	public ArrayList<BulletinVO> selectMyBulletin(BulletinVO vo) {
+		conn = JDBCUtil.connect();
+		ArrayList<BulletinVO> datas = new ArrayList<BulletinVO>();
+		try {
+			pstmt = conn.prepareStatement(sql_selectMyBulletin);
+			pstmt.setString(1, vo.getStu_id());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BulletinVO data = new BulletinVO();
+				data.setBul_id(rs.getInt("bul_id"));
+				data.setCategory(rs.getString("category"));
+				data.setContent(rs.getString("content"));
+				data.setImage(rs.getString("image"));
+				data.setRegDate(rs.getString("regDate"));
+				data.setTitle(rs.getString("title"));
+				
+				datas.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("BulletinDAO selectMyBulletin문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		
+		return datas;
 	}
 }

@@ -1,6 +1,6 @@
 package model.my_subject;
 
-public class My_subjectVO {
+public class My_subjectVO { 
 	private int my_sub_id;
 	private int academic_number;
 	private String stu_id;

@@ -1,4 +1,4 @@
-package model.faq;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,33 +8,33 @@ import java.util.ArrayList;
 
 import model.common.JDBCUtil;
 
-public class FAQDAO {
+public class NoticeDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_selectAll = "select * from FAQ";
-	private String sql_selectOne = "select * from FAQ where fid = ?";
-	private String sql_insert = "insert into FAQ values((select nvl(max(fid), 0) + 1 from FAQ), ?, ?, ?)";
-	private String sql_delete = "delete from FAQ where fid = ?";
-	private String sql_update = "update FAQ set category = ?, title = ?, content = ? where fid = ?";
+	private String sql_selectAll = "select * from notice";
+	private String sql_selectOne = "select * from notice where nid = ?";
+	private String sql_insert = "insert into notice(nid, title, content) values((select nvl(max(nid), 0) + 1 from notice), ?, ?)";
+	private String sql_delete = "delete from notice where nid = ?";
+	private String sql_update = "update notice set title = ?, content = ?, regDate = sysdate where nid = ?";
 	
-	public ArrayList<FAQVO> selectAll() {
+	public ArrayList<NoticeVO> selectAll() {
 		conn = JDBCUtil.connect();
-		ArrayList<FAQVO> datas = new ArrayList<FAQVO>();
+		ArrayList<NoticeVO> datas = new ArrayList<NoticeVO>();
 		try {
 			pstmt = conn.prepareStatement(sql_selectAll);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				FAQVO vo = new FAQVO();
-				vo.setCategory(rs.getString("category"));
+				NoticeVO vo = new NoticeVO();
 				vo.setContent(rs.getString("content"));
-				vo.setFid(rs.getInt("fid"));
+				vo.setNid(rs.getInt("nid"));
+				vo.setRegDate(rs.getString("regDate"));
 				vo.setTitle(rs.getString("title"));
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("NoticeDAO selectAll() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -43,22 +43,22 @@ public class FAQDAO {
 		return datas;
 	}
 	
-	public FAQVO selectOne(FAQVO vo) {
+	public NoticeVO selectOne(NoticeVO vo) {
 		conn = JDBCUtil.connect();
-		FAQVO data = null;
+		NoticeVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_selectOne);
-			pstmt.setInt(1, vo.getFid());
+			pstmt.setInt(1, vo.getNid());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				data = new FAQVO();
-				data.setCategory(rs.getString("category"));
+				data = new NoticeVO();
 				data.setContent(rs.getString("content"));
-				data.setFid(rs.getInt("fid"));
+				data.setNid(rs.getInt("nid"));
+				data.setRegDate(rs.getString("regDate"));
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("NoticeDAO selectOne() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -67,16 +67,15 @@ public class FAQDAO {
 		return data;
 	}
 	
-	public boolean insert(FAQVO vo) {
+	public boolean insert(NoticeVO vo) {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_insert);
-			pstmt.setString(1, vo.getCategory());
-			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContent());
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO insert() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("NoticeDAO insert() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -86,14 +85,14 @@ public class FAQDAO {
 		return true;
 	}
 	
-	public boolean delete(FAQVO vo) {
+	public boolean delete(NoticeVO vo) {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
-			pstmt.setInt(1, vo.getFid());
+			pstmt.setInt(1, vo.getNid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO delete() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("NoticeDAO delete() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -103,17 +102,16 @@ public class FAQDAO {
 		return true;
 	}
 	
-	public boolean update(FAQVO vo) {
+	public boolean update(NoticeVO vo) {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_update);
-			pstmt.setString(1, vo.getCategory());
-			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContent());
-			pstmt.setInt(4, vo.getFid());
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getNid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO update() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("NoticeDAO update() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

@@ -16,9 +16,7 @@ import model.university.UniversityVO;
 public class EditMyInformationAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// "UPDATE student SET cellphone=?, postcode=?, address=?, detail_address=?, "
-		//		+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=? WHERE stu_id = ?"; 
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception { 
 		StudentDAO dao = new StudentDAO();
 		StudentVO vo = new StudentVO();
 		HttpSession session = request.getSession();

@@ -1,4 +1,4 @@
-package controller.bulletin;
+package controller.member;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -12,27 +12,27 @@ import controller.ActionForward;
 import model.bulletin.BulletinDAO;
 import model.bulletin.BulletinVO;
 
-public class SelectMyTextAction implements Action {
+public class GetMyBulletinAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		HttpSession session = request.getSession();
-		vo.setStu_id((String) session.getAttribute("stu_id"));	// Session에 저장된 id 객체를 String 타입으로 형 변환해서 가져온다.
-		ArrayList<BulletinVO> bul_datas = dao.selectMyText(vo);
+		vo.setStu_id((String)session.getAttribute("user_id"));
+		ArrayList<BulletinVO> datas = dao.selectMyBulletin(vo);
 		ActionForward forward = null;
-		if(bul_datas.size() != 0) {
-			request.setAttribute("bul_datas", bul_datas);
+		if(datas.size() == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('데이터를 불러오는데에 실패하였습니다!'); history.back(-1);</script>");
+		} else {
+			request.setAttribute("mybulletin_data", datas);
 			forward = new ActionForward();
 			forward.setPath("myBoardText.jsp");
 			forward.setRedirect(false);
-		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('데이터를 불러오는 도중 문제가 발생하였습니다.'); history.back(-1);</script>");
 		}
 		return forward;
 	}
-
+	
 }

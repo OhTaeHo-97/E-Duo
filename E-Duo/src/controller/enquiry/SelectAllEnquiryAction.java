@@ -21,6 +21,7 @@ public class SelectAllEnquiryAction implements Action
 		enq_datas = dao.selectAll();
 		ActionForward forward = null;
 		if(enq_datas.size() != 0) {
+			request.setAttribute("enq_datas", enq_datas);
 			forward = new ActionForward();
 			forward.setPath("#"); 	// 관리자가 문의사항 전체보기 페이지로 갈 예정
 			forward.setRedirect(false);

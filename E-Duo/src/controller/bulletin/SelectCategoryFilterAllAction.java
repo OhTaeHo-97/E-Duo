@@ -21,6 +21,7 @@ public class SelectCategoryFilterAllAction implements Action {
 		ArrayList<BulletinVO> bul_datas = dao.selectCategoryFilterAll(vo);
 		ActionForward forward = null;
 		if(bul_datas.size() != 0) {
+			request.setAttribute("bul_datas", bul_datas);
 			forward = new ActionForward();
 			forward.setPath("bulletin_sort.jsp");
 			forward.setRedirect(false);

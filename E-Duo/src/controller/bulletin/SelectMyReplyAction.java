@@ -23,6 +23,7 @@ public class SelectMyReplyAction implements Action {
 		ArrayList<ReplyVO> rep_datas = dao.selectMyReply(vo);	// rep_datas로 데이터를 받아올 예정
 		ActionForward forward = null;
 		if(rep_datas.size() != 0) {
+			request.setAttribute("rep_datas", rep_datas);
 			forward = new ActionForward();
 			forward.setPath("myBoardReply.jsp");	//html 페이지 jsp로 수정예정
 			forward.setRedirect(false);

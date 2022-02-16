@@ -1,4 +1,4 @@
-package model.faq;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,33 +8,33 @@ import java.util.ArrayList;
 
 import model.common.JDBCUtil;
 
-public class FAQDAO {
+public class EnquiryDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_selectAll = "select * from FAQ";
-	private String sql_selectOne = "select * from FAQ where fid = ?";
-	private String sql_insert = "insert into FAQ values((select nvl(max(fid), 0) + 1 from FAQ), ?, ?, ?)";
-	private String sql_delete = "delete from FAQ where fid = ?";
-	private String sql_update = "update FAQ set category = ?, title = ?, content = ? where fid = ?";
+	private String sql_selectAll = "select * from enquiry";
+	private String sql_selectOne = "select * from enquiry where eid = ?";
+	private String sql_insert = "insert into enquiry values((select nvl(max(eid), 0) + 1 from enquiry), ?, ?, ?)";
+	private String sql_delete = "delete from enquiry where eid = ?";
+	private String sql_update = "update enquiry set category = ?, title = ?, content = ? where eid = ?";
 	
-	public ArrayList<FAQVO> selectAll() {
+	public ArrayList<EnquiryVO> selectAll() {
 		conn = JDBCUtil.connect();
-		ArrayList<FAQVO> datas = new ArrayList<FAQVO>();
+		ArrayList<EnquiryVO> datas = new ArrayList<EnquiryVO>();
 		try {
 			pstmt = conn.prepareStatement(sql_selectAll);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				FAQVO vo = new FAQVO();
+				EnquiryVO vo = new EnquiryVO();
 				vo.setCategory(rs.getString("category"));
 				vo.setContent(rs.getString("content"));
-				vo.setFid(rs.getInt("fid"));
+				vo.setEid(rs.getInt("eid"));
 				vo.setTitle(rs.getString("title"));
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("EnquiryDAO selectAll() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -43,22 +43,22 @@ public class FAQDAO {
 		return datas;
 	}
 	
-	public FAQVO selectOne(FAQVO vo) {
+	public EnquiryVO selectOne(EnquiryVO vo) {
 		conn = JDBCUtil.connect();
-		FAQVO data = null;
+		EnquiryVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_selectOne);
-			pstmt.setInt(1, vo.getFid());
+			pstmt.setInt(1, vo.getEid());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				data = new FAQVO();
+				data = new EnquiryVO();
 				data.setCategory(rs.getString("category"));
 				data.setContent(rs.getString("content"));
-				data.setFid(rs.getInt("fid"));
+				data.setEid(rs.getInt("eid"));
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("FAQDAO selectAll() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("EnquiryDAO selectOne() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -67,7 +67,7 @@ public class FAQDAO {
 		return data;
 	}
 	
-	public boolean insert(FAQVO vo) {
+	public boolean insert(EnquiryVO vo) {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_insert);
@@ -76,7 +76,7 @@ public class FAQDAO {
 			pstmt.setString(3, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO insert() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("EnquiryDAO insert() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -86,14 +86,14 @@ public class FAQDAO {
 		return true;
 	}
 	
-	public boolean delete(FAQVO vo) {
+	public boolean delete(EnquiryVO vo) {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
-			pstmt.setInt(1, vo.getFid());
+			pstmt.setInt(1, vo.getEid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO delete() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("EnquiryDAO delete() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -103,17 +103,17 @@ public class FAQDAO {
 		return true;
 	}
 	
-	public boolean update(FAQVO vo) {
+	public boolean update(EnquiryVO vo) {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_update);
 			pstmt.setString(1, vo.getCategory());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getContent());
-			pstmt.setInt(4, vo.getFid());
+			pstmt.setInt(4, vo.getEid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("FAQDAO update() ÏàòÌñâ Ï§ë Î¨∏Ï†ú Î∞úÏÉù");
+			System.out.println("EnquiryDAO delete() Ω««‡ ¡ﬂ πÆ¡¶ πﬂª˝");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

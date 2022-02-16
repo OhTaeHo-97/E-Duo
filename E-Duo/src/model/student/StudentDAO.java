@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import model.bulletin.BulletinVO;
 import model.common.JDBCUtil;
 
 public class StudentDAO {
@@ -17,6 +19,7 @@ public class StudentDAO {
 	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
 			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=? WHERE stu_id = ?";   
 	private String sql_delete = "DELETE FROM member WHERE mid=? AND mpw=?";
+	private String sql_updateObj_credit = "UPDATE student set obj_credit = ? where stu_id = ?";
 	
 	public boolean insert(StudentVO vo) {
 		int result = 0;
@@ -112,6 +115,24 @@ public class StudentDAO {
 		}
 		return result == 1;
 	}
+	// private String sql_updateObj_credit = "UPDATE student set obj_credit = ? where stu_id = ?";
+	public boolean update_obj_credit(StudentVO vo) {
+		int result = 0;
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_updateObj_credit);
+			pstmt.setFloat(1, vo.getObj_credit());
+			pstmt.setString(2, vo.getStu_id());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Student Update_obj_credit문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return result == 1;
+	}
+	
 	
 	
 /*	public boolean delete() {		//인자로 login_info를 받을 예정

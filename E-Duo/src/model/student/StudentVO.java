@@ -2,7 +2,7 @@ package model.student;
 
 import java.sql.Date;
 
-public class StudentVO {
+public class StudentVO { 
 	private String name;
 	private String stu_id;
 	private String cellphone;

@@ -34,7 +34,7 @@ public class EnquiryDAO {
 				datas.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("EnquiryDAO selectAll() ���� �� ���� �߻�");
+			System.out.println("EnquiryDAO selectAll() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -58,7 +58,7 @@ public class EnquiryDAO {
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
-			System.out.println("EnquiryDAO selectOne() ���� �� ���� �߻�");
+			System.out.println("EnquiryDAO selectOne() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} finally {
@@ -76,7 +76,7 @@ public class EnquiryDAO {
 			pstmt.setString(3, vo.getContent());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("EnquiryDAO insert() ���� �� ���� �߻�");
+			System.out.println("EnquiryDAO insert() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -93,7 +93,7 @@ public class EnquiryDAO {
 			pstmt.setInt(1, vo.getEid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("EnquiryDAO delete() ���� �� ���� �߻�");
+			System.out.println("EnquiryDAO delete() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;
@@ -113,7 +113,7 @@ public class EnquiryDAO {
 			pstmt.setInt(4, vo.getEid());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("EnquiryDAO delete() ���� �� ���� �߻�");
+			System.out.println("EnquiryDAO update() 수행 중 문제 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return false;

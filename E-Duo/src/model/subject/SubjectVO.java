@@ -10,8 +10,9 @@ public class SubjectVO {
 	private String professor;
 	private int credit_num;
 	private String classroom;
-	private Date start_time;
-	private Date end_time;
+	private String start_time;
+	private String end_time;
+	private String subject_date;
 
 
 	public int getSub_id() {
@@ -56,21 +57,23 @@ public class SubjectVO {
 	public void setClassroom(String classroom) {
 		this.classroom = classroom;
 	}
-	public Date getStart_time() {
+	public String getStart_time() {
 		return start_time;
 	}
-	public void setStart_time(Date start_time) {
+	public void setStart_time(String start_time) {
 		this.start_time = start_time;
 	}
-	public Date getEnd_time() {
+	public String getEnd_time() {
 		return end_time;
 	}
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
 	}
-	
-	
-	
-	
+	public String getSubject_date() {
+		return subject_date;
+	}
+	public void setSubject_date(String subject_date) {
+		this.subject_date = subject_date;
+	}
 	
 }

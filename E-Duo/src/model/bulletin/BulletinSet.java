@@ -2,7 +2,7 @@ package model.bulletin;
 
 import java.util.ArrayList;
 
-public class BulletinSet {
+public class BulletinSet { 
 	private BulletinVO bulletin;
 	private ArrayList<ReplyVO> rdatas = new ArrayList<ReplyVO>();
 	
