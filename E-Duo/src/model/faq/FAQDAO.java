@@ -18,6 +18,7 @@ public class FAQDAO {
 	private String sql_insert = "insert into FAQ values((select nvl(max(fid), 0) + 1 from FAQ), ?, ?, ?)";
 	private String sql_delete = "delete from FAQ where fid = ?";
 	private String sql_update = "update FAQ set category = ?, title = ?, content = ? where fid = ?";
+	private String sql_searchFAQ = "select * from FAQ where title LIKE '%'||?||'%'";
 	
 	public ArrayList<FAQVO> selectAll() {
 		conn = JDBCUtil.connect();
@@ -121,5 +122,31 @@ public class FAQDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return true;
+	}
+	
+	// private String sql_searchFAQ = "select * from FAQ where title LIKE '%'||?||'%'";
+	public ArrayList<FAQVO> searchFAQ(FAQVO vo) {
+		conn = JDBCUtil.connect();
+		ArrayList<FAQVO> datas = new ArrayList<FAQVO>();
+		try {
+			pstmt = conn.prepareStatement(sql_searchFAQ);
+			pstmt.setString(1, vo.getTitle());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				FAQVO data = new FAQVO();
+				data.setCategory(rs.getString("category"));
+				data.setContent(rs.getString("content"));
+				data.setFid(rs.getInt("fid"));
+				data.setTitle(rs.getString("title"));
+				datas.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("FAQDAO search() 수행 중 문제 발생");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return datas;
 	}
 }

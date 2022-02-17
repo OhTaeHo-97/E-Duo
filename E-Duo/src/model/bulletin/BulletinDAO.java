@@ -27,7 +27,7 @@ public class BulletinDAO {
 	private String sql_selectFilterAll = "SELECT * FROM bulletin where category = ?";
 	private String sql_searchBulletinByTitle = "SELECT * FROM bulletin where category = ? and title LIKE '%'||?||'%'";
 	private String sql_searchBulletinByContent = "SELECT * FROM bulletin where category = ? and content LIKE '%'||?||'%'";
-	private String sql_searchBulletinByContent_Title = "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%'";
+	private String sql_searchBulletinByContent_Title = "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%')";
 	private String sql_selectMyBulletin = "SELECT * FROM bulletin WHERE stu_id = ?";
 
 	

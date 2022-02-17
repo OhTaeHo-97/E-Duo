@@ -9,8 +9,8 @@ public class JDBCUtil {
    public static Connection connect() {
       String driver = "oracle.jdbc.driver.OracleDriver";
       String url = "jdbc:oracle:thin:@localhost:1521:xe";
-      String user = "system";
-      String password = "0000";
+      String user = "hr";
+      String password = "1234";
       
       Connection conn = null;
       
