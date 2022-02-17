@@ -11,7 +11,7 @@ import controller.ActionForward;
 import model.notice.NoticeDAO;
 import model.notice.NoticeVO;
 
-public class GetNoticePageAction implements Action {
+public class SelectAllNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

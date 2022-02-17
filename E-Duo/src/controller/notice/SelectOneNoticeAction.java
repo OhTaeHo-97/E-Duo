@@ -10,7 +10,7 @@ import controller.ActionForward;
 import model.notice.NoticeDAO;
 import model.notice.NoticeVO;
 
-public class GetNoticeDetailAction implements Action {
+public class SelectOneNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

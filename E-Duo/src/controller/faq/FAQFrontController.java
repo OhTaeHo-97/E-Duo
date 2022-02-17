@@ -1,4 +1,4 @@
-package controller.notice;
+package controller.faq;
 
 import java.io.IOException;
 
@@ -10,18 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.ActionForward;
-
 /**
- * Servlet implementation class NoticeFrontController
+ * Servlet implementation class FAQFrontController
  */
-@WebServlet("*.notice")
-public class NoticeFrontController extends HttpServlet {
+@WebServlet("*.faq")
+public class FAQFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeFrontController() {
+    public FAQFrontController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +29,16 @@ public class NoticeFrontController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doAction(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doAction(request, response);
 	}
-	
+
 	private void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		String cp = request.getContextPath();
@@ -49,51 +46,57 @@ public class NoticeFrontController extends HttpServlet {
 		System.out.println(command);
 		
 		ActionForward forward = null;
-		if(command.equals("/noticePage.notice")) {
+		if(command.equals("/deleteFAQ.faq")) {
 			try {
-				forward = new SelectAllNoticeAction().execute(request, response);
+				forward = new DeleteFAQAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("GetNoticePageAction() 수행 중 문제 발생!");
+				System.out.println("DeleteFAQAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/noticeDetail.notice")) {
+		} else if(command.equals("/insertFAQ.faq")) {
 			try {
-				forward = new SelectOneNoticeAction().execute(request, response);
+				forward = new InsertFAQAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("GetNoticeDetailAction() 수행 중 문제 발생!");
+				System.out.println("InsertFAQAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/insertNotice.notice")) {
+		} else if(command.equals("/searchFAQ.faq")) {
 			try {
-				forward = new InsertNoticeAction().execute(request, response);
+				forward = new SearchFAQAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("InsertNoticeAction() 수행 중 문제 발생!");
+				System.out.println("SearchFAQAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/deleteNotice.notice")) {
+		} else if(command.equals("/selectAllFAQ.faq")) {
 			try {
-				forward = new DeleteNoticeAction().execute(request, response);
+				forward = new SelectAllFAQAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("DeleteNoticeAction() 수행 중 문제 발생!");
+				System.out.println("SelectAllFAQAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/updateNotice.notice")) {
+		} else if(command.equals("/selectOneFAQ.faq")) {
 			try {
-				forward = new UpdateNoticeAction().execute(request, response);
+				forward = new SelectOneFAQAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("UpdateNoticeAction() 수행 중 문제 발생!");
+				System.out.println("SelectOneFAQAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/updateFAQ.faq")) {
+			try {
+				forward = new UpdateFAQAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("UpdateFAQAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		}
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {
-				response.sendRedirect(command);
+				response.sendRedirect(forward.getPath());
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
-		}
+		} 
 	}
-
 }

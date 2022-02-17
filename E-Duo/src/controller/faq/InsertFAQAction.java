@@ -10,7 +10,7 @@ import controller.ActionForward;
 import model.faq.FAQDAO;
 import model.faq.FAQVO;
 
-public class InsertFaqAction implements Action {
+public class InsertFAQAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -1,4 +1,4 @@
-package controller.notice;
+package controller.enquiry;
 
 import java.io.IOException;
 
@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import controller.ActionForward;
 
 /**
- * Servlet implementation class NoticeFrontController
+ * Servlet implementation class EnquiryFrontController
  */
-@WebServlet("*.notice")
-public class NoticeFrontController extends HttpServlet {
+@WebServlet("*.enq")
+public class EnquiryFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeFrontController() {
+    public EnquiryFrontController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +30,16 @@ public class NoticeFrontController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doAction(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doAction(request, response);
 	}
-	
+
 	private void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String uri = request.getRequestURI();
 		String cp = request.getContextPath();
@@ -49,51 +47,50 @@ public class NoticeFrontController extends HttpServlet {
 		System.out.println(command);
 		
 		ActionForward forward = null;
-		if(command.equals("/noticePage.notice")) {
+		if(command.equals("/deleteEnquiry.enq")) {
 			try {
-				forward = new SelectAllNoticeAction().execute(request, response);
+				forward = new DeleteEnquiryAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("GetNoticePageAction() 수행 중 문제 발생!");
+				System.out.println("DeleteEnquiryAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/noticeDetail.notice")) {
+		} else if(command.equals("/insertEnquiry.enq")) {
 			try {
-				forward = new SelectOneNoticeAction().execute(request, response);
+				forward = new InsertEnquiryAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("GetNoticeDetailAction() 수행 중 문제 발생!");
+				System.out.println("InsertEnquiryAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/insertNotice.notice")) {
+		} else if(command.equals("/selectAllEnquiry.enq")) {
 			try {
-				forward = new InsertNoticeAction().execute(request, response);
+				forward = new SelectAllEnquiryAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("InsertNoticeAction() 수행 중 문제 발생!");
+				System.out.println("SelectAllEnquiryAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/deleteNotice.notice")) {
+		} else if(command.equals("/selectEnquiry.enq")) {
 			try {
-				forward = new DeleteNoticeAction().execute(request, response);
+				forward = new SelectEnquiryAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("DeleteNoticeAction() 수행 중 문제 발생!");
+				System.out.println("SelectEnquiryAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/updateNotice.notice")) {
+		} else if(command.equals("/updateEnquiry.enq")) {
 			try {
-				forward = new UpdateNoticeAction().execute(request, response);
+				forward = new UpdateEnquiryAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("UpdateNoticeAction() 수행 중 문제 발생!");
+				System.out.println("UpdateEnquiryAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		}
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {
-				response.sendRedirect(command);
+				response.sendRedirect(forward.getPath());
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
-		}
+		} 
 	}
-
 }
