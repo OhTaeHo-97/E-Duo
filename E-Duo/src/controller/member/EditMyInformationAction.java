@@ -29,8 +29,8 @@ public class EditMyInformationAction implements Action {
 		UniversityDAO udao = new UniversityDAO();
 		UniversityVO uvo = new UniversityVO();
 		uvo.setUni_name(request.getParameter("uni_name"));
-		UniversityVO udata = udao.selectUniv(uvo);
-		vo.setUni_id(udata.getUni_id());
+//		UniversityVO udata = udao.selectUniv(uvo);
+//		vo.setUni_id(udata.getUni_id());
 		vo.setEmail(request.getParameter("email"));
 		vo.setGrade(Integer.parseInt(request.getParameter("grade")));
 		vo.setSemester(Integer.parseInt(request.getParameter("semester")));

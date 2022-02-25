@@ -1,14 +1,14 @@
 package model.loginInfo;
 
 public class LoginInfoVO {
-	private String id;
+	private String stu_id;
 	private String password;
 	private String auth;
-	public String getId() {
-		return id;
+	public String getStu_id() {
+		return stu_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setStu_id(String stu_id) {
+		this.stu_id = stu_id;
 	}
 	public String getPassword() {
 		return password;
@@ -24,6 +24,6 @@ public class LoginInfoVO {
 	}
 	@Override
 	public String toString() {
-		return "LoginInfoVO [id=" + id + ", password=" + password + ", auth=" + auth + "]";
+		return "LoginInfoVO [id=" + stu_id + ", password=" + password + ", auth=" + auth + "]";
 	}
 }

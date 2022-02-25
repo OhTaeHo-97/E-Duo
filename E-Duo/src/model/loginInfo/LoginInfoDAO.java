@@ -13,12 +13,13 @@ public class LoginInfoDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	private String sql_selectAll = "select * from log_info";
-	private String sql_loginUser = "select * from log_info where id = ? and password = ?";
-	private String sql_loginAdmin = "select * from log_info where id = ? and password = ? and auth = 'Y'";
-	private String sql_insert = "insert into log_info(id, password) values(?, ?)";
-	private String sql_delete = "delete from login_info where id = ?";
-	private String sql_update = "update login_info set password = ? where id = ?";
+	private String sql_selectAll = "select * from login_info";
+	private String sql_checkId = "select * from login_info where stu_id = ?";
+	private String sql_loginUser = "select * from login_info where stu_id = ? and password = ?";
+	private String sql_loginAdmin = "select * from login_info where stu_id = ? and password = ? and auth = 'a'";
+	private String sql_insert = "insert into login_info(stu_id, password) values(?, ?)";
+	private String sql_delete = "delete from login_info where stu_id = ?";
+	private String sql_update = "update login_info set password = ? where stu_id = ?";
 	
 	public ArrayList<LoginInfoVO> selectAll() {
 		conn = JDBCUtil.connect();
@@ -29,7 +30,7 @@ public class LoginInfoDAO {
 			while(rs.next()) {
 				LoginInfoVO vo = new LoginInfoVO();
 				vo.setAuth(rs.getString("auth"));
-				vo.setId(rs.getString("id"));
+				vo.setStu_id(rs.getString("stu_id"));
 				vo.setPassword(rs.getString("password"));
 				datas.add(vo);
 			}
@@ -48,13 +49,13 @@ public class LoginInfoDAO {
 		LoginInfoVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_loginUser);
-			pstmt.setString(1, vo.getId());
+			pstmt.setString(1, vo.getStu_id());
 			pstmt.setString(2, vo.getPassword());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				data = new LoginInfoVO();
 				data.setAuth(rs.getString("auth"));
-				data.setId(rs.getString("id"));
+				data.setStu_id(rs.getString("stu_id"));
 				data.setPassword(rs.getString("password"));
 			}
 		} catch (SQLException e) {
@@ -72,12 +73,12 @@ public class LoginInfoDAO {
 		LoginInfoVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_loginAdmin);
-			pstmt.setString(1, vo.getId());
+			pstmt.setString(1, vo.getStu_id());
 			pstmt.setString(2, vo.getPassword());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				data = new LoginInfoVO();
-				data.setId(rs.getString("id"));
+				data.setStu_id(rs.getString("stu_id"));
 				data.setPassword(rs.getString("password"));
 				data.setAuth(rs.getString("auth"));
 			}
@@ -95,7 +96,7 @@ public class LoginInfoDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_insert);
-			pstmt.setString(1, vo.getId());
+			pstmt.setString(1, vo.getStu_id());
 			pstmt.setString(2, vo.getPassword());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -113,7 +114,7 @@ public class LoginInfoDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
-			pstmt.setString(1, vo.getId());
+			pstmt.setString(1, vo.getStu_id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("LoginInfoVo delete() 수행 중 문제 발생");
@@ -131,7 +132,7 @@ public class LoginInfoDAO {
 		try {
 			pstmt = conn.prepareStatement(sql_update);
 			pstmt.setString(1, vo.getPassword());
-			pstmt.setString(2, vo.getId());
+			pstmt.setString(2, vo.getStu_id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("LoginInfoVo update() 수행 중 문제 발생");
@@ -142,5 +143,29 @@ public class LoginInfoDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return true;
+	}
+	
+	public int checkId(LoginInfoVO vo) { // ID 중복검사 : 버튼클릭해서 중복여부 확인
+		int usable = 0;
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_checkId);
+			//select * from member where member_id = ?
+			pstmt.setString(1, vo.getStu_id());
+			rs = pstmt.executeQuery();
+			if(rs.next()) { // 존재한다면?? false값 반환
+				usable = 0;
+			}
+			else {			// 존재안한다면?? true값 반환
+				usable = 1;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("LoginInfoDAO checkId진행 중 오류");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return usable;
 	}
 }

@@ -13,7 +13,7 @@ public class StudentVO {
 	private int uni_id;
 	private String email;
 	private String gender;
-	private Date birth;
+	private String birth;
 	private int grade;
 	private int semester;
 	private float obj_credit;
@@ -92,10 +92,10 @@ public class StudentVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	public int getGrade() {

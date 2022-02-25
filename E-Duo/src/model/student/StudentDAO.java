@@ -1,12 +1,13 @@
 package model.student;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-import model.bulletin.BulletinVO;
 import model.common.JDBCUtil;
 
 public class StudentDAO {
@@ -36,13 +37,15 @@ public class StudentDAO {
 			pstmt.setInt(8, vo.getUni_id());
 			pstmt.setString(9, vo.getEmail());
 			pstmt.setString(10, vo.getGender());
-			pstmt.setDate(11, vo.getBirth());
+			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date birth = new Date(dtFormat.parse(vo.getBirth()).getTime());
+			pstmt.setDate(11, birth);
 			pstmt.setInt(12, vo.getGrade());
 			pstmt.setInt(13, vo.getSemester());
 			pstmt.setFloat(14, vo.getObj_credit());
 			pstmt.setInt(15, vo.getGraduate_credit());
 			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("Student Insert문 에러 : " + e);
 			e.printStackTrace();
 		} finally {
@@ -71,7 +74,7 @@ public class StudentDAO {
 				stu_data.setUni_id(rs.getInt("uni_id"));
 				stu_data.setEmail(rs.getString("email"));
 				stu_data.setGender(rs.getString("gender"));
-				stu_data.setBirth(rs.getDate("birth"));
+				stu_data.setBirth(rs.getString("birth"));
 				stu_data.setGrade(rs.getInt("grade"));
 				stu_data.setSemester(rs.getInt("semester"));
 				stu_data.setObj_credit(rs.getFloat("obj_credit"));
