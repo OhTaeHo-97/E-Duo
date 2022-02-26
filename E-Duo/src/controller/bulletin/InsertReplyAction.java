@@ -14,6 +14,7 @@ public class InsertReplyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	// 회의 필요, 익명 관련한 column의 필요성
+		// 댓글 작성버튼 클릭 시 댓글이 DB에 저장됨
 		ReplyDAO dao = new ReplyDAO();
 		ReplyVO vo = new ReplyVO();
 		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));
@@ -24,7 +25,7 @@ public class InsertReplyAction implements Action {
 		ActionForward forward = null;
 		if(dao.insert(vo)) {
 			forward = new ActionForward();
-			forward.setPath("#"); // 글 하나 세부로 보는 bulletin 세부 페이지로 갈 예정
+			forward.setPath("bulletin_detail.jsp");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

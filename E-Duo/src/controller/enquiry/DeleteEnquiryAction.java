@@ -14,6 +14,7 @@ public class DeleteEnquiryAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 관리지가 문의사항을 해결한 후에 DB에서 삭제하기 위한 Controller
 		EnquiryDAO dao = new EnquiryDAO();
 		EnquiryVO vo = new EnquiryVO();
 		vo.setEid(Integer.parseInt(request.getParameter("eid")));

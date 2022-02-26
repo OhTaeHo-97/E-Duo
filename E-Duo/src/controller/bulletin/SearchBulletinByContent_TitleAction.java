@@ -11,15 +11,19 @@ import controller.ActionForward;
 import model.bulletin.BulletinDAO;
 import model.bulletin.BulletinVO;
 
-public class SelectFilterAllAction implements Action {
+public class SearchBulletinByContent_TitleAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 카테고리 + (내용 or 제목)을 통하여 bulletin 데이터를 검색한다
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		vo.setCategory(request.getParameter("category"));
-		ArrayList<BulletinVO> bul_datas = dao.selectCategoryFilterAll(vo);
+		vo.setContent(request.getParameter("content"));
+		vo.setTitle(request.getParameter("content"));
+		ArrayList<BulletinVO> bul_datas = dao.searchBulletinByContent(vo);
 		ActionForward forward = null;
+		
 		if(bul_datas.size() != 0) {
 			request.setAttribute("bul_datas", bul_datas);
 			forward = new ActionForward();
@@ -32,5 +36,5 @@ public class SelectFilterAllAction implements Action {
 		}
 		return forward;
 	}
-	
+
 }

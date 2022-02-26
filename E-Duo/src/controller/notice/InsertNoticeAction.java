@@ -14,6 +14,7 @@ public class InsertNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 관리자가 공지사항 작성 시에 DB에 공지사항이 작성됨
 		NoticeDAO dao = new NoticeDAO();
 		NoticeVO vo = new NoticeVO();
 		vo.setContent(request.getParameter("content"));
@@ -22,7 +23,7 @@ public class InsertNoticeAction implements Action {
 		ActionForward forward = null;
 		if(dao.insert(vo)) {
 			forward = new ActionForward();
-			forward.setPath("noticePage.notice");
+			forward.setPath("selectAllNotice.notice");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

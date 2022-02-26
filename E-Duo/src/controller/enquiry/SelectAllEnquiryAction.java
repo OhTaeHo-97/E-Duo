@@ -16,6 +16,7 @@ public class SelectAllEnquiryAction implements Action
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 관리자가 회원들이 작성한 문의사항 전체를 볼수 있도록 함
 		EnquiryDAO dao = new EnquiryDAO();
 		ArrayList<EnquiryVO> enq_datas = new ArrayList<EnquiryVO>();
 		enq_datas = dao.selectAll();

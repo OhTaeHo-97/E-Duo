@@ -14,6 +14,7 @@ public class UpdateBulletinAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 글 수정버튼 클릭 시 DB의 데이터가 수정됨, 이때 bul_id는 사용자가 입력하는 것이 아니고 invisible로 받아옴
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));

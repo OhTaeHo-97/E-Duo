@@ -15,6 +15,7 @@ public class SelectAllNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 공지사항 목록 전체를 불러옴
 		NoticeDAO dao = new NoticeDAO();
 		ArrayList<NoticeVO> datas = dao.selectAll();
 		ActionForward forward = null;

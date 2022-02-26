@@ -14,6 +14,7 @@ public class DeleteFAQAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//관리자가 faq를 삭제할 수 있도록 함
 		FAQDAO dao = new FAQDAO();
 		FAQVO vo = new FAQVO();
 		vo.setFid(Integer.parseInt(request.getParameter("fid")));

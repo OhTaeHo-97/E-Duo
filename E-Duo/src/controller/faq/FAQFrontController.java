@@ -60,11 +60,11 @@ public class FAQFrontController extends HttpServlet {
 				System.out.println("InsertFAQAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/searchFAQ.faq")) {
+		} else if(command.equals("/searchFAQByTitle.faq")) {
 			try {
-				forward = new SearchFAQAction().execute(request, response);
+				forward = new SearchFAQByTitleAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("SearchFAQAction 수행 중 문제 발생!");
+				System.out.println("SearchFAQByTitleAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		} else if(command.equals("/selectAllFAQ.faq")) {
@@ -86,6 +86,20 @@ public class FAQFrontController extends HttpServlet {
 				forward = new UpdateFAQAction().execute(request, response);
 			} catch (Exception e) {
 				System.out.println("UpdateFAQAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/searchFAQByContent.faq")) {
+			try {
+				forward = new SearchFAQByContentAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("SearchFAQByContentAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/searchFAQByContent_Title.faq")) {
+			try {
+				forward = new SearchFAQByContent_TitleAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("SearchFAQByContent_TitleAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		}

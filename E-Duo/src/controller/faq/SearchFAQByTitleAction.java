@@ -11,14 +11,15 @@ import controller.ActionForward;
 import model.faq.FAQDAO;
 import model.faq.FAQVO;
 
-public class SearchFAQAction implements Action {
+public class SearchFAQByTitleAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 제목을 통하여 FAQ를 검색할 수 있도록 함
 		FAQDAO dao = new FAQDAO();
 		FAQVO vo = new FAQVO();
 		vo.setTitle(request.getParameter("title"));
-		ArrayList<FAQVO> faq_datas = dao.searchFAQ(vo);
+		ArrayList<FAQVO> faq_datas = dao.searchFAQByTitle(vo);
 		
 		ActionForward forward = null;
 		if(faq_datas.size() != 0) {
@@ -29,7 +30,7 @@ public class SearchFAQAction implements Action {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('데이터를 불러오는 도중 문제가 발생하였습니다.'); history.back(-1);</script>");
+			out.println("<script>alert('조건을 만족하는 데이터가 존재하지 않습니다.'); history.back(-1);</script>");
 		}
 		return forward;
 	}

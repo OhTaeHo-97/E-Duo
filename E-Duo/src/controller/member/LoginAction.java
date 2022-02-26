@@ -15,6 +15,7 @@ public class LoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 로그인 시에 관리자인지? 일반 회원인지 판단하여 관리자일 시 권한을 주면서 로그인함.
 		LoginInfoDAO dao = new LoginInfoDAO();
 		LoginInfoVO vo = new LoginInfoVO();
 		vo.setId(request.getParameter("sid"));
@@ -30,6 +31,7 @@ public class LoginAction implements Action {
 			forward = new ActionForward();
 			forward.setPath("main.do");
 			forward.setRedirect(false);
+			// 아래 수정해야 됨
 		} else if(request.getParameter("auth").equals("s")) {
 			data = dao.loginAdmin(vo);
 			HttpSession session = request.getSession();

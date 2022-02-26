@@ -15,6 +15,7 @@ public class SelectOneAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 게시판 분류별 페이지 혹은 메인페이지의 게시판 top3 글 목록을 눌렀을 때, 글과 댓글이 써져있는 페이지로 이동하는 controller
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		BulletinSet bul_data = null;

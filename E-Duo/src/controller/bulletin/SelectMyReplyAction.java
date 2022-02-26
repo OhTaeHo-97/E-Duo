@@ -16,16 +16,17 @@ public class SelectMyReplyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 내가 작성한 모든 reply 데이터를 불러옴
 		ReplyDAO dao = new ReplyDAO();
 		ReplyVO vo = new ReplyVO();
 		HttpSession session = request.getSession();
-		vo.setStu_id((String) session.getAttribute("stu_id"));	// 세션에 아이디를 저장해놓고 session에서 아이디를 받아올 예정(변수명이 stu_id 에서 id로 바뀔 수 있음)
-		ArrayList<ReplyVO> rep_datas = dao.selectMyReply(vo);	// rep_datas로 데이터를 받아올 예정
+		vo.setStu_id((String) session.getAttribute("user_id"));	// session에 저장된 user의 아이디를 받아옴
+		ArrayList<ReplyVO> rep_datas = dao.selectMyReply(vo);
 		ActionForward forward = null;
 		if(rep_datas.size() != 0) {
 			request.setAttribute("rep_datas", rep_datas);
 			forward = new ActionForward();
-			forward.setPath("myBoardReply.jsp");	//html 페이지 jsp로 수정예정
+			forward.setPath("myBoardReply.jsp");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

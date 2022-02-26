@@ -14,6 +14,7 @@ public class InsertBulletinAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 글 작성 페이지에서 글 작성을 누르면 DB에 데이터를 insert 함
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		vo.setCategory(request.getParameter("Category"));

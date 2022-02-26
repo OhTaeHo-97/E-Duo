@@ -16,7 +16,8 @@ import model.university.UniversityVO;
 public class EditMyInformationAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception { 
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 회원정보를 수정하는 Controller
 		StudentDAO dao = new StudentDAO();
 		StudentVO vo = new StudentVO();
 		HttpSession session = request.getSession();

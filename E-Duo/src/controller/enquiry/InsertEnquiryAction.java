@@ -14,6 +14,7 @@ public class InsertEnquiryAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 회원이 문의사항을 작성하면 DB에 데이터를 저장해준다.
 		EnquiryDAO dao = new EnquiryDAO();
 		EnquiryVO vo = new EnquiryVO();
 		vo.setCategory(request.getParameter("category"));

@@ -14,6 +14,7 @@ public class DeleteBulletinAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 게시판 글 삭제버튼 클릭 시 수행되는 부분, DB에서 게시판 데이터를 삭제함
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));

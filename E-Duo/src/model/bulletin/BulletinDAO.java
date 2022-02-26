@@ -29,7 +29,38 @@ public class BulletinDAO {
 	private String sql_searchBulletinByContent = "SELECT * FROM bulletin where category = ? and content LIKE '%'||?||'%'";
 	private String sql_searchBulletinByContent_Title = "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%')";
 	private String sql_selectMyBulletin = "SELECT * FROM bulletin WHERE stu_id = ?";
+	private String sql_selectTop3 = "SELECT * FROM bulletin where category = ? and rownum < 5 order by bul_id desc";
 
+	public ArrayList<BulletinVO> selectTop3(BulletinVO vo) {
+		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
+		BulletinVO bul_data = null;
+		
+		conn = JDBCUtil.connect();
+		
+		try {
+			pstmt = conn.prepareStatement(sql_selectTop3);
+			pstmt.setString(1, vo.getCategory());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				bul_data = new BulletinVO();
+				bul_data.setBul_id(rs.getInt("bul_id"));
+				bul_data.setCategory(rs.getString("category"));
+				bul_data.setContent(rs.getString("content"));
+				bul_data.setImage(rs.getString("image"));
+				bul_data.setRegDate(rs.getString("regDate"));
+				bul_data.setStu_id(rs.getString("stu_id"));
+				bul_data.setTitle(rs.getString("title"));
+				
+				bul_datas.add(bul_data);
+			}
+		} catch (SQLException e) {
+			System.out.println("Bulletin SelectTop3문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return bul_datas;
+	}
 	
 	public boolean insert(BulletinVO vo) {
 		int result = 0;
@@ -115,7 +146,7 @@ public class BulletinDAO {
 		return bul_datas;
 	}
 	
-	public BulletinSet selectOne(BulletinVO vo) {	// 수정 필요, 한 개의 게시물을 눌렀을 경우 reply들이 보이도록 해야 함 reply와 연동 후 수정
+	public BulletinSet selectOne(BulletinVO vo) {
 		
 		BulletinSet data = null;
 		
@@ -265,7 +296,7 @@ public class BulletinDAO {
 	}
 	
 	public ArrayList<BulletinVO> searchBulletinByContent(BulletinVO vo) {
-		// 내용 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 제목 검색인 셈
+		// 내용 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 내용 검색인 셈
 		conn = JDBCUtil.connect();
 		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();
 		BulletinVO data = null;
@@ -295,7 +326,7 @@ public class BulletinDAO {
 		return bul_datas;
 	}
 	public ArrayList<BulletinVO> searchBulletinByContent_Title(BulletinVO vo) {
-		// 내용 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 제목 검색인 셈
+		// 내용, 제목 기반으로 게시판 검색(이때 게시판마다 검색이므로 category도 검색조건에 포함된다. 즉, 카테고리 + 제목 + 내용 검색인 셈
 		//  "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%'";
 		conn = JDBCUtil.connect();
 		ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();

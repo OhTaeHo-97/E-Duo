@@ -14,6 +14,7 @@ public class UpdateNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 관리자가 공지사항을 수정할 수 있도록 함
 		NoticeDAO dao = new NoticeDAO();
 		NoticeVO vo = new NoticeVO();
 		vo.setContent(request.getParameter("content"));
@@ -24,7 +25,7 @@ public class UpdateNoticeAction implements Action {
 		if(dao.update(vo)) {
 			request.setAttribute("nid", Integer.parseInt(request.getParameter("nid")));
 			forward = new ActionForward();
-			forward.setPath("noticeDetail.notice");
+			forward.setPath("selectOneNotice.notice");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/http; charset=UTF-8");

@@ -14,6 +14,7 @@ public class SelectEnquiryAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 문의사항 목록에서 하나를 클릭하면 문의사항의 내용을 보여주도록 함
 		EnquiryDAO dao = new EnquiryDAO();
 		EnquiryVO vo = new EnquiryVO();
 		EnquiryVO enq_data = null;

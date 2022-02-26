@@ -16,7 +16,8 @@ import model.my_subject.My_subjectVO;
 public class GetTimeTableAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {			
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {	
+		// 내 시간표에 들어있는 과목들의 데이터와 총 학점수, 총 평점을 가져온다.
 		My_subjectDAO dao = new My_subjectDAO();
 		My_subjectVO vo = new My_subjectVO();
 		HttpSession session = request.getSession();

@@ -15,6 +15,7 @@ public class DeleteStudentAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 회원탈퇴시에 회원 데이터를 DB에서 삭제하고 session에 저장된 user_id를 제거함
 		LoginInfoDAO dao = new LoginInfoDAO();
 		LoginInfoVO vo = new LoginInfoVO();
 		HttpSession session = request.getSession();

@@ -15,6 +15,7 @@ public class GetMyInformationAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 개인정보 페이지로 갈 때 개인정보를 모두 들고감
 		StudentDAO dao = new StudentDAO();
 		StudentVO vo = new StudentVO();
 		HttpSession session = request.getSession();

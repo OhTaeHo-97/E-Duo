@@ -15,6 +15,7 @@ public class SelectCategoryFilterAllAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 분류별 게시판 글 목록 불러오기(장터 게시판, 자유 게시판 등등)
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		vo.setCategory(request.getParameter("category"));

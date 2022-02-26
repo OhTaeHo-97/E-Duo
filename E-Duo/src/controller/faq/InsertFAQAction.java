@@ -14,6 +14,7 @@ public class InsertFAQAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 관리자가 faq를 작성하여 DB에 저장함
 		FAQDAO dao = new FAQDAO();
 		FAQVO vo = new FAQVO();
 		vo.setCategory(request.getParameter("category"));

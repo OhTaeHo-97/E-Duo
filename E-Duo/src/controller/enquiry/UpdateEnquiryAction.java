@@ -14,6 +14,7 @@ public class UpdateEnquiryAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 문의사항 수정인데, 필요할 지 유무는 대화 필요
 		EnquiryDAO dao = new EnquiryDAO();
 		EnquiryVO vo = new EnquiryVO();
 		vo.setCategory(request.getParameter("category"));

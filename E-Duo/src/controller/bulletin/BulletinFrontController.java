@@ -82,11 +82,25 @@ public class BulletinFrontController extends HttpServlet {
 				System.out.println("SelectCategoryFilterAllAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/selectFilterAll.bul")) {
+		} else if(command.equals("/searchBulletinByContent_Title.bul")) {
 			try {
-				forward = new SelectFilterAllAction().execute(request, response);
+				forward = new SearchBulletinByContent_TitleAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("SelectFilterAllAction 수행 중 문제 발생!");
+				System.out.println("SearchBulletinByContent_TitleAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/searchBulletinByContent.bul")) {
+			try {
+				forward = new SearchBulletinByContentAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("SearchBulletinByContentAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/searchBulletinByTitle.bul")) {
+			try {
+				forward = new SearchBulletinByTitleAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("SearchBulletinByTitleAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		} else if(command.equals("/selectMyReply.bul")) {
@@ -103,7 +117,7 @@ public class BulletinFrontController extends HttpServlet {
 				System.out.println("SelectMyTextAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/selectone.bul")) {
+		} else if(command.equals("/selectOne.bul")) {
 			try {
 				forward = new SelectOneAction().execute(request, response);
 			} catch (Exception e) {

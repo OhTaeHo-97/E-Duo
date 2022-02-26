@@ -16,10 +16,11 @@ public class SelectMyTextAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 내가 작성한 모든 글을 불러옴
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		HttpSession session = request.getSession();
-		vo.setStu_id((String) session.getAttribute("stu_id"));	// Session에 저장된 id 객체를 String 타입으로 형 변환해서 가져온다.
+		vo.setStu_id((String) session.getAttribute("user_id"));	// Session에 저장된 id 객체를 String 타입으로 형 변환해서 가져온다.
 		ArrayList<BulletinVO> bul_datas = dao.selectMyText(vo);
 		ActionForward forward = null;
 		if(bul_datas.size() != 0) {

@@ -14,6 +14,7 @@ public class SelectOneNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 공지사항 목록에서 특정 공지사항을 클릭할 시에 그 공지사항의 내용을 보여줌
 		NoticeDAO dao = new NoticeDAO();
 		NoticeVO vo = new NoticeVO();
 		vo.setNid(Integer.parseInt(request.getParameter("nid")));
@@ -27,7 +28,7 @@ public class SelectOneNoticeAction implements Action {
 		} else {
 			request.setAttribute("notice_data", data);
 			forward = new ActionForward();
-			forward.setPath("noticeDetail.jsp");
+			forward.setPath("notice_detail.jsp");
 			forward.setRedirect(false);
 		}
 		

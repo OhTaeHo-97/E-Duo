@@ -29,7 +29,7 @@ public class UpdateObj_creditAction implements Action {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('학젬 수정 수행 중 문제가 발생하였습니다.'); history.back(-1);</script>");
+			out.println("<script>alert('목표학점 수정 수행 중 문제가 발생하였습니다.'); history.back(-1);</script>");
 		}
 		return forward;
 	}

@@ -49,18 +49,18 @@ public class NoticeFrontController extends HttpServlet {
 		System.out.println(command);
 		
 		ActionForward forward = null;
-		if(command.equals("/noticePage.notice")) {
+		if(command.equals("/selectAllNotice.notice")) {
 			try {
 				forward = new SelectAllNoticeAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("GetNoticePageAction() 수행 중 문제 발생!");
+				System.out.println("SelectAllNoticeAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/noticeDetail.notice")) {
+		} else if(command.equals("/selectOneNotice.notice")) {
 			try {
 				forward = new SelectOneNoticeAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("GetNoticeDetailAction() 수행 중 문제 발생!");
+				System.out.println("SelectOneNoticeAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		} else if(command.equals("/insertNotice.notice")) {
