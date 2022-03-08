@@ -10,7 +10,7 @@ import controller.ActionForward;
 import model.notice.NoticeDAO;
 import model.notice.NoticeVO;
 
-public class GetNoticeDetailAction implements Action {
+public class GetNoticeEditPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -27,7 +27,7 @@ public class GetNoticeDetailAction implements Action {
 		} else {
 			request.setAttribute("notice_data", data);
 			forward = new ActionForward();
-			forward.setPath("noticeDetail.jsp");
+			forward.setPath("noticeEdit.jsp");
 			forward.setRedirect(false);
 		}
 		

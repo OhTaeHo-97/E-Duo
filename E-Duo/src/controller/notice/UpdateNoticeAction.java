@@ -18,7 +18,7 @@ public class UpdateNoticeAction implements Action {
 		NoticeVO vo = new NoticeVO();
 		vo.setContent(request.getParameter("content"));
 		vo.setTitle(request.getParameter("title"));
-		vo.setNid(Integer.parseInt(request.getParameter("nid")));
+		vo.setNot_id(Integer.parseInt(request.getParameter("nid")));
 		
 		ActionForward forward = null;
 		if(dao.update(vo)) {
@@ -27,7 +27,7 @@ public class UpdateNoticeAction implements Action {
 			forward.setPath("noticeDetail.notice");
 			forward.setRedirect(false);
 		} else {
-			response.setContentType("text/http; charset=UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('공지사항을 수정하는 중에 문제가 발생했습니다.');history.back(-1);</script>");
 		}

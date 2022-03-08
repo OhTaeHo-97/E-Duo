@@ -16,12 +16,12 @@ public class DeleteNoticeAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		NoticeDAO dao = new NoticeDAO();
 		NoticeVO vo = new NoticeVO();
-		vo.setNid(Integer.parseInt(request.getParameter("nid")));
+		vo.setNot_id(Integer.parseInt(request.getParameter("nid")));
 		
 		ActionForward forward = null;
 		if(dao.delete(vo)) {
 			forward = new ActionForward();
-			forward.setPath("notice.jsp");
+			forward.setPath("noticePage.notice");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/http; charset=UTF-8");

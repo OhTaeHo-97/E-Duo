@@ -31,7 +31,7 @@ public class NoticeFrontController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doAction(request, response);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class NoticeFrontController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		doAction(request, response);
 	}
 	
 	private void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,6 +82,13 @@ public class NoticeFrontController extends HttpServlet {
 				forward = new UpdateNoticeAction().execute(request, response);
 			} catch (Exception e) {
 				System.out.println("UpdateNoticeAction() 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/noticeUpdatePage.notice")) {
+			try {
+				forward = new GetNoticeEditPageAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("GetNoticeEditPageAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		}

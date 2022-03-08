@@ -15,7 +15,7 @@ public class LoginInfoDAO {
 	
 	private String sql_selectAll = "select * from login_info";
 	private String sql_checkId = "select * from login_info where stu_id = ?";
-	private String sql_loginUser = "select * from login_info where stu_id = ? and password = ?";
+	private String sql_loginUser = "select * from login_info where stu_id = ? and password = ? and auth = 's'";
 	private String sql_loginAdmin = "select * from login_info where stu_id = ? and password = ? and auth = 'a'";
 	private String sql_insert = "insert into login_info(stu_id, password) values(?, ?)";
 	private String sql_delete = "delete from login_info where stu_id = ?";
