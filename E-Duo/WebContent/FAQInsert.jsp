@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
+<meta charset="UTF-8">]
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
@@ -115,7 +114,7 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="question.jsp" class="d-flex"><span class="text-black">문의하기</span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">문의하기</span></a></li>
                 <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">서비스 이용약관</span></a></li>
                 <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">개인정보 처리방침</span></a></li>
                 <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">커뮤니티 이용규칙</span></a></li>
@@ -124,36 +123,43 @@
 
           </div>
           <div class="col-md-9 ml-auto">
-          	<c:choose>
-          		<c:when test = "${auth eq 'a'}">
-          			<div class="col-md-12 ml-auto">
-		            	<h3 class="mb-3 h3 text-uppercase text-black d-block">FAQ</h3>
-		            </div>
-		            <div class="col-md-4 ml-auto">
-		            	<input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 35%; height: 40px; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'FAQInsert.jsp'">
-		            </div>
-          		</c:when>
-          		<c:otherwise>
-          			<div class="col-md-12 ml-auto">
-		            	<h3 class="mb-3 h3 text-uppercase text-black d-block">FAQ</h3>
-		            </div>
-          		</c:otherwise>
-          	</c:choose>
-            <div class="col-md-12 ml-auto">
-                <ul style = "list-style:none; padding:0;">
-                	<c:forEach var = "data" items = "${faq_datas}">
-                		<a href = "selectOneFAQ.faq?fid=${data.faq_id}" style = "color:#8c92a0;">
-                			<li class = "faq_list1">
-                  				<div class="border p-4 rounded mb-4" class = "faq_list">
-                    				<div style = "margin-left: 7%;">
-                      					<span style = "font-size: 1.5rem; font-weight: 500;">${data.title}</span>
-                    				</div>
-                      			</div>
-                    		</li>
-                		</a>
-                	</c:forEach>
-                </ul>
-            </div>
+
+            <form action="insertFAQ.faq" method="post">
+              
+              <div class="p-3 p-lg-5 border">
+                <div class="form-group row">
+                  <div class="col-md-3">
+                    <label for="category_FAQ" class="text-black">카테고리<span class="text-danger">*</span></label>
+                    <select name="category" class="form-control" id="category_FAQ" >
+                      <option value="개인정보">개인정보</option>
+                      <option value="게시판">게시판</option>
+                      <option value="시간표">시간표</option>
+                      <option value="학점관리">학점관리</option>
+                      <option value="기타">기타</option>
+                    </select>
+                  </div>
+                  <div class="col-md-9">
+                    <label for="title_FAQ" class="text-black">제목<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="title_FAQ" name="title">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="content_FAQ" class="text-black">FAQ 내용 </label>
+                    <textarea name="content" id="content_FAQ" cols="30" rows="7" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="추가하기">
+                  </div>
+                  <div class="col-lg-3">
+                    <input type="button" class="btn btn-primary btn-lg btn-block" value="돌아가기" onclick = "location.href='selectAllFAQ.faq'">
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

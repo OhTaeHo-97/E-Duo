@@ -108,13 +108,21 @@
     <div class="site-section">
         <div class="container">
             <div class="row">
-<!--                 <div class="col-md-12 ml-auto"> -->
-                    <div class="col-md-9 ml-auto">
-                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
-                    </div>
-                    <div class="col-md-3 ml-auto">
-                        <input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 30%; height: 65%; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'noticeInsert.jsp'">
-                    </div>
+            	<c:choose>
+            		<c:when test = "${auto eq 'a'}">
+            			<div class="col-md-9 ml-auto">
+	                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
+	                    </div>
+	                   	<div class="col-md-3 ml-auto">
+	                        <input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 35%; height: 40px; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'noticeInsert.jsp'">
+	                    </div>
+            		</c:when>
+            		<c:otherwise>
+            			<div class="col-md-12 ml-auto">
+	                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
+	                    </div>
+            		</c:otherwise>
+            	</c:choose>
                     <div class="col-md-12 ml-auto">
                         <ul style = "list-style:none; padding:0;">
                         	<c:forEach var = "data" items = "${notice_datas}">

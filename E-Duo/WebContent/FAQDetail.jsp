@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="site-wrap">
+<div class="site-wrap">
     <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
@@ -100,61 +100,68 @@
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Contact</strong></div>
+          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Login</strong></div>
         </div>
       </div>
     </div>  
 
     <div class="site-section">
       <div class="container">
-        <div class="row">
+        <!-- <div class="row"> -->
+        <div>
           <div class="col-md-12">
-            <h2 class="h3 mb-3 text-black">Get In Touch</h2>
+            <h2 class="h2 mb-3 text-black">FAQ</h2>
           </div>
-          <div class="col-md-3">
-            <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="question.jsp" class="d-flex"><span class="text-black">문의하기</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">서비스 이용약관</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">개인정보 처리방침</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">커뮤니티 이용규칙</span></a></li>
-              </ul>
+          <!-- <div class="col-md-7" style = "width:100%;"> -->
+          <!-- <div style = "position:relative; left:25%; width:50%;"> -->
+        <div>
+
+<!--             <form action="updateNotice.notice" method="POST"> -->
+            <div class="p-3 p-lg-5 border">
+            <div class="form-group row">
+                <div class="col-md-9">
+                    <h3 style = "color:black;">${faq_data.title}</h3>
+                </div>
+                <div class="col-md-3">
+               		<c:if test = "${auth eq 'a'}">
+               			<input type="button" class="btn btn-primary btn-lg" style = "font-size: 0.9rem; background-color: white; border-color: white; width: 30%; height: 40px; text-align: center; color: black;" value="수정" onClick = "location.href = 'FAQUpdatePage.faq?fid=${faq_data.faq_id}'">
+                  		<input type="button" class="btn btn-primary btn-lg" style = "font-size: 0.9rem; background-color: white; border-color: white; width: 30%; height: 40px; text-align: center; color: red;" value="삭제" onClick = "location.href = 'deleteFAQ.faq?fid=${faq_data.faq_id}'">
+               		</c:if>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <span class = "notice-content">${faq_data.content}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                <input type="button" class="btn btn-primary btn-lg btn-block" value="전 페이지로 돌아가기" onClick = "location.href = 'selectAllFAQ.faq'">
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                <div class="col-lg-12">
+                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Send Message">
+                </div>
+            </div> -->
+            </div>
+<!--             </form> -->
+          </div>
+          <!-- <div class="col-md-5 ml-auto">
+            <div class="p-4 border mb-3">
+              <span class="d-block text-primary h6 text-uppercase">New York</span>
+              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
+            </div>
+            <div class="p-4 border mb-3">
+              <span class="d-block text-primary h6 text-uppercase">London</span>
+              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
+            </div>
+            <div class="p-4 border mb-3">
+              <span class="d-block text-primary h6 text-uppercase">Canada</span>
+              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
             </div>
 
-          </div>
-          <div class="col-md-9 ml-auto">
-          	<c:choose>
-          		<c:when test = "${auth eq 'a'}">
-          			<div class="col-md-12 ml-auto">
-		            	<h3 class="mb-3 h3 text-uppercase text-black d-block">FAQ</h3>
-		            </div>
-		            <div class="col-md-4 ml-auto">
-		            	<input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 35%; height: 40px; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'FAQInsert.jsp'">
-		            </div>
-          		</c:when>
-          		<c:otherwise>
-          			<div class="col-md-12 ml-auto">
-		            	<h3 class="mb-3 h3 text-uppercase text-black d-block">FAQ</h3>
-		            </div>
-          		</c:otherwise>
-          	</c:choose>
-            <div class="col-md-12 ml-auto">
-                <ul style = "list-style:none; padding:0;">
-                	<c:forEach var = "data" items = "${faq_datas}">
-                		<a href = "selectOneFAQ.faq?fid=${data.faq_id}" style = "color:#8c92a0;">
-                			<li class = "faq_list1">
-                  				<div class="border p-4 rounded mb-4" class = "faq_list">
-                    				<div style = "margin-left: 7%;">
-                      					<span style = "font-size: 1.5rem; font-weight: 500;">${data.title}</span>
-                    				</div>
-                      			</div>
-                    		</li>
-                		</a>
-                	</c:forEach>
-                </ul>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

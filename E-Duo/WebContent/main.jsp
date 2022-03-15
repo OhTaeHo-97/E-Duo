@@ -78,7 +78,7 @@
             <li class = "has-children">
             	<a href="FAQ.jsp">문의하기</a>
             	<ul class="dropdown">
-	                <li><a href="FAQ.jsp">FAQ</a></li>
+	                <li><a href="selectAllFAQ.faq">FAQ</a></li>
 	                <li><a href="question.html">문의하기</a></li>
 	                <li><a href="#">이용약관</a></li>
 	                <li><a href="#">개인정보 처리방침</a></li>

@@ -1,15 +1,15 @@
 package model.faq;
 
 public class FAQVO {
-	private int fid;
+	private int faq_id;
 	private String category;
 	private String title;
 	private String content;
-	public int getFid() {
-		return fid;
+	public int getFaq_id() {
+		return faq_id;
 	}
-	public void setFid(int fid) {
-		this.fid = fid;
+	public void setFaq_id(int faq_id) {
+		this.faq_id = faq_id;
 	}
 	public String getCategory() {
 		return category;
@@ -31,6 +31,6 @@ public class FAQVO {
 	}
 	@Override
 	public String toString() {
-		return "FAQVO [fid=" + fid + ", category=" + category + ", title=" + title + ", content=" + content + "]";
+		return "FAQVO [fid=" + faq_id + ", category=" + category + ", title=" + title + ", content=" + content + "]";
 	}
 }

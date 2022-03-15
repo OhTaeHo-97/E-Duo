@@ -121,7 +121,7 @@
 	            <div class="form-group row">
 	                <div class="col-md-12">
 	                	<h4>제목</h4>
-	                	<input type = "text" name = "title">
+	                	<input type = "text" name = "title" style = "width: 70%;">
 	<%--                     <h3 style = "color:black;">${notice_data.title}</h3> --%>
 	                <!-- <label for="login_uid" class="text-black">ID <span class="text-danger">*</span></label>
 	                <input type="text" class="form-control" id="login_uid" name="uid" placeholder="아이디를 입력하세요."> -->
