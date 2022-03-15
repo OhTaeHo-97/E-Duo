@@ -15,10 +15,10 @@ public class UniversityDAO {
 	
 	private String sql_insert = "INSERT INTO university VALUES(?,?)"; 
 	private String sql_select = "SELECT * FROM university WHERE uni_id=?";
-	private String sql_selectUniv = "SELECT * FROM uni_id WHERE uni_name=?"; 
 	private String sql_update = "UPDATE university SET uni_id=?, uni_name=? WHERE uni_id=?";
 	private String sql_delete = "DELETE FROM university WHERE uni_id=?";
-	private String sql_selectAll = "SELECT * FROM university";	
+	private String sql_selectAll = "SELECT * FROM university";
+	private String sql_getUniId = "SELECT uni_id FROM university WHERE uni_name = ?";
 	private String sql_selectFilter = "";
 	
 	public boolean insert(UniversityVO vo) {
@@ -121,23 +121,24 @@ public class UniversityDAO {
 		return uni_datas;
 	}
 	
-	public UniversityVO selectUniv(UniversityVO vo) {
-		UniversityVO uni_data = null;
+	public UniversityVO getUniId(UniversityVO vo) {
+		UniversityVO data = null;
 		conn = JDBCUtil.connect();
 		try {
-			pstmt = conn.prepareStatement(sql_selectUniv);
-			pstmt.setInt(1, vo.getUni_id());
+			pstmt = conn.prepareStatement(sql_getUniId);
+			pstmt.setString(1, vo.getUni_name());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				uni_data = new UniversityVO();
-				uni_data.setUni_id(rs.getInt("uni_id"));
-				uni_data.setUni_name(rs.getString("uni_name"));
+				data = new UniversityVO();
+				data.setUni_id(rs.getInt("uni_id"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("University selectUniv문 에러 : " + e);
+			System.out.println("University getUniId문 에러 : " + e);
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
 		}
-		return uni_data;
+		return data;
 	}
 }

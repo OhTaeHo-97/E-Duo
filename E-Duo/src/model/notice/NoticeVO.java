@@ -1,15 +1,15 @@
 package model.notice;
 
 public class NoticeVO {
-	private int nid;
+	private int not_id;
 	private String title;
 	private String content;
 	private String regDate;
-	public int getNid() {
-		return nid;
+	public int getNot_id() {
+		return not_id;
 	}
-	public void setNid(int nid) {
-		this.nid = nid;
+	public void setNot_id(int not_id) {
+		this.not_id = not_id;
 	}
 	public String getTitle() {
 		return title;
@@ -31,6 +31,6 @@ public class NoticeVO {
 	}
 	@Override
 	public String toString() {
-		return "NoticeVO [nid=" + nid + ", title=" + title + ", content=" + content + ", regDate=" + regDate + "]";
+		return "NoticeVO [nid=" + not_id + ", title=" + title + ", content=" + content + ", regDate=" + regDate + "]";
 	}
 }

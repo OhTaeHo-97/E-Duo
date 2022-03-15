@@ -21,6 +21,7 @@ public class InsertReplyAction implements Action {
 		vo.setContent(request.getParameter("content"));
 		vo.setRegDate(request.getParameter("regDate"));
 		vo.setStu_id(request.getParameter("stu_id"));
+		vo.setNickname(request.getParameter("nickname"));
 		
 		ActionForward forward = null;
 		if(dao.insert(vo)) {

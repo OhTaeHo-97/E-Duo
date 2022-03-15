@@ -14,15 +14,14 @@ public class DeleteNoticeAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 관리자가 공지사항 삭제버튼을 누를 경우 DB에서 데이터를 삭제함
 		NoticeDAO dao = new NoticeDAO();
 		NoticeVO vo = new NoticeVO();
-		vo.setNid(Integer.parseInt(request.getParameter("nid")));
+		vo.setNot_id(Integer.parseInt(request.getParameter("nid")));
 		
 		ActionForward forward = null;
 		if(dao.delete(vo)) {
 			forward = new ActionForward();
-			forward.setPath("selectAllNotice.jsp");
+			forward.setPath("noticePage.notice");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/http; charset=UTF-8");

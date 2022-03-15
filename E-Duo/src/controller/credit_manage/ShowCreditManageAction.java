@@ -58,10 +58,11 @@ public class ShowCreditManageAction implements Action {
 		}
 		this_semester_credit_average = temp/this_semester_credit;
 		
-		// 학점 평균 불러오기 로직
+		// 모든 학기 학점 평균 불러오기 로직
 		My_subjectDAO dao3 = new My_subjectDAO();
 		My_subjectVO vo3 = new My_subjectVO();
 		vo3.setStu_id((String)session.getAttribute("user_id"));
+		
 		ArrayList<Double> grade_averages = new ArrayList<Double>();
 		for(int i = 0 ; i < 4 ; i++) {
 			for(int j = 0 ; j < 2 ; j++) {
@@ -83,6 +84,12 @@ public class ShowCreditManageAction implements Action {
 		}
 		request.setAttribute("grade_averages", grade_averages);
 		
+		int all_credit = 0;
+		
+		ArrayList<My_subjectSet> all_sub_datas = dao3.getMyTimetable(vo3);
+		for(int i = 0 ; i < all_sub_datas.size() ; i++) {
+			
+		}
 		// 필요학점은 비동기 처리 예정
 		ActionForward forward = new ActionForward();
 		forward.setPath("CreditManagement.jsp");

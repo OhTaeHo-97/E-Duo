@@ -1,7 +1,7 @@
 package model.university;
 
 public class UniversityVO {
-	private int uni_id; 
+	private int uni_id;
 	private String uni_name;
 	
 	public int getUni_id() {

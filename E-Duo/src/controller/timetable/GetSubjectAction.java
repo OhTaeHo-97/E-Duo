@@ -18,7 +18,6 @@ public class GetSubjectAction implements Action {
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// user_id를 통하여 사용자가 다니는 대학의 id를 알아낸 뒤에 그 id를 이용하여 그 학교의 모든 과목 정보를 불러온다
 		StudentDAO dao = new StudentDAO();
 		StudentVO vo = new StudentVO();
 		HttpSession session = request.getSession();

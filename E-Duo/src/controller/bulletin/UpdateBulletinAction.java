@@ -22,7 +22,6 @@ public class UpdateBulletinAction implements Action {
 		vo.setContent(request.getParameter("content"));
 		vo.setImage(request.getParameter("image"));
 		vo.setRegDate(request.getParameter("regDate"));
-		vo.setStu_id(request.getParameter("stu_id"));
 		vo.setTitle(request.getParameter("title"));
 		
 		ActionForward forward = null;

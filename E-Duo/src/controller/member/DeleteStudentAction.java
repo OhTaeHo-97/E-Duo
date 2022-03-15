@@ -8,18 +8,17 @@ import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import controller.ActionForward;
-import model.logininfo.LoginInfoDAO;
-import model.logininfo.LoginInfoVO;
+import model.loginInfo.LoginInfoDAO;
+import model.loginInfo.LoginInfoVO;
 
 public class DeleteStudentAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 회원탈퇴시에 회원 데이터를 DB에서 삭제하고 session에 저장된 user_id를 제거함
 		LoginInfoDAO dao = new LoginInfoDAO();
 		LoginInfoVO vo = new LoginInfoVO();
 		HttpSession session = request.getSession();
-		vo.setId((String)session.getAttribute("user_id"));
+		vo.setStu_id((String)session.getAttribute("user_id"));
 		ActionForward forward = null;
 		if(dao.delete(vo)) {
 			session.invalidate();

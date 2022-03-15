@@ -23,6 +23,7 @@ public class InsertBulletinAction implements Action {
 		vo.setRegDate(request.getParameter("regDate"));
 		vo.setStu_id(request.getParameter("stu_id"));
 		vo.setTitle(request.getParameter("title"));
+		vo.setNickname(request.getParameter("nickname"));
 		
 		ActionForward forward = null;
 		if(dao.insert(vo)) {

@@ -1,18 +1,22 @@
 package model.bulletin;
 
-import java.sql.Date;
 
 public class BulletinVO {
 	private int bul_id;
 	private String stu_id;
+	private String nickname;
 	private String category;
 	private String title;
 	private String content;
 	private String image;
 	private String regDate;
 	
-	
-	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getBul_id() {
 		return bul_id;
 	}

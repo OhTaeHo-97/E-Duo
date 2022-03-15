@@ -63,6 +63,20 @@ public class MemberFrontController extends HttpServlet {
 				System.out.println("LogoutAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
+		} else if(command.equals("/register.mem")) {
+			try {
+				forward = new RegisterAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("RegisterAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/idRedundancyCheck.mem")) {
+			try {
+				forward = new CheckIdRedundancyAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("CheckIdRedundancyAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
 		} else if(command.equals("/deleteStudent.mem")) {
 			try {
 				forward = new DeleteStudentAction().execute(request, response);

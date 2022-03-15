@@ -13,11 +13,11 @@ public class NoticeDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_selectAll = "select * from notice";
-	private String sql_selectOne = "select * from notice where nid = ?";
-	private String sql_insert = "insert into notice(nid, title, content) values((select nvl(max(nid), 0) + 1 from notice), ?, ?)";
-	private String sql_delete = "delete from notice where nid = ?";
-	private String sql_update = "update notice set title = ?, content = ?, regDate = sysdate where nid = ?";
+	private String sql_selectAll = "select * from notice order by not_id desc";
+	private String sql_selectOne = "select * from notice where not_id = ?";
+	private String sql_insert = "insert into notice(not_id, title, content) values((select nvl(max(nid), 0) + 1 from notice), ?, ?)";
+	private String sql_delete = "delete from notice where not_id = ?";
+	private String sql_update = "update notice set title = ?, content = ?, regDate = now() where not_id = ?";
 	
 	public ArrayList<NoticeVO> selectAll() {
 		conn = JDBCUtil.connect();
@@ -28,7 +28,7 @@ public class NoticeDAO {
 			while(rs.next()) {
 				NoticeVO vo = new NoticeVO();
 				vo.setContent(rs.getString("content"));
-				vo.setNid(rs.getInt("nid"));
+				vo.setNot_id(rs.getInt("not_id"));
 				vo.setRegDate(rs.getString("regDate"));
 				vo.setTitle(rs.getString("title"));
 				datas.add(vo);
@@ -48,12 +48,12 @@ public class NoticeDAO {
 		NoticeVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_selectOne);
-			pstmt.setInt(1, vo.getNid());
+			pstmt.setInt(1, vo.getNot_id());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				data = new NoticeVO();
 				data.setContent(rs.getString("content"));
-				data.setNid(rs.getInt("nid"));
+				data.setNot_id(rs.getInt("not_id"));
 				data.setRegDate(rs.getString("regDate"));
 				data.setTitle(rs.getString("title"));
 			}
@@ -89,7 +89,7 @@ public class NoticeDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
-			pstmt.setInt(1, vo.getNid());
+			pstmt.setInt(1, vo.getNot_id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("NoticeDAO delete() 수행 중 문제 발생");
@@ -108,7 +108,7 @@ public class NoticeDAO {
 			pstmt = conn.prepareStatement(sql_update);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
-			pstmt.setInt(3, vo.getNid());
+			pstmt.setInt(3, vo.getNot_id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("NoticeDAO update() 수행 중 문제 발생");

@@ -1,4 +1,4 @@
-package controller.notice;
+package controller.timetable;
 
 import java.io.PrintWriter;
 
@@ -7,27 +7,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Action;
 import controller.ActionForward;
-import model.notice.NoticeDAO;
-import model.notice.NoticeVO;
+import model.my_subject.My_subjectDAO;
+import model.my_subject.My_subjectVO;
 
-public class InsertNoticeAction implements Action {
+public class DeleteTimeTableAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		NoticeDAO dao = new NoticeDAO();
-		NoticeVO vo = new NoticeVO();
-		vo.setContent(request.getParameter("content"));
-		vo.setTitle(request.getParameter("title"));
+		My_subjectDAO dao = new My_subjectDAO();
+		My_subjectVO vo = new My_subjectVO();
+		vo.setMy_sub_id(Integer.parseInt(request.getParameter("my_sub_id")));
 		
 		ActionForward forward = null;
-		if(dao.insert(vo)) {
+		if(dao.delete(vo)) {
 			forward = new ActionForward();
-			forward.setPath("noticePage.notice");
+			forward.setPath(null);
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('공지사항을 추가하는 중에 문제가 발생했습니다.');history.back(-1);</script>");
+			out.println("<script>alert('시간표를 삭제하는 중에 문제가 발생했습니다.');history.back(-1);</script>");
 		}
 		return forward;
 	}

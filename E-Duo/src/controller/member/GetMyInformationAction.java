@@ -10,12 +10,13 @@ import controller.Action;
 import controller.ActionForward;
 import model.student.StudentDAO;
 import model.student.StudentVO;
+import model.university.UniversityDAO;
+import model.university.UniversityVO;
 
 public class GetMyInformationAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 개인정보 페이지로 갈 때 개인정보를 모두 들고감
 		StudentDAO dao = new StudentDAO();
 		StudentVO vo = new StudentVO();
 		HttpSession session = request.getSession();
@@ -23,10 +24,19 @@ public class GetMyInformationAction implements Action {
 		StudentVO data = dao.selectOne(vo);
 		ActionForward forward = null;
 		if(data != null) {
-			request.setAttribute("stu_info", data);
-			forward = new ActionForward();
-			forward.setPath("PersonalInformationEditPage.jsp");
-			forward.setRedirect(false);
+			UniversityDAO udao = new UniversityDAO();
+			UniversityVO uvo = new UniversityVO();
+			uvo.setUni_id(data.getUni_id());
+			UniversityVO udata = udao.selectOne(uvo);
+			if(udata == null) {
+				return null;
+			} else {
+				request.setAttribute("stu_info", data);
+				request.setAttribute("univ", udata.getUni_name());
+				forward = new ActionForward();
+				forward.setPath("PersonalInformationEditPage.jsp");
+				forward.setRedirect(false);
+			}
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

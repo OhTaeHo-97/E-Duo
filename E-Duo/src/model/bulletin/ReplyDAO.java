@@ -27,10 +27,10 @@ public class ReplyDAO {
 		try {
 			pstmt = conn.prepareStatement(sql_insert);
 			pstmt.setString(1, vo.getStu_id());
-			pstmt.setInt(2, vo.getBul_id());
-			pstmt.setString(3, vo.getContent());
-			pstmt.setString(4, vo.getRegDate());
-			pstmt.setString(5, vo.getAnonymity());
+			pstmt.setString(2, vo.getNickname());
+			pstmt.setInt(3, vo.getBul_id());
+			pstmt.setString(4, vo.getContent());
+			pstmt.setString(5, vo.getRegDate());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Reply insert문 에러 : " + e);
@@ -95,6 +95,7 @@ public class ReplyDAO {
 			while(rs.next()) {
 				rep_data = new ReplyVO();
 				rep_data.setBul_id(rs.getInt("bul_id"));
+				rep_data.setNickname(rs.getString("nickname"));
 				rep_data.setContent(rs.getString("content"));
 				rep_data.setRegDate(rs.getString("regDate"));
 				rep_data.setRep_id(rs.getInt("rep_id"));
@@ -120,6 +121,7 @@ public class ReplyDAO {
 			while(rs.next()) {
 				ReplyVO data = new ReplyVO();
 				data.setBul_id(rs.getInt("bul_id"));
+				data.setNickname(rs.getString("nickname"));
 				data.setContent(rs.getString("content"));
 				data.setRegDate(rs.getString("regDate"));
 				data.setRep_id(rs.getInt("rep_id"));

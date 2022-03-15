@@ -31,7 +31,7 @@ public class NoticeFrontController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doAction(request, response);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class NoticeFrontController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		doAction(request, response);
 	}
 	
 	private void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,18 +49,18 @@ public class NoticeFrontController extends HttpServlet {
 		System.out.println(command);
 		
 		ActionForward forward = null;
-		if(command.equals("/selectAllNotice.notice")) {
+		if(command.equals("/noticePage.notice")) {
 			try {
-				forward = new SelectAllNoticeAction().execute(request, response);
+				forward = new GetNoticePageAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("SelectAllNoticeAction() 수행 중 문제 발생!");
+				System.out.println("GetNoticePageAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/selectOneNotice.notice")) {
+		} else if(command.equals("/noticeDetail.notice")) {
 			try {
-				forward = new SelectOneNoticeAction().execute(request, response);
+				forward = new GetNoticeDetailAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("SelectOneNoticeAction() 수행 중 문제 발생!");
+				System.out.println("GetNoticeDetailAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		} else if(command.equals("/insertNotice.notice")) {
@@ -82,6 +82,13 @@ public class NoticeFrontController extends HttpServlet {
 				forward = new UpdateNoticeAction().execute(request, response);
 			} catch (Exception e) {
 				System.out.println("UpdateNoticeAction() 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/noticeUpdatePage.notice")) {
+			try {
+				forward = new GetNoticeEditPageAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("GetNoticeEditPageAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		}

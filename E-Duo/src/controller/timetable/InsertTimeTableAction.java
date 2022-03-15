@@ -15,7 +15,6 @@ public class InsertTimeTableAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 수강하는 과목을 시간표에 추가하는 과정
 		My_subjectDAO dao = new My_subjectDAO();
 		My_subjectVO vo = new My_subjectVO();
 		HttpSession session = request.getSession();

@@ -2,9 +2,10 @@ package model.student;
 
 import java.sql.Date;
 
-public class StudentVO { 
+public class StudentVO {
 	private String name;
 	private String stu_id;
+	private String nickname;
 	private String cellphone;
 	private int postcode;
 	private String address;
@@ -13,12 +14,17 @@ public class StudentVO {
 	private int uni_id;
 	private String email;
 	private String gender;
-	private Date birth;
+	private String birth;
 	private int grade;
 	private int semester;
 	private float obj_credit;
 	private int graduate_credit;
-	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getCellphone() {
 		return cellphone;
 	}
@@ -92,10 +98,10 @@ public class StudentVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	public int getGrade() {
