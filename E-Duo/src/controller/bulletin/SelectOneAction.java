@@ -26,7 +26,7 @@ public class SelectOneAction implements Action {
 		if(bul_data != null) {
 			request.setAttribute("bul_data", bul_data);
 			forward = new ActionForward();
-			forward.setPath("#");	// 글 하나 세부로 보는 bulletin 세부 페이지로 갈 예정
+			forward.setPath("bulletin_detail.jsp");	// 글 하나 세부로 보는 bulletin 세부 페이지로 갈 예정
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

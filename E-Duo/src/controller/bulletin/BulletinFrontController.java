@@ -117,7 +117,7 @@ public class BulletinFrontController extends HttpServlet {
 				System.out.println("SelectMyTextAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/selectOne.bul")) {
+		} else if(command.equals("/bulletin_detail.bul")) {
 			try {
 				forward = new SelectOneAction().execute(request, response);
 			} catch (Exception e) {
