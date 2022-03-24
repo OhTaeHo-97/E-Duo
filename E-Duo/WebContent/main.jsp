@@ -66,12 +66,12 @@
             <li class = "has-children">
             	<a href="board.html">게시판</a>
             	<ul class="dropdown">
-	                <li><a href="bulletin_category.bul?category=free">자유게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=info">정보게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=fresh">새내기게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=ad">홍보게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=job">취업·진로</a></li>
-	                <li><a href="bulletin_category.bul?category=market">장터게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=fresh">새내기게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=ad">홍보게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=job">취업·진로</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=market">장터게시판</a></li>
               	</ul>
             </li>
             <li><a href="noticePage.notice">공지사항</a></li>
@@ -117,7 +117,7 @@
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
-	                    <c:forEach var = "data" items="free_datas">
+	                    <c:forEach var = "data" items="${free_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
 	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
 	                          		<h5 class = "text-black">${data.title}</h4>
@@ -138,7 +138,7 @@
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
-	                    <c:forEach var = "data" items="info_datas">
+	                    <c:forEach var = "data" items="${info_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
 	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
 	                          		<h5 class = "text-black">${data.title}</h4>
@@ -159,7 +159,7 @@
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
-	                    <c:forEach var = "data" items="fresh_datas">
+	                    <c:forEach var = "data" items="${fresh_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
 	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
 	                          		<h5 class = "text-black">${data.title}</h4>
@@ -180,7 +180,7 @@
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
-	                    <c:forEach var = "data" items="ad_datas">
+	                    <c:forEach var = "data" items="${ad_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
 	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
 	                          		<h5 class = "text-black">${data.title}</h4>
@@ -201,7 +201,7 @@
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
-	                    <c:forEach var = "data" items="job_datas">
+	                    <c:forEach var = "data" items="${job_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
 	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
 	                          		<h5 class = "text-black">${data.title}</h4>
@@ -222,7 +222,7 @@
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
-	                    <c:forEach var = "data" items="market_datas">
+	                    <c:forEach var = "data" items="${market_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
 	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
 	                          		<h5 class = "text-black">${data.title}</h4>

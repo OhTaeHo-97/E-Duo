@@ -24,8 +24,11 @@ public class SelectCategoryFilterAllAction implements Action {
 		if(bul_datas.size() != 0) {
 			request.setAttribute("bul_datas", bul_datas);
 			forward = new ActionForward();
-			forward.setPath("bulletin_sort.jsp");
+			forward.setPath("bulletin_category.jsp");
 			forward.setRedirect(false);
+			for(BulletinVO item : bul_datas) {
+				System.out.println(item.getContent());
+			}
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

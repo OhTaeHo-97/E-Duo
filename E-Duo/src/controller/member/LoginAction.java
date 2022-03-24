@@ -33,7 +33,7 @@ public class LoginAction implements Action {
 				session.setAttribute("user_id", data.getStu_id());
 				session.setAttribute("auth", data.getAuth());
 				forward = new ActionForward();
-				forward.setPath("main.jsp");
+				forward.setPath("main.do");
 				forward.setRedirect(false);
 			}
 		} else if(request.getParameter("auth").equals("a")) {
@@ -47,7 +47,7 @@ public class LoginAction implements Action {
 				session.setAttribute("user_id", data.getStu_id());
 				session.setAttribute("auth", data.getAuth());
 				forward = new ActionForward();
-				forward.setPath("main.jsp");
+				forward.setPath("main.do");
 				forward.setRedirect(false);
 			}
 		} else {

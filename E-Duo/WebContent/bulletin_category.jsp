@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -67,12 +68,12 @@
             <li class = "has-children">
             	<a href="board.html">게시판</a>
             	<ul class="dropdown">
-	                <li><a href="bulletin_category.bul?category=free">자유게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=info">정보게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=fresh">새내기게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=ad">홍보게시판</a></li>
-	                <li><a href="bulletin_category.bul?category=job">취업·진로</a></li>
-	                <li><a href="bulletin_category.bul?category=market">장터게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=fresh">새내기게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=ad">홍보게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=job">취업·진로</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=market">장터게시판</a></li>
               	</ul>
             </li>
             <li><a href="noticePage.notice">공지사항</a></li>
@@ -124,18 +125,18 @@
                 </div>
               </div>
             </div>
-            <div class="row mb-5">
-              <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer" onclick = "location.href = '#'";>
-                <div class="block-4 border" style = "padding: 5%;">
-                  <div style = "width: 70%; height: 2rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
-                    <span style = "font-weight: bold; font-size:1.5rem;">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</span>
-                  </div>
-                  <div style = "width: 100%; height: 3rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
-                    <span>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur? [33] At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</span>
-                  </div>
-                </div>
-              </div>                         
-            </div>
+             <c:forEach var="data" items="${bul_datas}">           	
+	            <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer" onclick = "location.href = 'bulletin_detail.bul?bul_id=${data.bul_id}'";>
+	                <div class="block-4 border" style = "padding: 5%;">
+	                  <div style = "width: 70%; height: 2rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
+	                    <span style = "font-weight: bold; font-size:1.5rem;">${data.title}</span>
+	                  </div>
+	                  <div style = "width: 100%; height: 3rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
+	                    <span>${data.content}</span>
+	                  </div>
+	                </div>
+	             </div>
+             </c:forEach>
             <div class="row" data-aos="fade-up">
               <div class="col-md-12 text-center">
                 <div class="site-block-27">
