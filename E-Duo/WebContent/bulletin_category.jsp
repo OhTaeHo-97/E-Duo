@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="css/style.css">
     
   </head>
-  <body>
-  
+  <body>  
   <div class="site-wrap">
     <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
