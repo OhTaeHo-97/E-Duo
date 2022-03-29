@@ -18,7 +18,7 @@ public class ShowCreditManageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 학생 정보
+		// 학생 정보(학년과 아이디 이름 등을 받아올 예정)
 		StudentDAO dao = new StudentDAO();
 		StudentVO vo = new StudentVO();
 		HttpSession session = request.getSession();
@@ -27,19 +27,12 @@ public class ShowCreditManageAction implements Action {
 		request.setAttribute("stu_data", stu_data);
 		
 		
-		// 현재 자신의 학년, 학기의 수강과목 리스트
+		// 이번 학기의 수강과목 리스트(밑에 넣을 예정)
 		My_subjectDAO dao2 = new My_subjectDAO();
-		My_subjectVO vo2 = new My_subjectVO();
-		
-		// 학년과 학기를 불러올 예정, 만약에 이 페이지에 처음 들어와서 학년과 학기를 받은 것이 없다면, 1학년 1학기를 default 값으로 받아옴
-		if(request.getParameter("grade") == null) {
-			vo2.setGrade(1);
-			vo2.setSemester(1);
-		} else {
-			vo2.setGrade(Integer.parseInt(request.getParameter("grade")));
-			vo2.setSemester(Integer.parseInt(request.getParameter("semester")));
-		}		
+		My_subjectVO vo2 = new My_subjectVO();		
 		vo2.setStu_id((String)session.getAttribute("user_id"));
+		vo2.setGrade(stu_data.getGrade());
+		vo2.setSemester(stu_data.getSemester());
 		ArrayList<My_subjectSet> this_semester_sub_datas = dao2.getMySubjectandcreditByGradeandSemester(vo2);
 		request.setAttribute("this_semester_sub_datas", this_semester_sub_datas);
 		
@@ -57,13 +50,14 @@ public class ShowCreditManageAction implements Action {
 			temp += this_semester_sub_datas.get(i).getSubjectVO().getCredit_num()*this_semester_sub_datas.get(i).getMy_subjectVO().getCredit();
 		}
 		this_semester_credit_average = temp/this_semester_credit;
+		request.setAttribute("this_semester_credit_average", this_semester_credit_average);
 		
 		// 모든 학기 학점 평균 불러오기 로직
 		My_subjectDAO dao3 = new My_subjectDAO();
 		My_subjectVO vo3 = new My_subjectVO();
 		vo3.setStu_id((String)session.getAttribute("user_id"));
 		
-		ArrayList<Double> grade_averages = new ArrayList<Double>();
+		ArrayList<Double> credit_averages = new ArrayList<Double>();
 		for(int i = 0 ; i < 4 ; i++) {
 			for(int j = 0 ; j < 2 ; j++) {
 				vo3.setGrade(i);
@@ -79,17 +73,23 @@ public class ShowCreditManageAction implements Action {
 				} else {
 					grade_avg = 0;
 				}
-				grade_averages.add(grade_avg);
+				credit_averages.add(grade_avg);
 			}
 		}
-		request.setAttribute("grade_averages", grade_averages);
+		request.setAttribute("credit_averages", credit_averages);
 		
+		// 내가 지금까지 들은 학점수 그리고 내가 지금까지 받은 학점 평균, 님은학기 내가 받아야될 학점 평균
 		int all_credit = 0;
-		
+		double credit_now = 0;
 		ArrayList<My_subjectSet> all_sub_datas = dao3.getMyTimetable(vo3);
 		for(int i = 0 ; i < all_sub_datas.size() ; i++) {
-			
+			all_credit += all_sub_datas.get(i).getSubjectVO().getCredit_num();
+			credit_now += all_sub_datas.get(i).getSubjectVO().getCredit_num()*all_sub_datas.get(i).getMy_subjectVO().getCredit();
 		}
+		request.setAttribute("all_credit", all_credit);
+		double need_avg;
+		need_avg = (stu_data.getObj_credit()*all_credit - credit_now) / (stu_data.getGraduate_credit() - all_credit);
+		
 		// 필요학점은 비동기 처리 예정
 		ActionForward forward = new ActionForward();
 		forward.setPath("CreditManagement.jsp");
