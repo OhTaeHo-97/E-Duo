@@ -127,10 +127,10 @@
                       <input type = "button" class="btn btn-primary btn-lg btn-block" value = "개인 정보 변경" onclick = "location.href = 'myInfo.mem'">
                     </div>
                     <div style="clear:both; margin-top:10%;">
-                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내가 작성한 글">
+                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내가 작성한 글" onclick = "location.href = 'myBulletin.mem'">
                     </div>
                     <div style="clear:both; margin-top:10%;">
-                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내가 작성한 댓글">
+                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내가 작성한 댓글" onclick = "location.href = 'myReply.mem'">
                     </div>
                     <div style="clear:both; margin-top:10%;">
                       <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내 시간표">

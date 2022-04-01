@@ -18,6 +18,7 @@ public class StudentVO {
 	private int semester;
 	private float obj_credit;
 	private int graduate_credit;
+	private String nickname;
 	
 	public String getCellphone() {
 		return cellphone;
@@ -110,6 +111,11 @@ public class StudentVO {
 	public void setSemester(int semester) {
 		this.semester = semester;
 	}
-
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	
 }

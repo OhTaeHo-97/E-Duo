@@ -77,6 +77,13 @@ public class MemberFrontController extends HttpServlet {
 				System.out.println("CheckIdRedundancyAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
+		} else if(command.equals("/nicknameRedundancyCheck.mem")) {
+			try {
+				forward = new CheckNicknameRedundancyAction().execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if(command.equals("/deleteStudent.mem")) {
 			try {
 				forward = new DeleteStudentAction().execute(request, response);

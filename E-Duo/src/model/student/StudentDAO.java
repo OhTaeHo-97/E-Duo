@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import model.common.JDBCUtil;
@@ -15,11 +14,12 @@ public class StudentDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO Student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+	private String sql_insert = "INSERT INTO Student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	private String sql_select = "SELECT * FROM student WHERE stu_id=?"; 
 	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
-			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=? WHERE stu_id = ?";   
+			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";   
 	private String sql_delete = "DELETE FROM member WHERE mid=? AND mpw=?";
+	private String sql_checkNickname = "SELECT * FROM student WHERE nickname=?";
 	
 	public boolean insert(StudentVO vo) {
 		int result = 0;
@@ -37,6 +37,7 @@ public class StudentDAO {
 			pstmt.setInt(8, vo.getUni_id());
 			pstmt.setString(9, vo.getEmail());
 			pstmt.setString(10, vo.getGender());
+			pstmt.setString(11, vo.getNickname());
 			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date birth = new Date(dtFormat.parse(vo.getBirth()).getTime());
 			pstmt.setDate(11, birth);
@@ -68,6 +69,7 @@ public class StudentDAO {
 				stu_data.setStu_id(rs.getString("stu_id"));
 				stu_data.setName(rs.getString("name"));
 				stu_data.setCellphone(rs.getString("cellphone"));
+				stu_data.setPostcode(rs.getInt("postcode"));
 				stu_data.setAddress(rs.getString("address"));
 				stu_data.setDetail_address(rs.getString("detail_address"));
 				stu_data.setRefernece(rs.getString("reference"));
@@ -107,7 +109,8 @@ public class StudentDAO {
 			pstmt.setInt(10, vo.getSemester());
 			pstmt.setFloat(11, vo.getObj_credit());
 			pstmt.setInt(12, vo.getGraduate_credit());
-			pstmt.setString(13, vo.getStu_id());
+			pstmt.setString(13, vo.getNickname());
+			pstmt.setString(14, vo.getStu_id());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Student Update문 에러 : " + e);
@@ -118,6 +121,30 @@ public class StudentDAO {
 		return result == 1;
 	}
 	
+	public int checkNickname(StudentVO vo) { // 닉네임 중복검사 : 버튼클릭해서 중복여부 확인
+		int usable = 0;
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_checkNickname);
+			//select * from member where member_id = ?
+			pstmt.setString(1, vo.getNickname());
+			rs = pstmt.executeQuery();
+			System.out.println("usable: " + usable);
+			if(rs.next()) { // 존재한다면?? false값 반환
+				usable = 0;
+			}
+			else {			// 존재안한다면?? true값 반환
+				usable = 1;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("StudentDAO checkNickname진행 중 오류");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return usable;
+	}
 	
 /*	public boolean delete() {		//인자로 login_info를 받을 예정
 		int result = 0;

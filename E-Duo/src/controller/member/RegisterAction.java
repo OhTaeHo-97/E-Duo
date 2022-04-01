@@ -55,6 +55,7 @@ public class RegisterAction implements Action {
 //			} else {
 //				vo.setUni_id(1);
 //			}
+			vo.setNickname(request.getParameter("nickname"));
 			
 			if(dao.insert(vo)) {
 				forward = new ActionForward();

@@ -121,7 +121,7 @@
                 <div class="form-group row">
                   <div class="col-md-6">
                     <label for="register_stu_id" class="text-black">아이디 <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="register_stu_id" name="stu_id" placeholder = "아이디">
+                    <input type="text" class="form-control" id="register_stu_id" name="stu_id" placeholder = "아이디를 입력하세요.">
                   </div>
                   <div class="col-md-6" style = "display: absolute; top: 40px;">
                   	&nbsp;&nbsp;&nbsp;<font id = "checkId"></font>
@@ -130,7 +130,7 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="register_password" class="text-black">비밀번호 <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="register_password" name="password" placeholder = "비밀번호">
+                    <input type="text" class="form-control" id="register_password" name="password" placeholder = "비밀번호를 입력하세요.">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -140,9 +140,12 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <div class="col-md-12">
-                    <label for="register_name" class="text-black">이름 <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="register_name" name="name" placeholder = "이름">
+                  <div class="col-md-6">
+                    <label for="register_nickname" class="text-black">닉네임 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="register_nickname" name="nickname" placeholder = "닉네임을 입력하세요.">
+                  </div>
+                  <div class="col-md-6" style = "display: absolute; top: 40px;">
+                  	&nbsp;&nbsp;&nbsp;<font id = "checkNickname"></font>
                   </div>
                 </div>
                 <div class="form-group row" style="margin-top: 2%;">
@@ -167,7 +170,7 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="register_email" class="text-black">이메일 <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="register_email" name="email" placeholder = "이메일">
+                    <input type="text" class="form-control" id="register_email" name="email" placeholder = "이메일을 입력하세요.">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -191,9 +194,12 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <label for="register_university" class="text-black">대학교 <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="register_university" name="university" placeholder = "대학교">
+                  </div>
+                  <div class="col-md-6">
+                   	<button class="btn btn-secondary btn-sm" onclick="getUniversity()" style="display: absolute; top: 35px;">대학교 검색</button>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -396,5 +402,34 @@
 			})
 		})
 	 </script>
+	 <script>
+		$('#register_nickname').focusout(function(){
+			let memberNickname = $('#register_nickname').val();
+			
+			$.ajax({
+				url : "nicknameRedundancyCheck.mem",
+				type : "post",
+				data : {memberNickname: memberNickname},
+				dataType : 'json',
+				success : function(result){
+					if(result == 0){
+						$("#checkNickname").html('사용할 수 없는 닉네임입니다.');
+						$("#checkNickname").attr('color','red');
+					} else{
+						$("#checkNickname").html('사용할 수 있는 닉네임입니다.');
+						$("#checkNickname").attr('color','green');
+					} 
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			})
+		})
+	 </script>
 </body>
+<script>
+	function getUniversity() {
+		window.open("getUniversity.jsp", "getUniversity", width=400, height=300, toolbar="no");
+	}
+</script>
 </html>
