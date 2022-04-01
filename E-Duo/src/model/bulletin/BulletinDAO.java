@@ -5,9 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import model.common.JDBCUtil;
-import model.student.StudentVO;
 
 public class BulletinDAO {
 	Connection conn;
@@ -18,11 +19,11 @@ public class BulletinDAO {
 	private String sql_insert = "INSERT INTO bulletin(bul_id, stu_id, category, title, content, image, regdate)"
 			+ "VALUES"
 			+ "(bulletin_seq.NEXTVAL,?,?,?,?,?,?)"; 
-	private String sql_select = "SELECT * FROM member WHERE bul_id=?"; 
+	private String sql_select = "SELECT * FROM bulletin WHERE bul_id=?"; 
 	private String sql_update = "UPDATE bulletin SET category=?, title=?, content=?, image=?, regdate=? WHERE bul_id=?";
 	private String sql_delete = "DELETE FROM bulletin WHERE bul_id=?";
 	private String sql_selectAll = "SELECT * FROM bulletin";
-	private String sql_selectAllReply = "select * from Reply where bul_id = ? order by regDate desc";
+	private String sql_selectAllReply = "select * from reply where bul_id = ? order by regDate desc";
 	private String sql_selectMyBulletin = "SELECT * FROM bulletin WHERE stu_id = ?";
 	
 	public boolean insert(BulletinVO vo) {
@@ -190,4 +191,50 @@ public class BulletinDAO {
 		return datas;
 	}
 	
+	public ArrayList<BulletinVO> selectMyReply(BulletinVO vo) {
+		
+		ArrayList<BulletinVO> bul_data = new ArrayList<BulletinVO>();
+		
+		conn = JDBCUtil.connect();
+		try {
+			ReplyDAO rdao = new ReplyDAO();
+			ReplyVO rvo = new ReplyVO();
+			rvo.setStu_id(vo.getStu_id());
+			ArrayList<ReplyVO> reply_list = rdao.selectMyReply(rvo);
+			HashSet<Integer> bul_id_set = new HashSet<Integer>();
+			for(int i = 0; i < reply_list.size(); i++) {
+				bul_id_set.add(reply_list.get(i).getBul_id());
+			}
+			System.out.println(bul_id_set.size());
+			Iterator<Integer> it = bul_id_set.iterator();
+			while(it.hasNext()) {
+				System.out.println(it.next());
+			}
+			it = bul_id_set.iterator();
+			while(it.hasNext()) {
+				pstmt = conn.prepareStatement(sql_select);
+				pstmt.setInt(1, it.next());
+				rs = pstmt.executeQuery();
+				BulletinVO data = null;
+				if(rs.next()) {
+					data = new BulletinVO();
+					data.setBul_id(rs.getInt("bul_id"));
+					data.setCategory(rs.getString("category"));
+					data.setContent(rs.getString("content"));
+					data.setImage(rs.getString("image"));
+					data.setRegDate(rs.getString("regDate"));
+					data.setStu_id(rs.getString("stu_id"));
+					data.setTitle(rs.getString("title"));
+				}
+				bul_data.add(data);
+			}
+		} catch (SQLException e) {
+			System.out.println("Bulletin selectMyReply문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		
+		return bul_data;
+	}
 }

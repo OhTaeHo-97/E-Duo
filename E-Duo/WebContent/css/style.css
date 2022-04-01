@@ -38,11 +38,12 @@ a {
   background-position:2% 50%;
 }
 
-.faq_list2 {
-  background-image:url("../images/arrow.png");
-  background-size:15px 15px;
-  background-repeat:no-repeat;
-  background-position:98% 50%;
+.notice-content {
+  font-size: 1.2rem;
+}
+
+.time {
+  font-size: 0.9rem;
 }
 
 .search:focus {

@@ -32,5 +32,4 @@ public class InsertFAQAction implements Action {
 		}
 		return forward;
 	}
-
 }

@@ -9,18 +9,18 @@ import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import controller.ActionForward;
-import model.bulletin.ReplyDAO;
-import model.bulletin.ReplyVO;
+import model.bulletin.BulletinDAO;
+import model.bulletin.BulletinVO;
 
 public class GetMyReplyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ReplyDAO dao = new ReplyDAO();
-		ReplyVO vo = new ReplyVO();
+		BulletinDAO dao = new BulletinDAO();
+		BulletinVO vo = new BulletinVO();
 		HttpSession session = request.getSession();
 		vo.setStu_id((String)session.getAttribute("user_id"));
-		ArrayList<ReplyVO> datas = dao.selectMyReply(vo);
+		ArrayList<BulletinVO> datas = dao.selectMyReply(vo);
 		ActionForward forward = null;
 		if(datas.size() == 0) {
 			response.setContentType("text/html; charset=UTF-8");

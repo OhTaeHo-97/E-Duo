@@ -109,52 +109,24 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h2 class="h3 mb-3 text-black">Get In Touch</h2>
+            <h2 class="h3 mb-3 text-black">내가 쓴 댓글</h2>
           </div>
-          <div class="col-md-3">
-            <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
-              <ul class="list-unstyled mb-0">
-              	<li class="mb-1"><a href="selectAllFAQ.faq" class="d-flex"><span class="text-black">FAQ</span></a></li>
-                <li class="mb-1"><a href="question.jsp" class="d-flex"><span class="text-black">문의하기</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">서비스 이용약관</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">개인정보 처리방침</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">커뮤니티 이용규칙</span></a></li>
-              </ul>
-            </div>
+          <div class="col-md-12 ml-auto">
 
-          </div>
-          <div class="col-md-9 ml-auto">
-          	<c:choose>
-          		<c:when test = "${auth eq 'a'}">
-          			<div class="col-md-12 ml-auto">
-		            	<h3 class="mb-3 h3 text-uppercase text-black d-block">FAQ</h3>
+			<ul style = "list-style:none;">
+				<c:forEach var="data" items="${myreply_data}">
+		            <div class="col-md-12 ml-auto">
+		              <div class="border p-4 rounded mb-4" style = "margin: 0 !important;">
+	               		<a href = "#" style = "color:black;">
+	                        <li>
+	                            <h5 class = "text-black" style="display: inline-block; width: 70%; white-space: nowrap; overflow: hidden; text-overflow: none; margin-bottom: 3px;'">${data.title}</h5>
+	                            <span style="display: inline-block; width: 90%; white-space: nowrap; overflow: hidden; text-overflow: none; margin-top: -6px;'">${data.content}</span>
+	                        </li>
+	                    </a>
+		              </div>
 		            </div>
-		            <div class="col-md-4 ml-auto">
-		            	<input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 35%; height: 40px; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'FAQInsert.jsp'">
-		            </div>
-          		</c:when>
-          		<c:otherwise>
-          			<div class="col-md-12 ml-auto">
-		            	<h3 class="mb-3 h3 text-uppercase text-black d-block">FAQ</h3>
-		            </div>
-          		</c:otherwise>
-          	</c:choose>
-            <div class="col-md-12 ml-auto">
-                <ul style = "list-style:none; padding:0;">
-                	<c:forEach var = "data" items = "${faq_datas}">
-                		<a href = "selectOneFAQ.faq?fid=${data.faq_id}" style = "color:#8c92a0;">
-                			<li class = "faq_list1">
-                  				<div class="border p-4 rounded mb-4" class = "faq_list">
-                    				<div style = "margin-left: 7%;">
-                      					<span style = "font-size: 1.5rem; font-weight: 500;">${data.title}</span>
-                    				</div>
-                      			</div>
-                    		</li>
-                		</a>
-                	</c:forEach>
-                </ul>
-            </div>
+            	</c:forEach>
+            </ul>
           </div>
         </div>
       </div>
