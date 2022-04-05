@@ -14,7 +14,7 @@ public class StudentDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO Student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+	private String sql_insert = "INSERT INTO student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	private String sql_select = "SELECT * FROM student WHERE stu_id=?"; 
 	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
 			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";   
@@ -28,23 +28,24 @@ public class StudentDAO {
 		try {
 			pstmt = conn.prepareStatement(sql_insert);
 			pstmt.setString(1, vo.getStu_id());
+			System.out.println(vo.getName());
 			pstmt.setString(2, vo.getName());
-			pstmt.setString(3, vo.getCellphone());
-			pstmt.setInt(4, vo.getPostcode());
-			pstmt.setString(5, vo.getAddress());
-			pstmt.setString(6, vo.getDetail_address());
-			pstmt.setString(7, vo.getRefernece());
-			pstmt.setInt(8, vo.getUni_id());
-			pstmt.setString(9, vo.getEmail());
-			pstmt.setString(10, vo.getGender());
-			pstmt.setString(11, vo.getNickname());
+			pstmt.setString(3, vo.getNickname());
+			pstmt.setString(4, vo.getCellphone());
+			pstmt.setInt(5, vo.getPostcode());
+			pstmt.setString(6, vo.getAddress());
+			pstmt.setString(7, vo.getDetail_address());
+			pstmt.setString(8, vo.getRefernece());
+			pstmt.setInt(9, vo.getUni_id());
+			pstmt.setString(10, vo.getEmail());
+			pstmt.setString(11, vo.getGender());
 			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date birth = new Date(dtFormat.parse(vo.getBirth()).getTime());
-			pstmt.setDate(11, birth);
-			pstmt.setInt(12, vo.getGrade());
-			pstmt.setInt(13, vo.getSemester());
-			pstmt.setFloat(14, vo.getObj_credit());
-			pstmt.setInt(15, vo.getGraduate_credit());
+			pstmt.setDate(12, birth);
+			pstmt.setInt(13, vo.getGrade());
+			pstmt.setInt(14, vo.getSemester());
+			pstmt.setFloat(15, vo.getObj_credit());
+			pstmt.setInt(16, vo.getGraduate_credit());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("Student Insert문 에러 : " + e);

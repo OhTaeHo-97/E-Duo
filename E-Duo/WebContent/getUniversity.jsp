@@ -23,6 +23,25 @@
 <link rel="stylesheet" href="css/style.css">
 <script src = "js/jquery-3.6.0.min.js"></script>
 <script src = "js/register.js"></script>
+<style>
+	#univ_list {
+		list-style: none;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
+	#univ_list li {
+		width: 100%;
+		height: 50px;
+		margin: 0px;
+		padding: 5px;
+	}
+	#univ_list li:hover {
+		cursor: pointer;
+		box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+	}
+	
+</style>
 </head>
 <body>
 	<div class="site-wrap">
@@ -34,20 +53,23 @@
             <h2 class="h3 mb-3 text-black">대학교 찾기</h2>
           </div>
           <div class="w-100">
-
-            <!-- <form action="register.mem" method="POST" name = "registerForm" id = "registerForm" onsubmit = "return register_check()"> -->
-            <form action="#">
-              <div class="p-3 p-lg-5 border" style="height: 100%;">
-                <div class="form-group row">
-                  <div class="col-md-9">
-                    <input type="text" class="form-control" id="university_window" name="university" placeholder = "대학교를 입력하세요.">
-                  </div>
-                  <div class="col-md-3">
-                    <input type="button" class="btn btn-secondary btn-sm dropdown-toggle" value="검색">
-                  </div>
-                </div>
-              </div>
-            </form>
+             <div class="p-3 p-lg-5 border" style="height: 100%;">
+               <div class="form-group row">
+                 <div class="col-md-9">
+                   <input type="text" class="form-control" id="srch_university" name="university" placeholder = "대학교를 입력하세요.">
+                 </div>
+                 <div class="col-md-3">
+                   <input type="button" id="searchUniv" class="btn btn-secondary btn-sm dropdown-toggle" value="검색">
+                 </div>
+               </div>
+               <div class="form-group row">
+                 <div class="col-md-12">
+                   <ul name="univ_list" id="univ_list">
+                   	
+                   </ul>
+                 </div>
+               </div>
+             </div>
           </div>
           
         </div>
@@ -65,108 +87,35 @@
 
   <script src="js/main.js"></script>
   
-  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-	    function sample6_execDaumPostcode() {
-	        new daum.Postcode({
-	            oncomplete: function(data) {
-	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-	
-	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-	                var addr = ''; // 주소 변수
-	                var extraAddr = ''; // 참고항목 변수
-	
-	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-	                    addr = data.roadAddress;
-	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-	                    addr = data.jibunAddress;
-	                }
-	
-	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-	                if(data.userSelectedType === 'R'){
-	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                        extraAddr += data.bname;
-	                    }
-	                    // 건물명이 있고, 공동주택일 경우 추가한다.
-	                    if(data.buildingName !== '' && data.apartment === 'Y'){
-	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                    }
-	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-	                    if(extraAddr !== ''){
-	                        extraAddr = ' (' + extraAddr + ')';
-	                    }
-	                    // 조합된 참고항목을 해당 필드에 넣는다.
-	                    document.getElementById("sample6_extraAddress").value = extraAddr;
-	                
-	                } else {
-	                    document.getElementById("sample6_extraAddress").value = '';
-	                }
-	
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                document.getElementById('sample6_postcode').value = data.zonecode;
-	                document.getElementById("sample6_address").value = addr;
-	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById("sample6_detailAddress").focus();
-	            }
-	        }).open();
-	    }
+		$('#searchUniv').click(function(){
+			let university = $('#srch_university').val(); // input_id에 입력되는 값
+			
+			$.ajax({
+				url : "getUniversities.mem",
+				type : "POST",
+				data : {university: university},
+				dataType : 'JSON',
+				success : function(result){
+					let data = JSON.parse(JSON.stringify(result));
+					console.log(data);
+					$.each(data, function(k, v) {
+						/* $('<li><a href="javascript:void(0);" onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</a></li>').val(k).text(v).appendTo($("#univ_list")); */
+						$('<li onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</li>').val(k).text(v).appendTo($("#univ_list"));
+					});
+				},
+				error : function(){
+					alert("서버요청실패");
+				}
+			})
+		})
+		
+		function findUniv(k, v) {
+			console.log(opener.document.getElementById("register_university"));
+			opener.document.getElementById("register_university").value = v;
+			opener.document.getElementById("univ_id").value = k;
+			window.close();
+		}
 	</script>
-	<script>
-		$('#register_stu_id').focusout(function(){
-			let memberId = $('#register_stu_id').val(); // input_id에 입력되는 값
-			
-			$.ajax({
-				url : "idRedundancyCheck.mem",
-				type : "post",
-				data : {memberId: memberId},
-				dataType : 'json',
-				success : function(result){
-					if(result == 0){
-						$("#checkId").html('사용할 수 없는 아이디입니다.');
-						$("#checkId").attr('color','red');
-					} else{
-						$("#checkId").html('사용할 수 있는 아이디입니다.');
-						$("#checkId").attr('color','green');
-					} 
-				},
-				error : function(){
-					alert("서버요청실패");
-				}
-			})
-		})
-	 </script>
-	 <script>
-		$('#register_nickname').focusout(function(){
-			let memberNickname = $('#register_nickname').val();
-			
-			$.ajax({
-				url : "nicknameRedundancyCheck.mem",
-				type : "post",
-				data : {memberNickname: memberNickname},
-				dataType : 'json',
-				success : function(result){
-					if(result == 0){
-						$("#checkNickname").html('사용할 수 없는 닉네임입니다.');
-						$("#checkNickname").attr('color','red');
-					} else{
-						$("#checkNickname").html('사용할 수 있는 닉네임입니다.');
-						$("#checkNickname").attr('color','green');
-					} 
-				},
-				error : function(){
-					alert("서버요청실패");
-				}
-			})
-		})
-	 </script>
 </body>
-<script>
-	function getUniversity() {
-		window.open("getUniversity.jsp", "getUniversity", width=400, height=300, toolbar="no");
-	}
-</script>
 </html>

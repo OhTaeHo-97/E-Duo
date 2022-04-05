@@ -52,10 +52,27 @@ const register_check = function() {
 		return false;
 	}
 	
-	const name = document.registerForm.name;
-	if(name == '') {
+	const name = document.registerForm.s_name;
+	if(name.value == '') {
 		alert("이름을 입력해주세요.");
 		name.focus();
+		return false;
+	}
+	const nickname = document.registerForm.nickname;
+	const check_nickname = document.getElementById("checkNickname");
+	if(nickname.value == '') {
+		alert("닉네임을 입력해주세요.");
+		nickname.focus();
+		return false;
+	}
+	if(nickname.value.length < 4) {
+		alert("닉네임은 4자리 이상 입력해주세요.");
+		nickname.focus();
+		return false;
+	}
+	if(check_nickname.innerText != '사용할 수 있는 닉네임입니다.') {
+		alert("닉네임을 확인해주세요.");
+		nickname.focus();
 		return false;
 	}
 	
@@ -127,9 +144,10 @@ const register_check = function() {
 	}
 	
 	const university = document.registerForm.university;
-	if(university == '') {
+	const univ_btn = document.getElementById("univ_btn");
+	if(university.value == '') {
 		alert("대학교를 입력해주세요.");
-		university.focus();
+		univ_btn.focus();
 		return false;
 	}
 	

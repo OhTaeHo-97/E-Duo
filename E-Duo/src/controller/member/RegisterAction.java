@@ -39,22 +39,13 @@ public class RegisterAction implements Action {
 			} else {
 				vo.setGraduate_credit(Integer.parseInt(request.getParameter("graduate_credit")));
 			}
-			vo.setName(request.getParameter("name"));
+			vo.setName(request.getParameter("s_name"));
 			vo.setObj_credit((float)3.0);
 			vo.setPostcode(Integer.parseInt(request.getParameter("postcode")));
 			vo.setRefernece(request.getParameter("reference"));
 			vo.setSemester(Integer.parseInt(request.getParameter("semester")));
 			vo.setStu_id(request.getParameter("stu_id"));
-			vo.setUni_id(1);
-//			UniversityDAO udao = new UniversityDAO();
-//			UniversityVO uvo = new UniversityVO();
-//			uvo.setUni_name(request.getParameter("university"));
-//			UniversityVO udata = udao.getUniId(uvo);
-//			if(udata == null) {
-//				return null;
-//			} else {
-//				vo.setUni_id(1);
-//			}
+			vo.setUni_id(Integer.parseInt(request.getParameter("university")));
 			vo.setNickname(request.getParameter("nickname"));
 			
 			if(dao.insert(vo)) {

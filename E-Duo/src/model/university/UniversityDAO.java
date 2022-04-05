@@ -19,7 +19,8 @@ public class UniversityDAO {
 	private String sql_delete = "DELETE FROM university WHERE uni_id=?";
 	private String sql_selectAll = "SELECT * FROM university";
 	private String sql_getUniId = "SELECT uni_id FROM university WHERE uni_name = ?";
-	private String sql_selectFilter = "";
+//	private String sql_selectFilter = "SELECT * FROM university WHERE uni_name LIKE '%'||?||'%'"; // 오라
+	private String sql_selectFilter = "SELECT * FROM university WHERE uni_name LIKE ?"; // MySQL
 	
 	public boolean insert(UniversityVO vo) {
 		int result = 0;
@@ -135,6 +136,31 @@ public class UniversityDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("University getUniId문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return data;
+	}
+	
+	public ArrayList<UniversityVO> searchUniversity(UniversityVO vo) {
+		ArrayList<UniversityVO> data = new ArrayList<UniversityVO>();
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_selectFilter);
+			System.out.println(sql_selectFilter);
+			System.out.println(vo.getUni_name());
+			pstmt.setString(1, "%" + vo.getUni_name() + "%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				UniversityVO uvo = new UniversityVO();
+				uvo.setUni_id(rs.getInt("uni_id"));
+				uvo.setUni_name(rs.getString("uni_name"));
+				data.add(uvo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("University searchUniversity문 에러 : " + e);
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.disconnect(pstmt, conn);

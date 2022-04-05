@@ -141,6 +141,12 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-md-6">
+                    <label for="register_nickname" class="text-black">이름 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="register_s_name" name="s_name" placeholder = "닉네임을 입력하세요.">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6">
                     <label for="register_nickname" class="text-black">닉네임 <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" id="register_nickname" name="nickname" placeholder = "닉네임을 입력하세요.">
                   </div>
@@ -196,10 +202,11 @@
                 <div class="form-group row">
                   <div class="col-md-6">
                     <label for="register_university" class="text-black">대학교 <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="register_university" name="university" placeholder = "대학교">
+                    <input type="text" class="form-control" id="register_university" placeholder = "대학교" readonly>
+                    <input type="hidden" name="university" id="univ_id">
                   </div>
                   <div class="col-md-6">
-                   	<button class="btn btn-secondary btn-sm" onclick="getUniversity()" style="display: absolute; top: 35px;">대학교 검색</button>
+                   	<button class="btn btn-secondary btn-sm" id="univ_btn" onclick="getUniversity(); return false;" style="display: absolute; top: 35px;">대학교 검색</button>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -429,7 +436,8 @@
 </body>
 <script>
 	function getUniversity() {
-		window.open("getUniversity.jsp", "getUniversity", width=400, height=300, toolbar="no");
+		window.name = "RegisterPage";
+		windowObj = window.open("getUniversity.jsp", "getUniversity", width=300, height=200, toolbar="no");
 	}
 </script>
 </html>

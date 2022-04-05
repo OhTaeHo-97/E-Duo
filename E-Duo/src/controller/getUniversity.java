@@ -1,4 +1,4 @@
-package controller.member;
+package controller;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -17,7 +17,7 @@ import org.json.simple.parser.JSONParser;
 
 import model.common.JDBCUtil;
 
-public class test {
+public class getUniversity {
 	static Connection conn;
 	static PreparedStatement pstmt;
 	public static void main(String[] args) {
