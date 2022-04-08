@@ -142,7 +142,7 @@
                 <div class="form-group row">
                   <div class="col-md-6">
                     <label for="register_nickname" class="text-black">이름 <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="register_s_name" name="s_name" placeholder = "닉네임을 입력하세요.">
+                    <input type="text" class="form-control" id="register_s_name" name="s_name" placeholder = "이름을 입력하세요.">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -425,7 +425,7 @@
 					} else{
 						$("#checkNickname").html('사용할 수 있는 닉네임입니다.');
 						$("#checkNickname").attr('color','green');
-					} 
+					}
 				},
 				error : function(){
 					alert("서버요청실패");

@@ -124,7 +124,7 @@
                       <input type = "button" class="btn btn-primary btn-lg" style = "width:35%; text-align:center; margin-left:10%;" value = "로그아웃" onclick = "location.href='logout.mem'">
                     </div>
                     <div style="clear:both; margin-top:30%;">
-                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "개인 정보 변경" onclick = "location.href = 'myInfo.mem'">
+                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "개인 정보 변경" onclick = "location.href = 'checkUser.jsp'">
                     </div>
                     <div style="clear:both; margin-top:10%;">
                       <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내가 작성한 글" onclick = "location.href = 'myBulletin.mem'">

@@ -32,7 +32,7 @@ public class GetMyInformationAction implements Action {
 				return null;
 			} else {
 				request.setAttribute("stu_info", data);
-				request.setAttribute("univ", udata.getUni_name());
+				request.setAttribute("univ", udata);
 				forward = new ActionForward();
 				forward.setPath("PersonalInformationEditPage.jsp");
 				forward.setRedirect(false);

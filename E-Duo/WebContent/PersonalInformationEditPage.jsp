@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/editInfo.js"></script>
 </head>
 <body>
 	<div class="site-wrap">
@@ -113,7 +114,7 @@
           </div>
           <div class="w-100">
 
-            <form action="#" method="post">
+            <form action="editMyInfo.mem" method="post" name="editInfoForm" id="editInfoForm" onsubmit="return editInfo_check()">
               
               <div class="p-3 p-lg-5 border">
                 <div class="form-group row">
@@ -124,32 +125,30 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
-                    <label for="edit_prev_upw" class="text-black">이전 비밀번호 </label>
-                    <input type="email" class="form-control" id="edit_prev_upw" name="prev_upw" placeholder="">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-12">
                     <label for="edit_new_upw" class="text-black">새로운 비밀번호 </label>
-                    <input type="email" class="form-control" id="edit_new_upw" name="new_upw" placeholder="">
+                    <input type="password" class="form-control" id="edit_new_upw" name="new_upw" placeholder="새로운 비밀번호를 입력해주세요.">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="edit_confirm_upw" class="text-black">새로운 비밀번호 확인 </label>
-                    <input type="email" class="form-control" id="edit_confirm_upw" name="confirm_upw" placeholder="">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <label for="edit_nickname" class="text-black">닉네임 </label>
-                    <input type="text" class="form-control" id="edit_nickname" name="nickname" placeholder="">
+                    <input type="password" class="form-control" id="edit_confirm_upw" name="confirm_upw" placeholder="새로운 비밀번호를 다시 한 번 입력해주세요.">
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="edit_uname" class="text-black">이름 </label>
                     <input type="text" class="form-control" id="edit_uname" name="uname" value="${stu_info.name}">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <label for="register_nickname" class="text-black">닉네임 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="edit_nickname" name="nickname" placeholder = "닉네임을 입력하세요." value="${stu_info.nickname}">
+                    <input type="hidden" id="prev_nickname" value="${stu_info.nickname}">
+                  </div>
+                  <div class="col-md-6" style = "display: absolute; top: 40px;">
+                  	&nbsp;&nbsp;&nbsp;<font id = "checkNickname"></font>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -184,10 +183,20 @@
 						<input type="text" class = "form-control" id="sample6_detailAddress" name = "detail_address" value = "${stu_info.detail_address}" placeholder="상세주소">
 					</div>
                 </div>
-                <div class="form-group row">
+                <%-- <div class="form-group row">
                   <div class="col-md-12">
                     <label for="edit_univ" class="text-black">대학교 </label>
                     <input type="text" class="form-control" id="edit_univ" name="univ" value="${univ}">
+                  </div>
+                </div> --%>
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <label for="register_university" class="text-black">대학교 <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="register_university" placeholder = "대학교" value="${univ.uni_name}" readonly>
+                    <input type="hidden" name="university" id="univ_id" value="${univ.uni_id}">
+                  </div>
+                  <div class="col-md-6">
+                   	<button class="btn btn-secondary btn-sm" id="univ_btn" onclick="getUniversity(); return false;" style="display: absolute; top: 35px;">대학교 검색</button>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -221,7 +230,7 @@
                     <select id = "edit_term" name = "term" style = "width:40%; margin-left: 2%;">
                       <c:forEach var = "cnt" begin = "1" end = "2" step = "1">
                     		<c:choose>
-                    			<c:when test = "${cnt eq stu_info.grade}">
+                    			<c:when test = "${cnt eq stu_info.semester}">
                     				<option value = "${cnt}" selected>${cnt}학기</option>
                     			</c:when>
                     			<c:otherwise>
@@ -237,7 +246,7 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <label for="edit_univ" class="text-black">목표 학점 </label>
-                    <input type="text" class="form-control-style" id="edit_univ" name="univ" value="${stu_info.obj_credit}" style = "margin:4% 0 0 5%; width:30% !important;">
+                    <input type="text" class="form-control-style" id="obj_credit" name="obj_credit" value="${stu_info.obj_credit}" style = "margin:4% 0 0 5%; width:30% !important;">
                   </div>
                 </div>
 
@@ -246,7 +255,7 @@
                     <input type="submit" class="btn btn-primary btn-lg btn-block" value="변경">
                   </div>
                   <div class="col-lg-6">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="개인 정보 페이지로 돌아가기">
+                    <input type="button" class="btn btn-primary btn-lg btn-block" value="개인 정보 페이지로 돌아가기" onclick="location.href='PersonalInformationPage.jsp'">
                   </div>
                 </div>
               </div>
@@ -391,5 +400,40 @@
 	        }).open();
 	    }
 	</script>
+	<script>
+		$('#edit_nickname').focusout(function(){
+			let memberNickname = $('#edit_nickname').val();
+			let prev_nickname = $('#prev_nickname').val();
+			if(memberNickname !== prev_nickname) {
+				$.ajax({
+					url : "nicknameRedundancyCheck.mem",
+					type : "post",
+					data : {memberNickname: memberNickname},
+					dataType : 'json',
+					success : function(result){
+						if(result == 0){
+							$("#checkNickname").html('사용할 수 없는 닉네임입니다.');
+							$("#checkNickname").attr('color','red');
+						} else{
+							$("#checkNickname").html('사용할 수 있는 닉네임입니다.');
+							$("#checkNickname").attr('color','green');
+						}
+					},
+					error : function(){
+						alert("서버요청실패");
+					}
+				})
+			} else {
+				$("#checkNickname").html('사용할 수 있는 닉네임입니다.');
+				$("#checkNickname").attr('color','green');
+			}
+		})
+	 </script>
 </body>
+<script>
+	function getUniversity() {
+		window.name = "EditInfoPage";
+		windowObj = window.open("getUniversity.jsp", "getUniversity", width=300, height=200, toolbar="no");
+	}
+</script>
 </html>

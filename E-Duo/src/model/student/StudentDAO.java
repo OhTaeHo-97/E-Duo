@@ -16,8 +16,10 @@ public class StudentDAO {
 	
 	private String sql_insert = "INSERT INTO student VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	private String sql_select = "SELECT * FROM student WHERE stu_id=?"; 
-	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
-			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";   
+//	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
+//			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
+	private String sql_update = "UPDATE student SET s_name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
+			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
 	private String sql_delete = "DELETE FROM member WHERE mid=? AND mpw=?";
 	private String sql_checkNickname = "SELECT * FROM student WHERE nickname=?";
 	
@@ -68,7 +70,9 @@ public class StudentDAO {
 			if(rs.next()) {
 				stu_data = new StudentVO();
 				stu_data.setStu_id(rs.getString("stu_id"));
-				stu_data.setName(rs.getString("name"));
+//				stu_data.setName(rs.getString("name"));
+				stu_data.setName(rs.getString("s_name"));
+				stu_data.setNickname(rs.getString("nickname"));
 				stu_data.setCellphone(rs.getString("cellphone"));
 				stu_data.setPostcode(rs.getInt("postcode"));
 				stu_data.setAddress(rs.getString("address"));

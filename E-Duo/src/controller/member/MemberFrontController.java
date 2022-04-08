@@ -126,6 +126,13 @@ public class MemberFrontController extends HttpServlet {
 				System.out.println("SearchUniversity 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
+		} else if(command.equals("/checkUser.mem")) {
+			try {
+				forward = new CheckUserAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("CheckUserAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
 		}
 		
 		if(forward != null) {
