@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="css/style.css">
     
   </head>
-  <body>  
+  <body>
+  
   <div class="site-wrap">
     <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
@@ -65,7 +66,7 @@
             <li class="active"><a href="CreditManagement.html">학점 관리</a></li>
             <li><a href="timeTable.html">시간표</a></li>
             <li class = "has-children">
-            	<a href="bulletin_main.bul">게시판</a>
+            	<a href="board.html">게시판</a>
             	<ul class="dropdown">
 	                <li><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
 	                <li><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
@@ -91,7 +92,6 @@
         </div>
       </nav>
     </header>
-
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
@@ -135,72 +135,59 @@
             <div class="row">
               <div class="col-md-12 mb-5">
                 <div class="float-md-left mb-4">
-                	<h2 class="text-black h5">
-	                	<c:choose>
-	          			<c:when test="${category eq 'free'}">
-	          				자유게시판
-	          			</c:when>
-	          			<c:when test="${category eq 'fresh'}">
-	          				새내기게시판
-	          			</c:when>
-	          			<c:when test="${category eq 'ad'}">
-	          				홍보게시판
-	          			</c:when>
-	          			<c:when test="${category eq 'job'}">
-	          				취업·진로
-	          			</c:when>
-	          			<c:when test="${category eq 'market'}">
-	          				장터게시판
-	          			</c:when>
-	          			<c:when test="${category eq 'info'}">
-	          				정보게시판
-	          			</c:when>
-          			</c:choose>
-					</h2>
-				</div>
-                <div class="d-flex">
-                  <div class="dropdown mr-1 ml-md-auto">
-                    <input type = "button" class="btn btn-secondary btn-sm dropdown-toggle" 
-                    value = "글 쓰기" onclick = "location.href = 'bulletin_write.bul?category=${category}'">
-                    <!-- <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Latest
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                      <a class="dropdown-item" href="#">Men</a>
-                      <a class="dropdown-item" href="#">Women</a>
-                      <a class="dropdown-item" href="#">Children</a>
-                    </div> -->
-                  </div>
+     	           	<h2 class="text-black h5">
+     	           		<c:choose>
+		          			<c:when test="${category eq 'free'}">
+		          				자유게시판
+		          			</c:when>
+		          			<c:when test="${category eq 'fresh'}">
+		          				새내기게시판
+		          			</c:when>
+		          			<c:when test="${category eq 'ad'}">
+		          				홍보게시판
+		          			</c:when>
+		          			<c:when test="${category eq 'job'}">
+		          				취업·진로
+		          			</c:when>
+		          			<c:when test="${category eq 'market'}">
+		          				장터게시판
+		          			</c:when>
+		          			<c:when test="${category eq 'info'}">
+		          				정보게시판
+		          			</c:when>
+          				</c:choose>
+           	    	</h2>
                 </div>
               </div>
             </div>
-             <c:forEach var="data" items="${bul_datas}">           	
-	            <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer" 
-	            onclick = "location.href = 'bulletin_detail.bul?bul_id=${data.bul_id}'";>
-	                <div class="block-4 border" style = "padding: 5%;">
-	                  <div style = "width: 70%; height: 2rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
-	                    <span style = "font-weight: bold; font-size:1.5rem;">${data.title}</span>
-	                  </div>
-	                  <div style = "width: 100%; height: 3rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
-	                    <span>${data.content}</span>
+            <div class="row mb-5">
+              <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer">
+                <div class="block-4 border" style = "padding: 5%;">
+                  <form action="bulletin_insert.bul" method="POST" name = "insertForm" id = "insertForm">
+                  	<div class="form-group row">
+	                  <div class="col-md-12">
+	                    <input type="text" class="form-control" id="bulletin_title" name="title" placeholder = "제목">
 	                  </div>
 	                </div>
-	             </div>
-             </c:forEach>
-            <div class="row" data-aos="fade-up">
-              <div class="col-md-12 text-center">
-                <div class="site-block-27">
-                  <ul>
-                    <li><a href="#">&lt;</a></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
-                  </ul>
+	                <div class="form-group row">
+	                  <div class="col-md-12">
+	                    <input type="text" class="form-control" id="bulletin_content" name="content" placeholder = "내용">
+	                  </div>
+	                </div>
+	                <div class="form-group row" style="margin-top: 2%;">
+                  <div class="col-md-12">
+                    <label for="bulletin_nickname" class="text-black">익명성 <span class="text-danger">*</span></label>
+                    <input type="radio" class="text-black" id="bulletin_nickname_Y" name="nickname" value="닉네임" style="margin-left: 1%;" checked><span class="text-black">닉네임</span>
+                    <input type="radio" class="text-black" id="bulletin_nickname_N" name="nickname" value="익명" style="margin-left: 1%;"><span class="text-black">익명</span>
+                    <input type="hidden" name="category" value="${category}" />
+                  </div>
                 </div>
-              </div>
+                  	<div class="col-lg-3">
+                    	<input type="submit" class="btn btn-primary btn-lg btn-block" value="작성">
+                  	</div>
+                  </form>
+                </div>
+              </div>                         
             </div>
           </div>
 
@@ -208,12 +195,12 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
-                <li class="text-black ml-auto"><a href="selectCategoryFilterAll.bul?category=free" class="d-flex"><span>자유게시판</span> <span class="text-black ml-auto">(2,220)</span></a></li>
-                <li class="text-black ml-auto"><a href="selectCategoryFilterAll.bul?category=info" class="d-flex"><span>정보게시판</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="text-black ml-auto"><a href="selectCategoryFilterAll.bul?category=fresh" class="d-flex"><span>새내기게시판</span> <span class="text-black ml-auto">(2,124)</span></a></li>
-                <li class="text-black ml-auto"><a href="selectCategoryFilterAll.bul?category=ad" class="d-flex"><span>홍보게시판</span> <span class="text-black ml-auto">(2,124)</span></a></li>
-                <li class="text-black ml-auto"><a href="selectCategoryFilterAll.bul?category=job" class="d-flex"><span>취업·진로</span> <span class="text-black ml-auto">(2,124)</span></a></li>
-                <li class="text-black ml-auto"><a href="selectCategoryFilterAll.bul?category=market" class="d-flex"><span>장터게시판</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                <li class="mb-1"><a href="selectCategoryFilterAll.bul?category=free" class="d-flex"><span>자유게시판</span> <span class="text-black ml-auto">(2,220)</span></a></li>
+                <li class="mb-1"><a href="selectCategoryFilterAll.bul?category=info" class="d-flex"><span>정보게시판</span> <span class="text-black ml-auto">(2,550)</span></a></li>
+                <li class="mb-1"><a href="selectCategoryFilterAll.bul?category=fresh" class="d-flex"><span>새내기게시판</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                <li class="mb-1"><a href="selectCategoryFilterAll.bul?category=ad" class="d-flex"><span>홍보게시판</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                <li class="mb-1"><a href="selectCategoryFilterAll.bul?category=job" class="d-flex"><span>취업·진로</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                <li class="mb-1"><a href="selectCategoryFilterAll.bul?category=market" class="d-flex"><span>장터게시판</span> <span class="text-black ml-auto">(2,124)</span></a></li>
               </ul>
             </div>
 

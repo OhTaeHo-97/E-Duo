@@ -61,7 +61,7 @@ public class BulletinFrontController extends HttpServlet {
 				System.out.println("DeleteReplyAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} else if(command.equals("/insertBulletin.bul")) {
+		} else if(command.equals("/bulletin_insert.bul")) {
 			try {
 				forward = new InsertBulletinAction().execute(request, response);
 			} catch (Exception e) {
@@ -138,7 +138,21 @@ public class BulletinFrontController extends HttpServlet {
 				System.out.println("UpdateReplyAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		}
+		} else if(command.equals("/bulletin_write.bul")) {
+			try {
+				forward = new WriteBulletinAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("UpdateReplyAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} else if(command.equals("/bulletin_main.bul")) {
+			try {
+				forward = new BulletinMainAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("UpdateReplyAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		} 
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {

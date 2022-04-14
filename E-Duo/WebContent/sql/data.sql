@@ -18,6 +18,7 @@ CREATE TABLE login_info(
 );
 
 SELECT * FROM login_info;
+INSERT INTO login_info(stu_id, password) values('xvsgxv', 'wjdals159!');
 INSERT INTO login_info(stu_id, password) values('student1', 'student1!');
 
 CREATE TABLE student(
@@ -58,6 +59,8 @@ CREATE TABLE subject(
    CONSTRAINT subject_fk FOREIGN KEY(uni_id) REFERENCES university(uni_id) ON DELETE CASCADE
 );
 
+Insert into SUBJECT values(1, 1000, 2, '한국어', '태보냥', 3, '청운관612호', );
+
 CREATE TABLE university(
    uni_id   int PRIMARY KEY,
    uni_name varchar(100) NOT NULL UNIQUE
@@ -85,7 +88,7 @@ CREATE TABLE bulletin(
    category varchar(100) NOT NULL,
    title varchar(300) NOT NULL,
    content varchar(3000) NOT NULL,
-   image varchar(1000) NOT NULL,
+   image varchar(1000),
    regDate   DATE DEFAULT SYSDATE,
    CONSTRAINT bulletin_fk FOREIGN KEY(stu_id) REFERENCES student(stu_id) ON DELETE CASCADE
 );
@@ -119,7 +122,12 @@ CREATE TABLE reply(
    CONSTRAINT reply_id_fk FOREIGN KEY(stu_id) REFERENCES student(stu_id) ON DELETE CASCADE,
    CONSTRAINT reply_bul_id_fk FOREIGN KEY(bul_id) REFERENCES bulletin(bul_id) ON DELETE CASCADE
 );
-
+select * from Reply where bul_id = 7 order by regDate desc;
+INSERT INTO reply(rep_id, stu_id, nickname, bul_id, content) values(1, 'xvsgxv', '장사자비서', 7, '오태호 바보');
+INSERT INTO reply(rep_id, stu_id, nickname, bul_id, content) values(2, 'xvsgxv', '장사자비서', 7, '태보는 냥이');
+INSERT INTO reply(rep_id, stu_id, nickname, bul_id, content) values(3, 'xvsgxv', '장사자비서', 7, '코딩 즐겁다');
+DELETE from reply where bul_id = 7;
+SELECT * FROM reply;
 CREATE TABLE notice(
    not_id   int PRIMARY KEY,
    title varchar(300) NOT NULL,

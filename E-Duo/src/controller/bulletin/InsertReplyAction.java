@@ -4,11 +4,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import controller.ActionForward;
 import model.bulletin.ReplyDAO;
 import model.bulletin.ReplyVO;
+import model.student.StudentDAO;
+import model.student.StudentVO;
 
 public class InsertReplyAction implements Action {
 
@@ -19,14 +22,25 @@ public class InsertReplyAction implements Action {
 		ReplyVO vo = new ReplyVO();
 		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));
 		vo.setContent(request.getParameter("content"));
-		vo.setRegDate(request.getParameter("regDate"));
-		vo.setStu_id(request.getParameter("stu_id"));
-		vo.setNickname(request.getParameter("nickname"));
+		HttpSession session = request.getSession();
+		vo.setStu_id((String)session.getAttribute("user_id"));
 		
+		StudentDAO dao2 = new StudentDAO();
+		StudentVO vo2 = new StudentVO();
+		StudentVO stu_data = new StudentVO();
+		stu_data = dao2.selectOne(vo2);
+		vo.setNickname(request.getParameter("nickname"));
+		if(request.getParameter("nickname") == "닉네임") {
+			vo.setNickname(stu_data.getNickname());
+		} else {
+			vo.setNickname("익명");
+		}
 		ActionForward forward = null;
 		if(dao.insert(vo)) {
+			request.setAttribute("category", request.getAttribute("category"));
+			request.setAttribute("bul_id", Integer.parseInt(request.getParameter("bul_id")));
 			forward = new ActionForward();
-			forward.setPath("bulletin_detail.jsp");
+			forward.setPath("bulletin_detail.bul");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

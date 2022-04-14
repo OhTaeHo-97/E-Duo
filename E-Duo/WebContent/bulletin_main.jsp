@@ -62,7 +62,7 @@
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
             <li class="active"><a href="CreditManagement.html">학점 관리</a></li>
-            <li><a href="bulletin">시간표</a></li>
+            <li><a href="timeTable.html">시간표</a></li>
             <li class = "has-children">
             	<a href="bulletin_main.bul">게시판</a>
             	<ul class="dropdown">
@@ -97,21 +97,10 @@
         <div class="row mb-5">
           <div class="col-md-9 order-2">
             <div class="row mb-5">
-
-              <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up">
-                <div class="block-4 border" style = "padding: 20px;">
-                  <h3 class="mb-3 h6 text-uppercase text-black d-block">추이 그래프</h3>
-                  <div class = "text-center">
-                    <figure class="block-4-image">
-                      <a href="creditma"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                    </figure>
-                  </div>
-                </div>
-              </div>
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
                   <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "bulletin_category.bul?category=free">
+                  	<a href = "selectCategoryFilterAll.bul?category=free">
                   		<h3 class="mb-3 h6 text-uppercase text-black d-block">자유게시판</h3>
                   	</a>          
                   </div>
@@ -132,7 +121,7 @@
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
                   <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "bulletin_category.bul?category=info">
+                  	<a href = "selectCategoryFilterAll.bul?category=info">
                   		<h3 class="mb-3 h6 text-uppercase text-black d-block">정보게시판</h3>
                   	</a>          
                   </div>
@@ -153,7 +142,7 @@
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
                   <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "bulletin_category.bul?category=fresh">
+                  	<a href = "selectCategoryFilterAll.bul?category=fresh">
                   		<h3 class="mb-3 h6 text-uppercase text-black d-block">새내기게시판</h3>
                   	</a>          
                   </div>
@@ -174,7 +163,7 @@
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
                   <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "bulletin_category.bul?category=ad">
+                  	<a href = "selectCategoryFilterAll.bul?category=ad">
                   		<h3 class="mb-3 h6 text-uppercase text-black d-block">홍보게시판</h3>
                   	</a>          
                   </div>
@@ -195,7 +184,7 @@
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
                   <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "bulletin_category.bul?category=job">
+                  	<a href = "selectCategoryFilterAll.bul?category=job">
                   		<h3 class="mb-3 h6 text-uppercase text-black d-block">취업 진로게시판</h3>
                   	</a>          
                   </div>
@@ -216,7 +205,7 @@
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
                   <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "bulletin_category.bul?category=market">
+                  	<a href = "selectCategoryFilterAll.bul?category=market">
                   		<h3 class="mb-3 h6 text-uppercase text-black d-block">장터게시판</h3>
                   	</a>          
                   </div>
@@ -248,7 +237,7 @@
                 <li class="mb-1" style = "text-align: center;"><span>${user_id}</span></li>
               </ul>
             </div>
-
+            
             <div class="border p-4 rounded mb-4">
               <div class="mb-4">
                 <h3 class="mb-3 h6 text-uppercase text-black d-block">시간표</h3>

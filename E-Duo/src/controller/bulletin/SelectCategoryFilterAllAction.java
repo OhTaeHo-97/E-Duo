@@ -23,6 +23,7 @@ public class SelectCategoryFilterAllAction implements Action {
 		ActionForward forward = null;
 		if(bul_datas.size() != 0) {
 			request.setAttribute("bul_datas", bul_datas);
+			request.setAttribute("category", vo.getCategory());
 			forward = new ActionForward();
 			forward.setPath("bulletin_category.jsp");
 			forward.setRedirect(false);

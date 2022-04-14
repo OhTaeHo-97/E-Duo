@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,8 +43,16 @@
             <div class="col-6 col-md-4 order-3 order-md-3 text-right">
               <div class="site-top-icons">
                 <ul>
-                  <li><a href="#"><span class="icon icon-person"></span></a></li>
-                  <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+                  <li><a href="PersonalInformationPage.jsp"><span class="icon icon-person"></span></a></li>
+                  <li class="d-inline-block d-md-none ml-md-0"><a href="PersonalInformatioinPage.jsp" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+                  <c:choose>
+	                  <c:when test = "${user_id == null}">
+	                  	<li><a href = "login.jsp">로그인</a></li>
+	                  </c:when>
+	                  <c:otherwise>
+	                  	<li><a href = "logout.mem">로그아웃</a></li>
+	                  </c:otherwise>
+                  </c:choose>
                 </ul>
               </div> 
             </div>
@@ -54,34 +63,31 @@
       <nav class="site-navigation text-right text-md-center" role="navigation">
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
-            <li class="has-children active">
-              <a href="index.html">Home</a>
-              <ul class="dropdown">
-                <li><a href="#">Menu One</a></li>
-                <li><a href="#">Menu Two</a></li>
-                <li><a href="#">Menu Three</a></li>
-                <li class="has-children">
-                  <a href="#">Sub Menu</a>
-                  <ul class="dropdown">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                  </ul>
-                </li>
-              </ul>
+            <li class="active"><a href="CreditManagement.html">학점 관리</a></li>
+            <li><a href="timeTable.html">시간표</a></li>
+            <li class = "has-children">
+            	<a href="board.html">게시판</a>
+            	<ul class="dropdown">
+	                <li><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=fresh">새내기게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=ad">홍보게시판</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=job">취업·진로</a></li>
+	                <li><a href="selectCategoryFilterAll.bul?category=market">장터게시판</a></li>
+              	</ul>
             </li>
-            <li class="has-children">
-              <a href="about.html">About</a>
-              <ul class="dropdown">
-                <li><a href="#">Menu One</a></li>
-                <li><a href="#">Menu Two</a></li>
-                <li><a href="#">Menu Three</a></li>
-              </ul>
+            <li><a href="noticePage.notice">공지사항</a></li>
+            <li class = "has-children">
+            	<a href="FAQ.jsp">문의하기</a>
+            	<ul class="dropdown">
+	                <li><a href="FAQ.jsp">FAQ</a></li>
+	                <li><a href="question.html">문의하기</a></li>
+	                <li><a href="#">이용약관</a></li>
+	                <li><a href="#">개인정보 처리방침</a></li>
+	                <li><a href="#">커뮤니티 이용규칙</a></li>
+              	</ul>
             </li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="#">Catalogue</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <!-- <li><a href="contact.html">Contact</a></li> -->
           </ul>
         </div>
       </nav>
@@ -173,13 +179,13 @@
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
                   <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">목표 학점: </h3>
-                    <span style = "margin-left: 4%;">4.5</span>
+                    <span style = "margin-left: 4%;">${stu_data.obj_credit}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
-                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">남은 학기수: </h3>
-                    <span style = "margin-left: 4%;">4</span>
+                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">이수 학점/남은 학점 </h3>
+                    <span style = "margin-left: 4%;">${all_credit} / ${stu_data.graduate_credit}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
@@ -209,7 +215,7 @@
                       <option value = "">4.5 만점(A- 포함)</option>
                       <option value = "">4.3 만점</option>
                     </select>
-                    <span class = "text-black" style = "margin-left: 30px; font-size: 1.1rem;">총 평점 : 4.1</span>
+                    <span class = "text-black" style = "margin-left: 30px; font-size: 1.1rem;">총 평점 : ${this_semester_credit_average}</span>
                   </div>
                   <div style = "width:80%; margin: 20px auto; clear: both; margin-top: 30px;">
                     <table border = "1" style = "width:100%; border-color: #ced4da;">
