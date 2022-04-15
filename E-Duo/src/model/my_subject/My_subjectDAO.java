@@ -19,7 +19,8 @@ public class My_subjectDAO {
 	private String sql_update = "UPDATE my_subject SET academic_number=?, credit=?, grade=?, semester=? WHERE my_sub_id=?";
 	private String sql_delete = "DELETE FROM my_subject WHERE my_sub_id=?";
 	private String sql_selectAll = "SELECT * FROM my_subject";
-	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
+//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
+	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
 	
 	private String sql_selectFilter = "";
 	
@@ -152,9 +153,12 @@ public class My_subjectDAO {
 				sdata.setProfessor(rs.getString("professor"));
 				sdata.setCredit_num(rs.getInt("credit_num"));
 				sdata.setClassroom(rs.getString("classroom"));
-				sdata.setStart_time(rs.getString("start_time"));
-				sdata.setEnd_time(rs.getString("end_time"));
-				sdata.setSubject_date(rs.getString("subject_date;"));
+				sdata.setFirst_date(rs.getString("first_date"));
+				sdata.setFirst_start(rs.getString("first_start"));
+				sdata.setFirst_end(rs.getString("first_end"));
+				sdata.setSecond_date(rs.getString("second_date"));
+				sdata.setSecond_start(rs.getString("second_start"));
+				sdata.setSecond_end(rs.getString("second_end"));
 				My_subjectVO mdata = new My_subjectVO();
 				mdata.setMy_sub_id(rs.getInt("sub_id"));
 				mdata.setAcademic_number(rs.getInt("academic_number"));

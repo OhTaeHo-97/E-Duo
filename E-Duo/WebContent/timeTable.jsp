@@ -20,6 +20,16 @@
 <link rel="stylesheet" href="css/aos.css">
 
 <link rel="stylesheet" href="css/style.css">
+<style>
+	#subjects {
+		position: fixed;
+		z-index: 99;
+		bottom: 0;
+		width: 100%;
+		background-color: #fff;
+		overflow: hidden;
+	}
+</style>
 </head>
 <body>
 	<div class="site-wrap">
@@ -106,6 +116,78 @@
 
     <div class="site-section border-bottom" data-aos="fade">
       <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+            <div class="site-section site-blocks-2">
+                <div class="row" style = "margin: 0 auto;">
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">1학년 1학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">1학년 2학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">2학년 1학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">2학년 2학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">3학년 1학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">3학년 2학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">4학년 1학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px;">
+                    <a href="#">
+                      <div>
+                        <span class="text-uppercase text-black">4학년 2학기</span>
+                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+                      </div>
+                    </a>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
         <div class="row mb-5">
           <div class="col-md-12">
             <h3 style = "text-align:center;">시간표</h3>
@@ -245,13 +327,37 @@
             </table>
             <br><br>
             <div style = "text-align:right; font-size: 1.5rem; font-weight:bold;">
-              <span>현재 학점 : </span><span>3.6</span>
-              <span style = "margin-left:5%;">이수 학점 : </span><span>120</span>
+              <span>현재 학점 : </span><span>${avg_credit}</span>
+              <span style = "margin-left:5%;">이수 학점 : </span><span>${total_credit_num}</span>
             </div>
             <div style = "margin-top:3%;">
-              <input type = "button" class="btn btn-primary btn-lg" style = "float:right;" onclick = "location.href = '#'" value = "학점 관리 페이지로 이동">
+              <input type = "button" class="btn btn-primary btn-lg" style="float: right;" onclick = "location.href = 'showCreditManage.cre'" value = "학점 관리 페이지로 이동">
+              <input type = "button" class="btn btn-primary btn-lg" style="float: right; margin-right: 2%;" onclick = "getSubject(); return false;" value = "수업 목록에서 검색">
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 border" id="subjects" style="display: block;">
+      <div class="form-group row">
+        <div class="col-md-9" style="margin: 0 auto;">
+          <input type="text" class="form-control" id="srch_subject" name="subject" style = "display: inline-block; width: 90%;" placeholder = "과목을 입력하세요.">
+          <input type="button" id="searchSub" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; width: 8%;" value="검색">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-10" style="margin: 0 auto;">
+          <table style="width: 100%;">
+            <tr>
+              <th>학수번호</th>
+              <th>과목명</th>
+              <th>이수</th>
+              <th>학점</th>
+              <th>교수</th>
+              <th>시간</th>
+              <th>강의실</th>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -341,4 +447,10 @@
 
   <script src="js/main.js"></script>
 </body>
+<script>
+	function getUniversity() {
+		window.name = "TimeTablePage";
+		windowObj = window.open("getUniversity.jsp", "getUniversity", width=300, height=200, toolbar="no");
+	}
+</script>
 </html>

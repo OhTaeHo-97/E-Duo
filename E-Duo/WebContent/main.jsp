@@ -62,7 +62,7 @@
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
             <li class="active"><a href="CreditManagement.html">학점 관리</a></li>
-            <li><a href="timeTable.html">시간표</a></li>
+            <li><a href="timetablePage.timetable">시간표</a></li>
             <li class = "has-children">
             	<a href="board.html">게시판</a>
             	<ul class="dropdown">

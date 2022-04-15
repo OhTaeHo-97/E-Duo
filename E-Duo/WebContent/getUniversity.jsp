@@ -99,6 +99,7 @@
 				success : function(result){
 					let data = JSON.parse(JSON.stringify(result));
 					console.log(data);
+					$("ul#univ_list").children().remove();
 					$.each(data, function(k, v) {
 						/* $('<li><a href="javascript:void(0);" onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</a></li>').val(k).text(v).appendTo($("#univ_list")); */
 						$('<li onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</li>').val(k).text(v).appendTo($("#univ_list"));

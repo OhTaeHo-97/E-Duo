@@ -13,9 +13,9 @@ public class SubjectDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO subject VALUES(subject_seq.NEXTVAL,?,?,?,?,?,?,?,?,?)"; 
+	private String sql_insert = "INSERT INTO subject VALUES((select NVL(MAX(sub_id), 0) + 1 from subject),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 	private String sql_select = "SELECT * FROM subject WHERE sub_id=?"; 
-	private String sql_update = "UPDATE subject SET academic_number=?, subject_name=?, professor=?, credit_num=?, classroom=?, start_time=?, end_time=? WHERE sub_id=?";
+	private String sql_update = "UPDATE subject SET academic_number=?, subject_name=?, professor=?, credit_num=?, classroom=?, first_date=?, first_start=?, first_end=?, second_date=?, second_start=?, second_end=?, third_date=?, third_start=?, third_end=? WHERE sub_id=?";
 	private String sql_delete = "DELETE FROM subject WHERE sub_id=?";
 	private String sql_selectAll = "SELECT * FROM subject WHERE uni_id=?";
 	private String sql_selectFilter = "";
@@ -32,9 +32,17 @@ public class SubjectDAO {
 			pstmt.setString(4, vo.getProfessor());
 			pstmt.setInt(5, vo.getCredit_num());
 			pstmt.setString(6, vo.getClassroom());
-			pstmt.setString(7, vo.getStart_time());
-			pstmt.setString(8, vo.getEnd_time());
-			pstmt.setString(9, vo.getSubject_date());
+			pstmt.setString(7, vo.getSub_sort());
+			pstmt.setBoolean(8, vo.isMajor());
+			pstmt.setString(9, vo.getFirst_date());
+			pstmt.setString(10, vo.getFirst_start());
+			pstmt.setString(11, vo.getFirst_end());
+			pstmt.setString(12, vo.getSecond_date());
+			pstmt.setString(13, vo.getSecond_start());
+			pstmt.setString(14, vo.getSecond_end());
+			pstmt.setString(15, vo.getThird_date());
+			pstmt.setString(16, vo.getThird_start());
+			pstmt.setString(17, vo.getThird_end());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Subject Insert문 에러 : " + e);
@@ -56,15 +64,22 @@ public class SubjectDAO {
 			if(rs.next()) {
 				sub_data = new SubjectVO();
 				sub_data.setAcademic_number(rs.getInt("academic_number"));
-				sub_data.setClassroom(rs.getString("classroom"));
-				sub_data.setCredit_num(rs.getInt("credit_num"));
-				sub_data.setEnd_time(rs.getString("end_time"));
-				sub_data.setProfessor(rs.getString("professor"));
-				sub_data.setStart_time(rs.getString("start_time"));
-				sub_data.setSub_id(rs.getInt("sub_id"));
-				sub_data.setSubject_name(rs.getString("subject_name"));
 				sub_data.setUni_id(rs.getInt("uni_id"));
-				sub_data.setSubject_date(rs.getString("subject_date"));
+				sub_data.setSubject_name(rs.getString("subject_name"));
+				sub_data.setProfessor(rs.getString("professor"));
+				sub_data.setCredit_num(rs.getInt("credit_num"));
+				sub_data.setClassroom(rs.getString("classroom"));
+				sub_data.setSub_sort(rs.getString("sub_sort"));
+				sub_data.setMajor(rs.getBoolean("major"));
+				sub_data.setFirst_date(rs.getString("first_date"));
+				sub_data.setFirst_start(rs.getString("first_start"));
+				sub_data.setFirst_end(rs.getString("first_end"));
+				sub_data.setSecond_date(rs.getString("second_date"));
+				sub_data.setSecond_start(rs.getString("second_start"));
+				sub_data.setSecond_end(rs.getString("second_end"));
+				sub_data.setThird_date(rs.getString("third_date"));
+				sub_data.setThird_start(rs.getString("third_start"));
+				sub_data.setThird_end(rs.getString("third_end"));
 			}
 		} catch (SQLException e) {
 			System.out.println("Subject selectOne문 에러 : " + e);
@@ -86,10 +101,16 @@ public class SubjectDAO {
 			pstmt.setString(3, vo.getProfessor());
 			pstmt.setInt(4, vo.getCredit_num());
 			pstmt.setString(5, vo.getClassroom());
-			pstmt.setString(6, vo.getStart_time());
-			pstmt.setString(7, vo.getEnd_time());
-			pstmt.setInt(8, vo.getSub_id());
-			pstmt.setString(9, vo.getSubject_date());
+			pstmt.setString(6, vo.getFirst_date());
+			pstmt.setString(7, vo.getFirst_start());
+			pstmt.setString(8, vo.getFirst_end());
+			pstmt.setString(9, vo.getSecond_date());
+			pstmt.setString(10, vo.getSecond_start());
+			pstmt.setString(11, vo.getSecond_end());
+			pstmt.setString(12, vo.getThird_date());
+			pstmt.setString(13, vo.getThird_start());
+			pstmt.setString(14, vo.getThird_end());
+			pstmt.setInt(15, vo.getSub_id());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Subject update문 에러 : " + e);
@@ -130,15 +151,23 @@ public class SubjectDAO {
 			while(rs.next()) {
 				sub_data = new SubjectVO();
 				sub_data.setAcademic_number(rs.getInt("academic_number"));
-				sub_data.setClassroom(rs.getString("classroom"));
-				sub_data.setCredit_num(rs.getInt("credit_num"));
-				sub_data.setEnd_time(rs.getString("end_time"));
-				sub_data.setProfessor(rs.getString("professor"));
-				sub_data.setStart_time(rs.getString("start_time"));
-				sub_data.setSub_id(rs.getInt("sub_id"));
-				sub_data.setSubject_name(rs.getString("subject_name"));
 				sub_data.setUni_id(rs.getInt("uni_id"));
-				sub_data.setSubject_date(rs.getString("subject_date"));
+				sub_data.setSubject_name(rs.getString("subject_name"));
+				sub_data.setProfessor(rs.getString("professor"));
+				sub_data.setCredit_num(rs.getInt("credit_num"));
+				sub_data.setClassroom(rs.getString("classroom"));
+				sub_data.setSub_sort(rs.getString("sub_sort"));
+				sub_data.setMajor(rs.getBoolean("major"));
+				sub_data.setFirst_date(rs.getString("first_date"));
+				sub_data.setFirst_start(rs.getString("first_start"));
+				sub_data.setFirst_end(rs.getString("first_end"));
+				sub_data.setSecond_date(rs.getString("second_date"));
+				sub_data.setSecond_start(rs.getString("second_start"));
+				sub_data.setSecond_end(rs.getString("second_end"));
+				sub_data.setThird_date(rs.getString("third_date"));
+				sub_data.setThird_start(rs.getString("third_start"));
+				sub_data.setThird_end(rs.getString("third_end"));
+				sub_datas.add(sub_data);
 			}
 		} catch (SQLException e) {
 			System.out.println("Subject selectAll문 에러 : " + e);

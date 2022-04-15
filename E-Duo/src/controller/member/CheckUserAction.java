@@ -23,7 +23,7 @@ public class CheckUserAction implements Action {
 		LoginInfoVO data = dao.loginStudent(vo);
 		ActionForward forward = null;
 		if(data == null) {
-			response.setCharacterEncoding("text/html; charset=utf-8");
+			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('잘못된 비밀번호를 입력하셨습니다.'); history.back(-1);</script>");
 		} else {
