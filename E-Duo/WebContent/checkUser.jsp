@@ -116,7 +116,7 @@
           <!-- <div class="col-md-7" style = "width:100%;"> -->
           <div style = "position:relative; left:25%; width:50%;">
 
-            <form action="checkUser.mem" method="POST" name = "loginForm" id = "loginForm" onsubmit = "return login_check()">
+            <form action="checkUser.mem" method="POST" name = "checkForm" id = "checkForm" onsubmit = "return login_check()">
               
               <div class="p-3 p-lg-5 border">
                 <div class="form-group row">
