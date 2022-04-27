@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Action;
 import controller.ActionForward;
@@ -18,11 +19,12 @@ public class DeleteBulletinAction implements Action{
 		BulletinDAO dao = new BulletinDAO();
 		BulletinVO vo = new BulletinVO();
 		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));
+		request.setAttribute("category", request.getParameter("category"));
 		ActionForward forward = null;
 		if(dao.delete(vo)) {
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			forward.setPath("bulletin_sort.bul");
+			forward.setPath("selectCategoryFilterAll.bul");
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

@@ -166,12 +166,12 @@
                   <form action="bulletin_insert.bul" method="POST" name = "insertForm" id = "insertForm">
                   	<div class="form-group row">
 	                  <div class="col-md-12">
-	                    <input type="text" class="form-control" id="bulletin_title" name="title" placeholder = "제목">
+	                    <input type="text" value="${bul_data.bulletin.title}" class="form-control" id="bulletin_title" name="title" placeholder = "제목">
 	                  </div>
 	                </div>
 	                <div class="form-group row">
 	                  <div class="col-md-12">
-	                    <input type="text" class="form-control" id="bulletin_content" name="content" placeholder = "내용">
+	                    <input type="text" value="${bul_data.bulletin.content}" class="form-control" id="bulletin_content" name="content" placeholder = "내용">
 	                  </div>
 	                </div>
 	                <div class="form-group row" style="margin-top: 2%;">

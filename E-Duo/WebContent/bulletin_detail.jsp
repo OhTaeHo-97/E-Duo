@@ -160,10 +160,18 @@
             </div>          
             <div class="row mb-5">
               <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up";>
-                <div class="block-4 border" style = "padding: 5%;">
-                	<div>
-                		${bul_data.bulletin.nickname}
-                		${bul_data.bulletin.regDate}
+                <div class="p-3 p-lg-5 border" style = "padding: 5%;">
+                	<div class="form-group row">
+                		<div class="col-md-7">
+	                		${bul_data.bulletin.nickname}
+	                		${bul_data.bulletin.regDate}
+	                	</div>
+	                	<div class="col-md-5">
+	                		<c:if test = "${user_id eq bul_data.bulletin.stu_id}">
+	               				<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 30%; height: 2.3rem; text-align: center; color: black;" value="수정" onClick = "location.href = 'bulletin_updatePage.bul?category=${category}&bul_id=${bul_data.bulletin.bul_id}&'">
+	                  			<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 30%; height: 2.3rem; text-align: center; color: red;" value="삭제" onClick = "location.href = 'deleteBulletin.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}'">
+	               			</c:if>
+	               		</div>
                 	</div>                               	
                 	<div style = "width: 70%; height: 2rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
                     	<span style = "font-weight: bold; font-size:1.5rem;">
@@ -182,10 +190,14 @@
               <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up";>
                 <div class="block-4 border" style = "padding: 5%;">
                 	<c:forEach var="rep_datas" items="${bul_data.rdatas}">           
-	                	<div>
-	                		${rep_datas.nickname}
-	                		${rep_datas.regDate}
-	                	</div>                               	
+	                		<div class = "col-md-12">
+		                		${rep_datas.nickname}
+		                		${rep_datas.regDate}
+		                		<c:if test = "${user_id eq rep_datas.stu_id}">
+		               				<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 10%; height: 2.3rem; text-align: center; color: black;" value="수정" onClick = "location.href = 'BulletinUpdatePage.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}'">
+		                  			<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 10%; height: 2.3rem; text-align: center; color: red;" value="삭제" onClick = "location.href = 'deleteBulletin.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}'">
+		               			</c:if>
+		                	</div>                               	
 	                	<div style = "width: 50%; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
 	                    	<span style = "font-weight: bold; font-size:1.5rem;">	                    		
 	                    	</span>
@@ -198,15 +210,20 @@
                   	</c:forEach>                                
                 </div>
                 <form action="insertReply.bul?bul_id=${bul_data.bulletin.bul_id}" method="POST" name = "insertRepltForm" id = "insertReplyForm">
-                	<div class="form-group row">
-	                  <div class="col-md-12">
-	                    <input type="text" class="form-control" id="reply_content" name="content" placeholder = "댓글 내용">
+                  	<div class="form-group row">
+	                  <div class="col-md-6">
+	                    <input type="text" class="form-control" id="bulletin_title" name="content" placeholder = "내용">
+	                  </div>
+	                  <div class="col-md-3" style="margin-top: 1%;">
+	                    <label for="bulletin_nickname" class="text-black">익명성 <span class="text-danger">*</span></label>
+	                    <input type="radio" class="text-black" id="reply_nickname_Y" name="nickname" value="닉네임" style="margin-left: 1%;" checked><span class="text-black">닉네임</span>
+	                    <input type="radio" class="text-black" id="reply_nickname_N" name="nickname" value="익명" style="margin-left: 1%;"><span class="text-black">익명</span>
 	                    <input type="hidden" name="category" value="${category}" />
 	                  </div>
-	                </div>	                
-                	<div class="col-lg-3">
-                    	<input type="submit" class="btn btn-primary btn-lg btn-block" value="작성">
-                  	</div>
+	                  <div class="col-md-3">
+                    	<input type="submit" class="btn btn-primary btn-lg btn-block" value="댓글 작성">
+                  	  </div>
+	                </div>            	            
                 </form>                
                 <input type = "button" class="btn btn-secondary btn-sm dropdown-toggle" 
                     value = "목록으로" onclick = "location.href = 'selectCategoryFilterAll.bul?category=${category}'">

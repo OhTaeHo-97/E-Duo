@@ -31,8 +31,7 @@ public class InsertBulletinAction implements Action {
 		vo.setImage(request.getParameter("image"));
 		vo.setStu_id((String)session.getAttribute("user_id"));
 		vo.setTitle(request.getParameter("title"));
-		System.out.println(request.getParameter("nickname"));
-		if(request.getParameter("nickname") == "닉네임") {
+		if(request.getParameter("nickname").equals("닉네임")) {
 			vo.setNickname(stu_data.getNickname());
 		} else {
 			vo.setNickname("익명");

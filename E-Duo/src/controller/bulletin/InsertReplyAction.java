@@ -27,10 +27,11 @@ public class InsertReplyAction implements Action {
 		
 		StudentDAO dao2 = new StudentDAO();
 		StudentVO vo2 = new StudentVO();
+		vo2.setStu_id((String)session.getAttribute("user_id"));
 		StudentVO stu_data = new StudentVO();
 		stu_data = dao2.selectOne(vo2);
 		vo.setNickname(request.getParameter("nickname"));
-		if(request.getParameter("nickname") == "닉네임") {
+		if(request.getParameter("nickname").equals("닉네임")) {
 			vo.setNickname(stu_data.getNickname());
 		} else {
 			vo.setNickname("익명");

@@ -72,7 +72,7 @@ public class BulletinDAO {
          pstmt.setString(2, vo.getNickname());
          pstmt.setString(3, vo.getCategory());
          pstmt.setString(4, vo.getTitle());
-         pstmt.setString(5, vo.getTitle());
+         pstmt.setString(5, vo.getContent());
          pstmt.setString(6, vo.getImage());
          result = pstmt.executeUpdate();
       } catch (SQLException e) {
