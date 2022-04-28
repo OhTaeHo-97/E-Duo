@@ -19,8 +19,8 @@ public class My_subjectDAO {
 	private String sql_update = "UPDATE my_subject SET academic_number=?, credit=?, grade=?, semester=? WHERE my_sub_id=?";
 	private String sql_delete = "DELETE FROM my_subject WHERE my_sub_id=?";
 	private String sql_selectAll = "SELECT * FROM my_subject";
-//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
-	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
+	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
+//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
 	
 	private String sql_selectFilter = "";
 	

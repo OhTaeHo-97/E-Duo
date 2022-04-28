@@ -77,8 +77,8 @@ public class StudentDAO {
 				stu_data.setPostcode(rs.getInt("postcode"));
 				stu_data.setAddress(rs.getString("address"));
 				stu_data.setDetail_address(rs.getString("detail_address"));
-//				stu_data.setRefernece(rs.getString("reference"));
-				stu_data.setRefernece(rs.getString("ref"));
+				stu_data.setRefernece(rs.getString("reference"));
+//				stu_data.setRefernece(rs.getString("ref"));
 				stu_data.setUni_id(rs.getInt("uni_id"));
 				stu_data.setEmail(rs.getString("email"));
 				stu_data.setGender(rs.getString("gender"));
