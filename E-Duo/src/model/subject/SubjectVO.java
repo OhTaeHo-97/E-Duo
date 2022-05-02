@@ -2,14 +2,14 @@ package model.subject;
 
 public class SubjectVO {
 	private int sub_id;
-	private int academic_number;
+	private String academic_number;
 	private int uni_id;
 	private String subject_name;
 	private String professor;
 	private int credit_num;
 	private String classroom;
 	private String sub_sort;
-	private boolean major;
+	private String major;
 	private String first_date;
 	private String first_start;
 	private String first_end;
@@ -26,10 +26,10 @@ public class SubjectVO {
 	public void setSub_id(int sub_id) {
 		this.sub_id = sub_id;
 	}
-	public int getAcademic_number() {
+	public String getAcademic_number() {
 		return academic_number;
 	}
-	public void setAcademic_number(int academic_number) {
+	public void setAcademic_number(String academic_number) {
 		this.academic_number = academic_number;
 	}
 	public int getUni_id() {
@@ -68,10 +68,10 @@ public class SubjectVO {
 	public void setSub_sort(String sub_sort) {
 		this.sub_sort = sub_sort;
 	}
-	public boolean isMajor() {
+	public String getMajor() {
 		return major;
 	}
-	public void setMajor(boolean major) {
+	public void setMajor(String major) {
 		this.major = major;
 	}
 	public String getFirst_date() {

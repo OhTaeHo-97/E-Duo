@@ -21,49 +21,51 @@ public class GetTimeTableAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {			
 		My_subjectDAO dao = new My_subjectDAO();
+		My_subjectSet set = new My_subjectSet();
 		My_subjectVO vo = new My_subjectVO();
+		SubjectVO sub_vo = new SubjectVO();
 		HttpSession session = request.getSession();
 		StudentDAO sdao = new StudentDAO();
 		StudentVO svo = new StudentVO();
 		svo.setStu_id((String)session.getAttribute("user_id"));
 		StudentVO sdata = sdao.selectOne(svo);
-		vo.setGrade(sdata.getGrade());
-		vo.setSemester(sdata.getSemester());
-		vo.setStu_id((String)session.getAttribute("user_id"));
-		
-		ArrayList<My_subjectSet> datas = dao.getMyTimetable(vo);
-		ActionForward forward = null;
-		if(datas.size() == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('시간표 정보를 가져오는데에 실패하였습니다.'); history.back(-1);</script>");
+		if(request.getParameter("grade") == null) {
+			vo.setGrade(sdata.getGrade());
+			vo.setSemester(sdata.getSemester());
 		} else {
-			int total_credit_num = 0;
-			double total_credit = 0;
-			for(My_subjectSet set : datas) {
-				total_credit_num += set.getSubjectVO().getCredit_num();
-				total_credit += set.getSubjectVO().getCredit_num() * set.getMy_subjectVO().getCredit();
-				System.out.println("total_credit: " + total_credit);
-			}
-			double avg_credit = (double)Math.round((total_credit / total_credit_num) * 100) / 100;
-			ArrayList<SubjectVO> sub_datas = new ArrayList<SubjectVO>();
-			for(My_subjectSet mset : datas) {
-				sub_datas.add(mset.getSubjectVO());
-			}
-			System.out.println(total_credit_num);
-			System.out.println(avg_credit);
-			System.out.println(sub_datas);
-			svo = new StudentVO();
-			svo.setGrade(sdata.getGrade());
-			svo.setSemester(sdata.getSemester());
-			request.setAttribute("grade_semester", svo);
-			request.setAttribute("table_datas", sub_datas);
-			request.setAttribute("total_credit_num", total_credit_num);
-			request.setAttribute("avg_credit", avg_credit);
-			forward = new ActionForward();
-			forward.setPath("timeTable.jsp");
-			forward.setRedirect(false);
+			vo.setGrade(Integer.parseInt(request.getParameter("grade")));
+			vo.setSemester(Integer.parseInt(request.getParameter("semester")));
 		}
+		vo.setStu_id((String)session.getAttribute("user_id"));
+		sub_vo.setUni_id(sdata.getUni_id());
+		set.setMy_subjectVO(vo);
+		set.setSubjectVO(sub_vo);
+		
+		ArrayList<My_subjectSet> datas = dao.getMyTimetable(set);
+		ActionForward forward = null;
+		int total_credit_num = 0;
+		double total_credit = 0;
+		for(My_subjectSet mset : datas) {
+			total_credit_num += mset.getSubjectVO().getCredit_num();
+			total_credit += mset.getSubjectVO().getCredit_num() * mset.getMy_subjectVO().getCredit();
+			System.out.println("total_credit: " + total_credit);
+		}
+		double avg_credit = (double)Math.round((total_credit / total_credit_num) * 100) / 100;
+		ArrayList<SubjectVO> sub_datas = new ArrayList<SubjectVO>();
+		for(My_subjectSet mset : datas) {
+			sub_datas.add(mset.getSubjectVO());
+		}
+		System.out.println(total_credit_num);
+		System.out.println(avg_credit);
+		System.out.println(sub_datas);
+		request.setAttribute("grade", sdata.getGrade());
+		request.setAttribute("semester", sdata.getSemester());
+		request.setAttribute("table_datas", sub_datas);
+		request.setAttribute("total_credit_num", total_credit_num);
+		request.setAttribute("avg_credit", avg_credit);
+		forward = new ActionForward();
+		forward.setPath("timeTable.jsp");
+		forward.setRedirect(false);
 		
 		return forward;
 	}

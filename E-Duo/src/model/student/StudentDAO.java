@@ -19,7 +19,9 @@ public class StudentDAO {
 //	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
 //			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
 	private String sql_update = "UPDATE student SET s_name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
-			+ "ref=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
+			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
+//	private String sql_update = "UPDATE student SET s_name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
+//			+ "ref=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
 	private String sql_delete = "DELETE FROM member WHERE mid=? AND mpw=?";
 	private String sql_checkNickname = "SELECT * FROM student WHERE nickname=?";
 	

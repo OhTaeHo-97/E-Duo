@@ -14,13 +14,13 @@ public class My_subjectDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO my_subject VALUES(?,?,?,?,?,?)"; 
+	private String sql_insert = "INSERT INTO my_subject VALUES((select nvl(max(my_sub_id), 0) + 1 from my_subject),?,?,?,?,?)"; 
 	private String sql_select = "SELECT * FROM my_subject WHERE my_sub_id=?"; 
 	private String sql_update = "UPDATE my_subject SET academic_number=?, credit=?, grade=?, semester=? WHERE my_sub_id=?";
 	private String sql_delete = "DELETE FROM my_subject WHERE my_sub_id=?";
 	private String sql_selectAll = "SELECT * FROM my_subject";
-	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
-//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
+	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
+//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
 	
 	private String sql_selectFilter = "";
 	
@@ -30,12 +30,11 @@ public class My_subjectDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_insert);
-			pstmt.setInt(1, vo.getMy_sub_id());
-			pstmt.setInt(2, vo.getAcademic_number());
-			pstmt.setString(3, vo.getStu_id());
-			pstmt.setFloat(4, vo.getCredit());
-			pstmt.setInt(5, vo.getGrade());
-			pstmt.setInt(6, vo.getSemester());
+			pstmt.setString(1, vo.getAcademic_number());
+			pstmt.setString(2, vo.getStu_id());
+			pstmt.setFloat(3, vo.getCredit());
+			pstmt.setInt(4, vo.getGrade());
+			pstmt.setInt(5, vo.getSemester());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("My_subject insert문 에러 : " + e);
@@ -58,7 +57,7 @@ public class My_subjectDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				my_sub_data = new My_subjectVO();
-				my_sub_data.setAcademic_number(rs.getInt("academic_number"));
+				my_sub_data.setAcademic_number(rs.getString("academic_number"));
 				my_sub_data.setCredit(rs.getFloat("credit"));
 				my_sub_data.setGrade(rs.getInt("grade"));
 				my_sub_data.setMy_sub_id(rs.getInt("my_sub_id"));
@@ -80,7 +79,7 @@ public class My_subjectDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_update);
-			pstmt.setInt(1, vo.getAcademic_number());
+			pstmt.setString(1, vo.getAcademic_number());
 			pstmt.setFloat(2, vo.getCredit());
 			pstmt.setInt(3, vo.getGrade());
 			pstmt.setInt(4, vo.getSemester());
@@ -119,7 +118,7 @@ public class My_subjectDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				my_sub_data = new My_subjectVO();
-				my_sub_data.setAcademic_number(rs.getInt("academic_number"));
+				my_sub_data.setAcademic_number(rs.getString("academic_number"));
 				my_sub_data.setCredit(rs.getFloat("credit"));
 				my_sub_data.setGrade(rs.getInt("grade"));
 				my_sub_data.setMy_sub_id(rs.getInt("my_sub_id"));
@@ -135,19 +134,20 @@ public class My_subjectDAO {
 		}
 		return my_sub_datas;
 	}
-	public ArrayList<My_subjectSet> getMyTimetable(My_subjectVO vo) {
+	public ArrayList<My_subjectSet> getMyTimetable(My_subjectSet mset) {
 		ArrayList<My_subjectSet> datas = new ArrayList<My_subjectSet>();
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_getMyTimetable);
-			pstmt.setString(1, vo.getStu_id());
-			pstmt.setInt(2, vo.getGrade());
-			pstmt.setInt(3, vo.getSemester());
+			pstmt.setString(1, mset.getMy_subjectVO().getStu_id());
+			pstmt.setInt(2, mset.getMy_subjectVO().getGrade());
+			pstmt.setInt(3, mset.getMy_subjectVO().getSemester());
+			pstmt.setInt(4, mset.getSubjectVO().getUni_id());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				SubjectVO sdata = new SubjectVO();
 				sdata.setSub_id(rs.getInt("sub_id"));
-				sdata.setAcademic_number(rs.getInt("academic_number"));
+				sdata.setAcademic_number(rs.getString("academic_number"));
 				sdata.setUni_id(rs.getInt("uni_id"));
 				sdata.setSubject_name(rs.getString("subject_name"));
 				sdata.setProfessor(rs.getString("professor"));
@@ -161,7 +161,7 @@ public class My_subjectDAO {
 				sdata.setSecond_end(rs.getString("second_end"));
 				My_subjectVO mdata = new My_subjectVO();
 				mdata.setMy_sub_id(rs.getInt("sub_id"));
-				mdata.setAcademic_number(rs.getInt("academic_number"));
+				mdata.setAcademic_number(rs.getString("academic_number"));
 				mdata.setStu_id(rs.getString("stu_id"));
 				mdata.setCredit(rs.getFloat("credit"));
 				mdata.setGrade(rs.getInt("grade"));

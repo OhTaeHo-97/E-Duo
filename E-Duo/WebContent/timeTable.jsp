@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,10 @@
 		width: 100%;
 		background-color: #fff;
 		overflow: hidden;
+	}
+	tr.content:hover {
+		background-color: rgba(99, 99, 99, 0.3);
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -338,16 +343,19 @@
         </div>
       </div>
     </div>
-    <div class="col-md-12 border" id="subjects" style="display: block;">
-      <div class="form-group row">
-        <div class="col-md-9" style="margin: 0 auto;">
-          <input type="text" class="form-control" id="srch_subject" name="subject" style = "display: inline-block; width: 90%;" placeholder = "과목을 입력하세요.">
-          <input type="button" id="searchSub" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; width: 8%;" value="검색">
+    <div class="col-md-12 border" id="subjects" style="position: fixed; display: block; width: 100%; overflow: scroll;">
+      <div class="form-group row" style="margin-top: 20px;">
+        <div class="col-md-9">
+        	<input type="text" class="form-control" id="srch_subject" name="subject" style = "display: inline-block; width: 70%; margin-left: 20%;" placeholder = "과목을 입력하세요.">
+        	<input type="button" id="searchSub" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; width: 8%;" value="검색">
+        </div>
+        <div class="col-md-3">
+        	<input type="button" id="close_tab" class="btn btn-secondary btn-sm dropdown-toggle" style="margin-left: 20%;" value="닫기" onclick="close_tab()">
         </div>
       </div>
-      <div class="form-group row">
+      <div class="form-group" style="height: 150px; margin-top: 20px;">
         <div class="col-md-10" style="margin: 0 auto;">
-          <table style="width: 100%;">
+          <table style="width: 100%;" id="subject_table" border="1">
             <tr>
               <th>학수번호</th>
               <th>과목명</th>
@@ -426,6 +434,7 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
+            
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -446,11 +455,42 @@
   <script src="js/aos.js"></script>
 
   <script src="js/main.js"></script>
-</body>
-<script>
-	function getUniversity() {
-		window.name = "TimeTablePage";
-		windowObj = window.open("getUniversity.jsp", "getUniversity", width=300, height=200, toolbar="no");
+  <script>
+    function close_tab() {
+      document.getElementById("subjects").style.display = 'none';
 	}
-</script>
+  </script>
+  <script>
+	$('#searchSub').click(function(){
+		let subject = $('#srch_subject').val();
+		$.ajax({
+			url : "getSubjects.timetable",
+			type : "GET",
+			data : {subject: subject},
+			dataType : 'JSON',
+			success : function(result){
+				let data = JSON.parse(JSON.stringify(result));
+				console.log(data);
+				$("table#subject_table").children().remove();
+				$('<tr><th>학수번호</th><th>과목명</th><th>이수</th><th>학점</th><th>교수</th><th>시간</th><th>강의실</th></tr>').appendTo($("#subject_table"));
+				$.each(data, function(k, d) {
+					$('<tr class="content" onclick=location.href="insertSubject.timetable?aca=' + d.academic_number
+							+ '&grade=' + <%= request.getAttribute("grade") %> + '&semester=' + <%= request.getAttribute("semester") %> + '"><td>' + d.academic_number + '</td><td>' + d.subject_name + '</td>'
+							+ '<td>' + d.sub_sort + '</td><td>' + d.credit_num + '</td><td>' + d.professor + '</td>'
+							+ '<td>' + d.first_date + ' ' + d.first_start + '~' + d.first_end + '<br>'
+							+ d.second_date + ' ' + d.second_start + '~' + d.second_end + '<br>'
+							+ d.third_date + ' ' + d.third_start + '~' + d.third_end + '</td>'
+							+ '<td>' + d.classroom + '</td>' + '</tr>').appendTo($("#subject_table"));
+					/* $('<li><a href="javascript:void(0);" onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</a></li>').val(k).text(v).appendTo($("#univ_list")); */
+					/* $('<li onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</li>').val(k).text(v).appendTo($("#sub_list")); */
+					console.log(d.sub_id);
+				});
+			},
+			error : function(){
+				alert("서버요청실패");
+			}
+		});
+	});
+  </script>
+</body>
 </html>
