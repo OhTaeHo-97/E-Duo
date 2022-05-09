@@ -58,6 +58,9 @@ CREATE TABLE subject(
    end_time DATE NOT NULL,
    CONSTRAINT subject_fk FOREIGN KEY(uni_id) REFERENCES university(uni_id) ON DELETE CASCADE
 );
+Insert into SUBJECT(sub_id, academic_number, uni_id, subject_name, professor, credit_num, classroom, start_time, end_time) values (1, 333, 2, '미적분학', '홍창훈', 3, '청운관', '2002-05-3', '2002-05-04');
+Insert into SUBJECT(sub_id, academic_number, uni_id, subject_name, professor, credit_num, classroom, start_time, end_time) values (2, 433, 2, '미적분학2', '홍창훈', 3, '청운관2', '2002-05-3', '2002-05-04');
+Insert into SUBJECT(sub_id, academic_number, uni_id, subject_name, professor, credit_num, classroom, start_time, end_time) values (3, 533, 2, '해석학', '홍창훈', 3, '청운관3', '2002-05-3', '2002-05-04');
 
 Insert into SUBJECT values(1, 1000, 2, '한국어', '태보냥', 3, '청운관612호', );
 
@@ -68,7 +71,7 @@ CREATE TABLE university(
 INSERT INTO university VALUES(1, '가천대학교');
 INSERT INTO university VALUES(2, '경희대학교');
 
-SELECT * FROM UNIVERSITY;
+SELECT * FROM my_subject;
 SELECT * FROM UNIVERSITY WHERE uni_name = '가천대학교';
 
 CREATE TABLE my_subject(
@@ -80,6 +83,10 @@ CREATE TABLE my_subject(
    semester int NOT NULL,
    CONSTRAINT my_subject_fk FOREIGN KEY(stu_id) REFERENCES student(stu_id) ON DELETE CASCADE
 );
+
+insert into MY_SUBJECT(my_sub_id, academic_number, stu_id, credit, grade, semester) values(1, 333, 'xvsgxv', 3.3, 4, 2);
+insert into MY_SUBJECT(my_sub_id, academic_number, stu_id, credit, grade, semester) values(2, 433, 'xvsgxv', 4.3, 4, 2);
+insert into MY_SUBJECT(my_sub_id, academic_number, stu_id, credit, grade, semester) values(3, 533, 'xvsgxv', 3.7, 4, 2);
 
 CREATE TABLE bulletin(
    bul_id   int PRIMARY KEY,

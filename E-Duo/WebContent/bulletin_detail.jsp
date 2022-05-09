@@ -168,7 +168,7 @@
 	                	</div>
 	                	<div class="col-md-5">
 	                		<c:if test = "${user_id eq bul_data.bulletin.stu_id}">
-	               				<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 30%; height: 2.3rem; text-align: center; color: black;" value="수정" onClick = "location.href = 'bulletin_updatePage.bul?category=${category}&bul_id=${bul_data.bulletin.bul_id}&'">
+	               				<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 30%; height: 2.3rem; text-align: center; color: black;" value="수정" onClick = "location.href = 'bulletin_updatePage.bul?category=${category}&bul_id=${bul_data.bulletin.bul_id}'">
 	                  			<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 30%; height: 2.3rem; text-align: center; color: red;" value="삭제" onClick = "location.href = 'deleteBulletin.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}'">
 	               			</c:if>
 	               		</div>
@@ -195,7 +195,7 @@
 		                		${rep_datas.regDate}
 		                		<c:if test = "${user_id eq rep_datas.stu_id}">
 		               				<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 10%; height: 2.3rem; text-align: center; color: black;" value="수정" onClick = "location.href = 'BulletinUpdatePage.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}'">
-		                  			<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 10%; height: 2.3rem; text-align: center; color: red;" value="삭제" onClick = "location.href = 'deleteBulletin.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}'">
+		                  			<input type="button" class="btn btn-primary btn-lg" style = "background-color: white; border-color: white; width: 10%; height: 2.3rem; text-align: center; color: red;" value="삭제" onClick = "location.href = 'deleteReply.bul?bul_id=${bul_data.bulletin.bul_id}&category=${category}&rep_id=${rep_datas.rep_id}'">
 		               			</c:if>
 		                	</div>                               	
 	                	<div style = "width: 50%; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">

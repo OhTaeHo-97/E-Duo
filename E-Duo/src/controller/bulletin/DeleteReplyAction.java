@@ -20,8 +20,10 @@ public class DeleteReplyAction implements Action {
 		
 		ActionForward forward = null;
 		if(dao.delete(vo) ) {
+			request.setAttribute("category", request.getAttribute("category"));
+			request.setAttribute("bul_id", request.getAttribute("bul_id"));
 			forward = new ActionForward();
-			forward.setPath("bulletin_detail.jsp");
+			forward.setPath("bulletin_detail.bul");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

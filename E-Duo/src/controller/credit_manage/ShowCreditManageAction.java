@@ -18,6 +18,7 @@ public class ShowCreditManageAction implements Action {
 
    @Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	   
       // 학생 정보(학년과 아이디 이름 등을 받아올 예정)
       StudentDAO dao = new StudentDAO();
       StudentVO vo = new StudentVO();
@@ -26,71 +27,63 @@ public class ShowCreditManageAction implements Action {
       StudentVO stu_data = dao.selectOne(vo);
       request.setAttribute("stu_data", stu_data);
       
-      
-      // 이번 학기의 수강과목 리스트(밑에 넣을 예정)
+      // 학생의 수강과목 전체 목록
       My_subjectDAO dao2 = new My_subjectDAO();
-      My_subjectVO vo2 = new My_subjectVO();      
+      My_subjectVO vo2 = new My_subjectVO();
       vo2.setStu_id((String)session.getAttribute("user_id"));
-      vo2.setGrade(stu_data.getGrade());
-      vo2.setSemester(stu_data.getSemester());
-      ArrayList<My_subjectSet> this_semester_sub_datas = dao2.getMySubjectandcreditByGradeandSemester(vo2);
-      request.setAttribute("this_semester_sub_datas", this_semester_sub_datas);
+      ArrayList<My_subjectSet> sub_datas = dao2.selectAllMy_subject(vo2);
       
-      // 이번학기 들은 학점수
-      int this_semester_credit = 0;
-      for(int i = 0; i< this_semester_sub_datas.size(); i++) {
-         this_semester_credit += this_semester_sub_datas.get(i).getSubjectVO().getCredit_num();
+      // 페이지의 현재 수강과목을 받아올 예정
+      @SuppressWarnings("unchecked")
+	  ArrayList<My_subjectSet>[] sort = new ArrayList[8];
+      for(int i = 0 ; i < 8 ; i++) {
+    	  sort[i] = new ArrayList<My_subjectSet>();
       }
-      request.setAttribute("this_semester_credit", this_semester_credit);
       
-      // 이번학기 학점 평균
-      double this_semester_credit_average = 0;
-      double temp = 0;
-      for(int i = 0; i< this_semester_sub_datas.size(); i++) {
-         temp += this_semester_sub_datas.get(i).getSubjectVO().getCredit_num()*this_semester_sub_datas.get(i).getMy_subjectVO().getCredit();
+      // 각 학년마다의 학점 평균
+      float[] credit_averages = new float[8];
+      for(int i = 0 ; i < 8 ; i++) {
+    	  float temp_credit = 0;
+    	  int temp_credit_num = 0;
+    	  for(int j = 0 ; j < sort[i].size() ; i++) {
+    		  float temp = sort[i].get(j).getSubjectVO().getCredit_num();
+    		  temp_credit += sort[i].get(j).getMy_subjectVO().getCredit()* temp;
+    		  temp_credit_num += temp;
+    	  }
+    	  credit_averages[i] = temp_credit/temp_credit_num;
       }
-      this_semester_credit_average = temp/this_semester_credit;
-      request.setAttribute("this_semester_credit_average", this_semester_credit_average);
       
-      // 모든 학기 학점 평균 불러오기 로직
-      My_subjectDAO dao3 = new My_subjectDAO();
-      My_subjectVO vo3 = new My_subjectVO();
-      vo3.setStu_id((String)session.getAttribute("user_id"));
-      
-      ArrayList<Double> credit_averages = new ArrayList<Double>();
-      for(int i = 0 ; i < 4 ; i++) {
-         for(int j = 0 ; j < 2 ; j++) {
-            vo3.setGrade(i);
-            vo3.setSemester(j);
-            ArrayList<My_subjectVO> sub_datas = dao3.selectFilterBySemester(vo3);
-            double grade_avg;
-            if(sub_datas.size() != 0) {
-               int grade_sum = 0;
-               for(int k = 0; k < sub_datas.size() ; k++) {
-                  grade_sum += sub_datas.get(k).getGrade();
-               }
-               grade_avg = (double) (Math.round(((double)grade_sum/sub_datas.size())*100)/100.0);
-            } else {
-               grade_avg = 0;
-            }
-            credit_averages.add(grade_avg);
-         }
+      float credit_sum = 0;
+      float credit_num_sum = 0;
+      for(int i = 0 ; i < sub_datas.size() ; i++) {
+    	  // 학점수, 학점 평균
+    	  float credit_num = sub_datas.get(i).getSubjectVO().getCredit_num();
+    	  credit_num_sum += credit_num;
+    	  credit_sum += sub_datas.get(i).getMy_subjectVO().getCredit()*credit_num;
+    	  
+    	  // 학년, 학기별로 구분하기 위한 로직
+    	  int temp_grade = sub_datas.get(i).getMy_subjectVO().getGrade();
+    	  int temp_semester = sub_datas.get(i).getMy_subjectVO().getSemester();
+    	  int idx = (temp_grade-1)*2 + temp_semester - 1;
+    	  sort[idx].add(sub_datas.get(i));
       }
-      request.setAttribute("credit_averages", credit_averages);
       
-      // 내가 지금까지 들은 학점수 그리고 내가 지금까지 받은 학점 평균, 님은학기 내가 받아야될 학점 평균
-      int all_credit = 0;
-      double credit_now = 0;
-      ArrayList<My_subjectSet> all_sub_datas = dao3.getMyTimetable(vo3);
-      for(int i = 0 ; i < all_sub_datas.size() ; i++) {
-         all_credit += all_sub_datas.get(i).getSubjectVO().getCredit_num();
-         credit_now += all_sub_datas.get(i).getSubjectVO().getCredit_num()*all_sub_datas.get(i).getMy_subjectVO().getCredit();
-      }
-      request.setAttribute("all_credit", all_credit);
-      double need_avg;
-      need_avg = (stu_data.getObj_credit()*all_credit - credit_now) / (stu_data.getGraduate_credit() - all_credit);
+      // 필요 평균 학점
+      float need_credit = (stu_data.getGraduate_credit()*stu_data.getObj_credit() - credit_sum)/(stu_data.getGraduate_credit() - credit_num_sum);
+      request.setAttribute("need_credit", need_credit);
       
-      // 필요학점은 비동기 처리 예정
+      // 학점 평균
+      float credit_average = credit_sum/credit_num_sum;
+      request.setAttribute("credit_average", credit_average);
+      
+      // 들은 학점수
+      request.setAttribute("credit_num_sum", credit_num_sum);
+      
+      // 이번학기 수강과목 데이터
+      int grade = Integer.parseInt(request.getParameter("grade"));
+      int semester = Integer.parseInt(request.getParameter("semester"));
+      request.setAttribute("now_sub_datas", sort[(grade-1)*2 + semester - 1]);
+      
       ActionForward forward = new ActionForward();
       forward.setPath("CreditManagement.jsp");
       forward.setRedirect(false);

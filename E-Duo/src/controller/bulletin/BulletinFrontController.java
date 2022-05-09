@@ -142,17 +142,24 @@ public class BulletinFrontController extends HttpServlet {
 			try {
 				forward = new WriteBulletinAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("UpdateReplyAction 수행 중 문제 발생!");
+				System.out.println("WriteBulletinAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
 		} else if(command.equals("/bulletin_main.bul")) {
 			try {
 				forward = new BulletinMainAction().execute(request, response);
 			} catch (Exception e) {
-				System.out.println("UpdateReplyAction 수행 중 문제 발생!");
+				System.out.println("BulletinMainAction 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
-		} 
+		} else if(command.equals("/bulletin_updatePage.bul")) {
+			try {
+				forward = new BulletinUpdatePageAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("BulletinUpdatePageAction 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
+		}
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {

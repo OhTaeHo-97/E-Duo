@@ -163,7 +163,7 @@
             <div class="row mb-5">
               <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer">
                 <div class="block-4 border" style = "padding: 5%;">
-                  <form action="bulletin_insert.bul" method="POST" name = "insertForm" id = "insertForm">
+                  <form action="updateBulletin.bul" method="POST" name = "updateForm" id = "updateForm">
                   	<div class="form-group row">
 	                  <div class="col-md-12">
 	                    <input type="text" value="${bul_data.bulletin.title}" class="form-control" id="bulletin_title" name="title" placeholder = "제목">
@@ -180,6 +180,7 @@
 	                    <input type="radio" class="text-black" id="bulletin_nickname_Y" name="nickname" value="닉네임" style="margin-left: 1%;" checked><span class="text-black">닉네임</span>
 	                    <input type="radio" class="text-black" id="bulletin_nickname_N" name="nickname" value="익명" style="margin-left: 1%;"><span class="text-black">익명</span>
 	                    <input type="hidden" name="category" value="${category}" />
+	                    <input type="hidden" name="bul_id" value="${bul_data.bulletin.bul_id}" />
 	                  </div>
                 	</div>
                   	<div class="col-lg-3">

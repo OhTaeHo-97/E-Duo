@@ -66,7 +66,7 @@
             <li class="active"><a href="CreditManagement.html">학점 관리</a></li>
             <li><a href="timeTable.html">시간표</a></li>
             <li class = "has-children">
-            	<a href="board.html">게시판</a>
+            	<a href="bulletin_main.bul">게시판</a>
             	<ul class="dropdown">
 	                <li><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
 	                <li><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
@@ -178,14 +178,14 @@
 
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
-                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">목표 학점: </h3>
+                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">목표 학점 : </h3>
                     <span style = "margin-left: 4%;">${stu_data.obj_credit}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
-                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">이수 학점/남은 학점 </h3>
-                    <span style = "margin-left: 4%;">${all_credit} / ${stu_data.graduate_credit}</span>
+                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">이수 학점/남은 학점 : </h3>
+                    <span style = "margin-left: 4%;">${all_credit}/${stu_data.graduate_credit}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
@@ -269,8 +269,17 @@
               </div>
               <ul class="list-unstyled mb-0">
                 <li class="mb-1 text-black" style = "text-align: center; margin-top: 20px;"><span style = "font-size: 1.2rem; font-weight: 500;">이름</span></li>
-                <li class="mb-1" style = "text-align: center;"><span>아이디</span></li>
+                <li class="mb-1" style = "text-align: center;"><span>${user_id}</span></li>
               </ul>
+            </div>
+
+            <div class="border p-4 rounded mb-4">
+              <div class="mb-4">
+                <h3 class="mb-3 h6 text-uppercase text-black d-block">시간표</h3>
+                <div style = "margin-top: 20px; text-align: center;">
+                  <a href = "#"><img src = "images/schedule.png" style = "width: 120px; height: 120px;"></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

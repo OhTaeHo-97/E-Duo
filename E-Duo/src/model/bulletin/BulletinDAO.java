@@ -18,7 +18,7 @@ public class BulletinDAO {
          + "VALUES"
          + "((select nvl(max(bul_id), 0) + 1 from Bulletin),?,?,?,?,?,?)"; 
    private String sql_select = "SELECT * FROM bulletin WHERE bul_id=?"; 
-   private String sql_update = "UPDATE bulletin SET category=?, title=?, content=?, image=?, regdate=? WHERE bul_id=?";
+   private String sql_update = "UPDATE bulletin SET category=?, title=?, content=?, image=?, nickname=? WHERE bul_id=?";
    private String sql_delete = "DELETE FROM bulletin WHERE bul_id=?";
    private String sql_selectAll = "SELECT * FROM bulletin order by bul_id desc";
    private String sql_selectAllReply = "select * from Reply where bul_id = ? order by regDate desc";
@@ -225,7 +225,7 @@ public class BulletinDAO {
          pstmt.setString(2, vo.getTitle());
          pstmt.setString(3, vo.getContent());
          pstmt.setString(4, vo.getImage());
-         pstmt.setString(5, vo.getRegDate());
+         pstmt.setString(5, vo.getNickname());
          pstmt.setInt(6, vo.getBul_id());
          result = pstmt.executeUpdate();
       } catch (SQLException e) {
