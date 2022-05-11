@@ -63,7 +63,7 @@
       <nav class="site-navigation text-right text-md-center" role="navigation">
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
-            <li class="active"><a href="CreditManagement.html">학점 관리</a></li>
+            <li class="active"><a href="showCreditManage.cre">학점 관리</a></li>
             <li><a href="timeTable.html">시간표</a></li>
             <li class = "has-children">
             	<a href="bulletin_main.bul">게시판</a>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="row" style = "margin: 0 auto;">
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=1&semester=1">
                       <div>
                         <span class="text-uppercase text-black">1학년 1학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -113,7 +113,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=1&semester=2">
                       <div>
                         <span class="text-uppercase text-black">1학년 2학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -121,7 +121,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=2&semester=1">
                       <div>
                         <span class="text-uppercase text-black">2학년 1학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -129,7 +129,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=2&semester=2">
                       <div>
                         <span class="text-uppercase text-black">2학년 2학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -137,7 +137,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=3&semester=1">
                       <div>
                         <span class="text-uppercase text-black">3학년 1학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -145,7 +145,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=3&semester=2">
                       <div>
                         <span class="text-uppercase text-black">3학년 2학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -153,7 +153,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=4&semester=1">
                       <div>
                         <span class="text-uppercase text-black">4학년 1학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -161,7 +161,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px;">
-                    <a href="#">
+                    <a href="showCreditManage.cre?grade=4&semester=2">
                       <div>
                         <span class="text-uppercase text-black">4학년 2학기</span>
                         <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
@@ -178,20 +178,20 @@
 
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
-                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">목표 학점 : </h3>
-                    <span style = "margin-left: 4%;">${stu_data.obj_credit}</span>
+                  <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">목표 학점/현재 학점 : </h3>
+                    <span style = "margin-left: 4%;">${stu_data.obj_credit}/${credit_average}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
                   <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">이수 학점/남은 학점 : </h3>
-                    <span style = "margin-left: 4%;">${all_credit}/${stu_data.graduate_credit}</span>
+                    <span style = "margin-left: 4%;">${credit_num_sum}/${stu_data.graduate_credit}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 border" style = "padding: 20px;">
                   <h3 class="mb-3 h6 text-uppercase text-black d-block" style = "display: inline-block !important;">잔여 학기 필요한 평균학점: </h3>
-                    <span style = "margin-left: 4%;">3</span>
+                    <span style = "margin-left: 4%;">${need_credit}</span>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up">

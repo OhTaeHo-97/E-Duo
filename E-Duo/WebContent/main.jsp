@@ -61,7 +61,7 @@
       <nav class="site-navigation text-right text-md-center" role="navigation">
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
-            <li><a href="showCreditManage.cre">학점 관리</a></li>
+            <li class="active"><a href="showCreditManage.cre">학점 관리</a></li>
             <li><a href="bulletin">시간표</a></li>
             <li class = "has-children">
             	<a href="bulletin_main.bul">게시판</a>
@@ -103,7 +103,7 @@
                   <h3 class="mb-3 h6 text-uppercase text-black d-block">추이 그래프</h3>
                   <div class = "text-center">
                     <figure class="block-4-image">
-                      <a href="creditma"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                      <a href="showCreditManage.cre"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
                     </figure>
                   </div>
                 </div>

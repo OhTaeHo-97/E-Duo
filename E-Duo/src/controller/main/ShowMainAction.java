@@ -49,30 +49,8 @@ public class ShowMainAction implements Action {
 			out.println("<script>alert('회원정보를 불러오는 데에 실패하였습니다.'); history.back(-1);</script>");
 		}
 		
-		// 학점 평균 불러오기 로직
-		My_subjectDAO dao3 = new My_subjectDAO();
-		My_subjectVO vo3 = new My_subjectVO();
-		vo3.setStu_id((String)session.getAttribute("user_id"));
-		ArrayList<Double> grade_averages = new ArrayList<Double>();
-		for(int i = 0 ; i < 4 ; i++) {
-			for(int j = 0 ; j < 2 ; j++) {
-				vo3.setGrade(i);
-				vo3.setSemester(j);
-				ArrayList<My_subjectVO> sub_datas = dao3.selectFilterBySemester(vo3);
-				double grade_avg;
-				if(sub_datas.size() != 0) {
-					int grade_sum = 0;
-					for(int k = 0; k < sub_datas.size() ; k++) {
-						grade_sum += sub_datas.get(k).getGrade();
-					}
-					grade_avg = (double) (Math.round(((double)grade_sum/sub_datas.size())*100)/100.0);
-				} else {
-					grade_avg = 0;
-				}
-				grade_averages.add(grade_avg);
-			}
-		}
-		request.setAttribute("grade_averages", grade_averages);
+		// 학점 평균 불러오기 로직 만들어야 됨
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("main.jsp");

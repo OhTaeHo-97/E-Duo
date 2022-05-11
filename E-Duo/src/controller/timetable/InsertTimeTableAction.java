@@ -19,7 +19,7 @@ public class InsertTimeTableAction implements Action {
 		My_subjectVO vo = new My_subjectVO();
 		HttpSession session = request.getSession();
 		vo.setMy_sub_id(Integer.parseInt(request.getParameter("sub_id")));
-		vo.setAcademic_number(Integer.parseInt(request.getParameter("academic_number")));
+		vo.setAcademic_number(request.getParameter("academic_number"));
 		vo.setStu_id((String)session.getAttribute("user_id"));
 		vo.setCredit(0);
 		vo.setGrade(Integer.parseInt(request.getParameter("grade")));

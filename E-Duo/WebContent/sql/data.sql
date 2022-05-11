@@ -48,19 +48,27 @@ SELECT * FROM student;
 
 CREATE TABLE subject(
    sub_id   int   PRIMARY KEY,
-   academic_number int NOT NULL,
+   academic_number varchar(20) NOT NULL,
    uni_id   int NOT NULL,
    subject_name varchar(100) NOT NULL,
-   professor varchar(50),
-   credit_num int,
-   classroom varchar(100),
-   start_time DATE NOT NULL,
-   end_time DATE NOT NULL,
+   professor varchar(50) DEFAULT '미정',
+   credit_num int NOT NULL,
+   classroom varchar(100) DEFAULT '미정',
+     sub_sort varchar(100) NOT NULL,
+   major char(1) NOT NULL
+   CONSTRAINT major_ck CHECK(major IN ('Y', 'N')),
+   first_date varchar(5),
+   first_start varchar(6),
+   first_end varchar(6),
+   second_date varchar(5),
+   second_start varchar(6),
+   second_end varchar(6),
+   third_date varchar(5),
+   third_start varchar(6),
+   third_end varchar(6),
    CONSTRAINT subject_fk FOREIGN KEY(uni_id) REFERENCES university(uni_id) ON DELETE CASCADE
 );
-Insert into SUBJECT(sub_id, academic_number, uni_id, subject_name, professor, credit_num, classroom, start_time, end_time) values (1, 333, 2, '미적분학', '홍창훈', 3, '청운관', '2002-05-3', '2002-05-04');
-Insert into SUBJECT(sub_id, academic_number, uni_id, subject_name, professor, credit_num, classroom, start_time, end_time) values (2, 433, 2, '미적분학2', '홍창훈', 3, '청운관2', '2002-05-3', '2002-05-04');
-Insert into SUBJECT(sub_id, academic_number, uni_id, subject_name, professor, credit_num, classroom, start_time, end_time) values (3, 533, 2, '해석학', '홍창훈', 3, '청운관3', '2002-05-3', '2002-05-04');
+
 
 Insert into SUBJECT values(1, 1000, 2, '한국어', '태보냥', 3, '청운관612호', );
 
@@ -71,7 +79,7 @@ CREATE TABLE university(
 INSERT INTO university VALUES(1, '가천대학교');
 INSERT INTO university VALUES(2, '경희대학교');
 
-SELECT * FROM my_subject;
+SELECT * FROM UNIVERSITY;
 SELECT * FROM UNIVERSITY WHERE uni_name = '가천대학교';
 
 CREATE TABLE my_subject(
@@ -83,10 +91,6 @@ CREATE TABLE my_subject(
    semester int NOT NULL,
    CONSTRAINT my_subject_fk FOREIGN KEY(stu_id) REFERENCES student(stu_id) ON DELETE CASCADE
 );
-
-insert into MY_SUBJECT(my_sub_id, academic_number, stu_id, credit, grade, semester) values(1, 333, 'xvsgxv', 3.3, 4, 2);
-insert into MY_SUBJECT(my_sub_id, academic_number, stu_id, credit, grade, semester) values(2, 433, 'xvsgxv', 4.3, 4, 2);
-insert into MY_SUBJECT(my_sub_id, academic_number, stu_id, credit, grade, semester) values(3, 533, 'xvsgxv', 3.7, 4, 2);
 
 CREATE TABLE bulletin(
    bul_id   int PRIMARY KEY,
