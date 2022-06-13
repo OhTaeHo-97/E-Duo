@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css">
 <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
-
 <link rel="stylesheet" href="css/aos.css">
 
 <link rel="stylesheet" href="css/style.css">
@@ -30,9 +29,50 @@
 		background-color: #fff;
 		overflow: hidden;
 	}
+	th {
+		width: 80px;
+	}
+	tr.dates {
+		height: 40px;
+		background-color: #cae1f2;
+	}
 	tr.content:hover {
 		background-color: rgba(99, 99, 99, 0.3);
 		cursor: pointer;
+	}
+	.date {
+		text-align: center;
+	}
+	.time {
+		box-sizing: border-box;
+		height: 100px;
+		border-bottom: 1px solid lightgrey;
+		text-align: center;
+		line-height: 100px;
+	}
+	.times .time:last-of-type {
+		border-bottom: 0px;
+	}
+	.area {
+		border-top: 1px solid lightgrey;
+		height: 100px;
+	}
+	.area:first-child {
+		border-top: 0px;
+	}
+	.col {
+		position: absolute;
+		z-index: 20;
+		padding: 0;
+	}
+	.subject {
+		position: absolute;
+		overflow: hidden;
+		box-sizing: border-box;
+		width: 100%;
+		border: 1px solid lightgrey;
+		border-width: 1px 0;
+		z-index: 10;
 	}
 </style>
 </head>
@@ -125,70 +165,182 @@
           <div class="col-md-12">
             <div class="site-section site-blocks-2">
                 <div class="row" style = "margin: 0 auto;">
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">1학년 1학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">1학년 2학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">2학년 1학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">2학년 2학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">3학년 1학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">3학년 2학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">4학년 1학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px;">
-                    <a href="#">
-                      <div>
-                        <span class="text-uppercase text-black">4학년 2학기</span>
-                        <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-                      </div>
-                    </a>
-                  </div>
+                  <c:choose>
+                  	<c:when test = "${grade eq 1 and semester eq 1}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=1&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">1학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=1&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">1학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 1 and semester eq 2}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=1&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">1학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=1&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">1학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 2 and semester eq 1}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=2&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">2학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=2&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">2학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 2 and semester eq 2}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=2&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">2학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=2&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">2학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 3 and semester eq 1}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=3&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">3학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=3&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">3학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 3 and semester eq 2}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=3&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">3학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=3&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">3학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 4 and semester eq 1}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=4&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">4학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=4&semester=1">
+		                    <div>
+		                      <span class="text-uppercase text-black">4학년 1학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
+                  <c:choose>
+                  	<c:when test = "${grade eq 4 and semester eq 2}">
+	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+		                  <a href="timetablePage.timetable?grade=4&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">4학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:when>
+                  	<c:otherwise>
+                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+		                  <a href="timetablePage.timetable?grade=4&semester=2">
+		                    <div>
+		                      <span class="text-uppercase text-black">4학년 2학기</span>
+		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+		                    </div>
+		                  </a>
+	                  </div>
+                  	</c:otherwise>
+                  </c:choose>
                 </div>
             </div>
           </div>
@@ -196,154 +348,189 @@
         <div class="row mb-5">
           <div class="col-md-12">
             <h3 style = "text-align:center;">시간표</h3>
-            <table border = "1" width = "100%" height = "2000" style = "border-color:lightgrey;">
-              <thead>
-                <tr height = "50" style = "text-align:center; background-color:#cae1f2;">
-                  <th width = "10%"></th>
-                  <th width = "18%">월</th>
-                  <th width = "18%">화</th>
-                  <th width = "18%">수</th>
-                  <th width = "18%">목</th>
-                  <th width = "18%">금</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr height = "130" style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오전 9시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오전 10시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오전 11시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 12시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 1시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 2시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 3시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 4시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 5시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 6시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 7시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 8시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 9시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 10시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr style = "text-align:center;">
-                  <td style = "background-color:#cae1f2;">오후 11시</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+            <div>
+            	<table border = "1" width = "100%" style="border-color: lightgrey;">
+            		<tbody>
+            			<tr class="dates">
+            				<th></th>
+            				<td class="date">월</td>
+            				<td class="date">화</td>
+            				<td class="date">수</td>
+            				<td class="date">목</td>
+            				<td class="date">금</td>
+            				<td class="date" style="display: none;">토</td>
+            			</tr>
+            		</tbody>
+            	</table>
+            </div>
+            <div>
+           		<table border = "1" width = "100%" height = "1500" style = "border-color:lightgrey;">
+           			<tbody>
+           				<tr>
+           					<th>
+           						<div class="times">
+           							<div class="time">오전 9시</div>
+           							<div class="time">오전 10시</div>
+           							<div class="time">오전 11시</div>
+           							<div class="time">오후 12시</div>
+           							<div class="time">오후 1시</div>
+           							<div class="time">오후 2시</div>
+           							<div class="time">오후 3시</div>
+           							<div class="time">오후 4시</div>
+           							<div class="time">오후 5시</div>
+           							<div class="time">오후 6시</div>
+           							<div class="time">오후 7시</div>
+           							<div class="time">오후 8시</div>
+           							<div class="time">오후 9시</div>
+           							<div class="time">오후 10시</div>
+           							<div class="time">오후 11시</div>
+           						</div>
+           					</th>
+           					<td id="MON">
+           						<div class="col" style="width: 168px;"></div>
+           						<div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           						</div>
+           					</td>
+           					<td id="TUE">
+           						<div class="col" style="width: 168px;"></div>
+           						<div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           						</div>
+           					</td>
+           					<td id="WED">
+           						<div class="col" style="width: 168px;"></div>
+           						<div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           						</div>
+           					</td>
+           					<td id="THU">
+           						<div class="col" style="width: 168px;"></div>
+           						<div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           						</div>
+           					</td>
+           					<td id="FRI">
+           						<div class="col" style="width: 168px;"></div>
+           						<div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           						</div>
+           					</td>
+           					<td id="SAT" style="display: none;">
+           						<div class="col" style="width: 168px;"></div>
+           						<div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           							<div class="area"></div>
+           						</div>
+           					</td>
+           				</tr>
+           			</tbody>
+           		</table>
+            </div>
             <br><br>
             <div style = "text-align:right; font-size: 1.5rem; font-weight:bold;">
-              <span>현재 학점 : </span><span>${avg_credit}</span>
               <span style = "margin-left:5%;">이수 학점 : </span><span>${total_credit_num}</span>
+              <span></span>
             </div>
             <div style = "margin-top:3%;">
-              <input type = "button" class="btn btn-primary btn-lg" style="float: right;" onclick = "location.href = 'showCreditManage.cre'" value = "학점 관리 페이지로 이동">
+              <input type = "button" class="btn btn-primary btn-lg" style="float: right;" onclick = "location.href = 'showCreditManage.cre?grade=${grade}&semester=${semester}'" value = "학점 관리 페이지로 이동">
               <input type = "button" class="btn btn-primary btn-lg" style="float: right; margin-right: 2%;" onclick = "getSubject(); return false;" value = "수업 목록에서 검색">
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-12 border" id="subjects" style="position: fixed; display: block; width: 100%; overflow: scroll;">
+    <div class="col-md-12" id="searchBtnTab" style="position: fixed; bottom: 0; display: block; width: 100%;">
+		    <div class="form-group row" style="margin-top: 20px;">
+		    	<div class="col-md-9" style="margin: 0 auto; text-align: center;">
+		    		<input type="button" id="open_searchTab" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; z-index: 99;" value="과목 추가하기" onclick="openSearchTab()">
+		    	</div>
+		    </div>
+    	</div>
+    <div class="col-md-12 border" id="subjects" style="position: fixed; display: none; width: 100%; overflow: scroll;">
       <div class="form-group row" style="margin-top: 20px;">
         <div class="col-md-9">
         	<input type="text" class="form-control" id="srch_subject" name="subject" style = "display: inline-block; width: 70%; margin-left: 20%;" placeholder = "과목을 입력하세요.">
@@ -405,7 +592,7 @@
           <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
             <h3 class="footer-heading mb-4">Promo</h3>
             <a href="#" class="block-6">
-              <img src="images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4">
+              <img src="images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4" style="z-index: 1;">
               <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
               <p>Promo from  nuary 15 &mdash; 25, 2019</p>
             </a>
@@ -456,8 +643,15 @@
 
   <script src="js/main.js"></script>
   <script>
+  	function openSearchTab() {
+  		document.getElementById("searchBtnTab").style.display = 'none';
+  		document.getElementById("subjects").style.display = 'block';
+  	}
+  </script>
+  <script>
     function close_tab() {
       document.getElementById("subjects").style.display = 'none';
+      document.getElementById("searchBtnTab").style.display = 'block';
 	}
   </script>
   <script>
@@ -491,6 +685,288 @@
 			}
 		});
 	});
+  </script>
+  <script>
+  	console.log('grade: ' + <%= request.getAttribute("grade") %>);
+  	console.log('semester: ' + <%= request.getAttribute("semester") %>);
+  </script>
+  <script language="javaScript">
+  	let table_datas = JSON.parse(JSON.stringify('${table_datas}'));
+  	let newDiv;
+  	let newPTag;
+  	let parents;
+  	<c:forEach items="${table_datas}" var="item">
+  		<c:choose>
+  			<c:when test="${item.subjectVO.first_date eq 'MON'}">
+  				newDiv = document.createElement("div");
+  				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.first_height}" + "px";
+				newDiv.style.top = "${item.first_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#MON>div.col");
+				parents.appendChild(newDiv);
+  			</c:when>
+  			<c:when test="${item.subjectVO.second_date eq 'MON'}">
+				newDiv = document.createElement("div");
+  				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.second_height}" + "px";
+				newDiv.style.top = "${item.second_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#MON>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.third_date eq 'MON'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.third_height}" + "px";
+				newDiv.style.top = "${item.third_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#MON>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.first_date eq 'TUE'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.first_height}" + "px";
+				newDiv.style.top = "${item.first_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#TUE>div.col");
+				parents.appendChild(newDiv);
+				</c:when>
+			<c:when test="${item.subjectVO.second_date eq 'TUE'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.second_height}" + "px";
+				newDiv.style.top = "${item.second_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#TUE>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.third_date eq 'TUE'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.third_height}" + "px";
+				newDiv.style.top = "${item.third_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#TUE>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.first_date eq 'WED'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.first_height}" + "px";
+				newDiv.style.top = "${item.first_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#WED>div.col");
+				parents.appendChild(newDiv);
+				</c:when>
+			<c:when test="${item.subjectVO.second_date eq 'WED'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.second_height}" + "px";
+				newDiv.style.top = "${item.second_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#WED>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.third_date eq 'WED'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.third_height}" + "px";
+				newDiv.style.top = "${item.third_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#WED>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.first_date eq 'THU'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.first_height}" + "px";
+				newDiv.style.top = "${item.first_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#THU>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.second_date eq 'THU'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.second_height}" + "px";
+				newDiv.style.top = "${item.second_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#MON>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.third_date eq 'THU'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.third_height}" + "px";
+				newDiv.style.top = "${item.third_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#THU>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.first_date eq 'FRI'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.first_height}" + "px";
+				newDiv.style.top = "${item.first_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#FRI>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.second_date eq 'FRI'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.second_height}" + "px";
+				newDiv.style.top = "${item.second_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#FRI>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.third_date eq 'FRI'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.third_height}" + "px";
+				newDiv.style.top = "${item.third_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#FRI>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.first_date eq 'SAT'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.first_height}" + "px";
+				newDiv.style.top = "${item.first_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#SAT>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.second_date eq 'SAT'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.second_height}" + "px";
+				newDiv.style.top = "${item.second_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#SAT>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+			<c:when test="${item.subjectVO.third_date eq 'SAT'}">
+				newDiv = document.createElement("div");
+				newDiv.setAttribute("id", "${item.my_sub_id}");
+				newDiv.setAttribute("class", "subject");
+				newDiv.style.height = "${item.third_height}" + "px";
+				newDiv.style.top = "${item.third_start}" + "px";
+				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
+				newPTag = document.createElement('p');
+				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+				newDiv.appendChild(newPTag);
+				parents = document.querySelector("td#SAT>div.col");
+				parents.appendChild(newDiv);
+			</c:when>
+  		</c:choose>
+		console.log("${item.my_sub_id}");
+		console.log("${item.subjectVO.first_date}");
+		console.log("${item.subjectVO.first_start}");
+		console.log("${item.subjectVO.first_end}");
+		console.log("${item.subjectVO.second_date}");
+		console.log("${item.subjectVO.second_start}");
+		console.log("${item.subjectVO.second_end}");
+		console.log("${item.subjectVO.third_date}");
+		console.log("${item.subjectVO.third_start}");
+		console.log("${item.subjectVO.third_end}");
+	</c:forEach>
+	
+	// 금요일 2시 시작
+	/* let newDiv = document.createElement("div");
+	newDiv.setAttribute("class", "subject");
+	newDiv.style.height = "101px";
+	newDiv.style.top = "500px";
+	newDiv.innerHTML = "<h3>" + "소프트웨어" + "</h3>";
+	let newPTag = document.createElement('p');
+	newPTag.innerHTML = "<em>" + "오태호" + "</em><span>" + "강의실 1호" + "</span>";
+	newDiv.appendChild(newPTag);
+	let parents = document.querySelector("td#FRI>div.col");
+	parents.appendChild(newDiv); */
+	// 금요일 오전 9시 시작
+	/* let newDiv = document.createElement("div");
+	newDiv.setAttribute("class", "subject");
+	newDiv.style.height = "101px";
+	newDiv.style.top = "0px";
+	newDiv.innerHTML = "<h3>" + "소프트웨어" + "</h3>";
+	let newPTag = document.createElement('p');
+	newPTag.innerHTML = "<em>" + "오태호" + "</em><span>" + "강의실 1호" + "</span>";
+	newDiv.appendChild(newPTag);
+	let parents = document.querySelector("td#FRI>div.col");
+	parents.appendChild(newDiv); */
+
   </script>
 </body>
 </html>

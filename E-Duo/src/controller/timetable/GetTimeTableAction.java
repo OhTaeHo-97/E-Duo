@@ -1,7 +1,7 @@
 package controller.timetable;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +15,7 @@ import model.my_subject.My_subjectVO;
 import model.student.StudentDAO;
 import model.student.StudentVO;
 import model.subject.SubjectVO;
+import model.timetable.TimeTableVO;
 
 public class GetTimeTableAction implements Action {
 
@@ -29,6 +30,8 @@ public class GetTimeTableAction implements Action {
 		StudentVO svo = new StudentVO();
 		svo.setStu_id((String)session.getAttribute("user_id"));
 		StudentVO sdata = sdao.selectOne(svo);
+		System.out.println("grade: " + request.getParameter("grade"));
+		System.out.println("semester: " + request.getParameter("semester"));
 		if(request.getParameter("grade") == null) {
 			vo.setGrade(sdata.getGrade());
 			vo.setSemester(sdata.getSemester());
@@ -44,30 +47,83 @@ public class GetTimeTableAction implements Action {
 		ArrayList<My_subjectSet> datas = dao.getMyTimetable(set);
 		ActionForward forward = null;
 		int total_credit_num = 0;
-		double total_credit = 0;
+//		for(My_subjectSet mset : datas) {
+//			total_credit_num += mset.getSubjectVO().getCredit_num();
+//		}
+		ArrayList<TimeTableVO> sub_datas = new ArrayList<TimeTableVO>();
 		for(My_subjectSet mset : datas) {
 			total_credit_num += mset.getSubjectVO().getCredit_num();
-			total_credit += mset.getSubjectVO().getCredit_num() * mset.getMy_subjectVO().getCredit();
-			System.out.println("total_credit: " + total_credit);
-		}
-		double avg_credit = (double)Math.round((total_credit / total_credit_num) * 100) / 100;
-		ArrayList<SubjectVO> sub_datas = new ArrayList<SubjectVO>();
-		for(My_subjectSet mset : datas) {
-			sub_datas.add(mset.getSubjectVO());
+			TimeTableVO tvo = new TimeTableVO();
+			tvo.setMy_sub_id(mset.getMy_subjectVO().getMy_sub_id());
+			tvo.setSubjectVO(mset.getSubjectVO());
+			
+			if(mset.getSubjectVO().getFirst_start().equals("NULL")) {
+				tvo.setFirst_height(0);
+				tvo.setFirst_start(0);
+			} else {
+				String start = mset.getSubjectVO().getFirst_start();
+				String end = mset.getSubjectVO().getFirst_end();
+				StringTokenizer st = new StringTokenizer(start, ":");
+				int start_hour = Integer.parseInt(st.nextToken());
+				double start_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
+				double start_position = ((start_hour - 9) + start_min) * 100;
+				st = new StringTokenizer(end, ":");
+				int end_hour = Integer.parseInt(st.nextToken());
+				double end_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
+				double height = ((end_hour - start_hour) + (end_min - start_min)) * 100;
+//				System.out.println("start_hour: " + start_hour + ", end_hour: " + end_hour + ", start_min: " + start_min + ", end_min: " + end_min);
+//				System.out.println("result: " + (end_hour - start_hour) + (end_min - start_min));
+//				System.out.println("height: " + height);
+				tvo.setFirst_start(start_position);
+				tvo.setFirst_height(height);
+			}
+			if(mset.getSubjectVO().getSecond_start().equals("NULL")) {
+				tvo.setSecond_height(0);
+				tvo.setSecond_start(0);
+			} else {
+				String start = mset.getSubjectVO().getSecond_start();
+				String end = mset.getSubjectVO().getSecond_end();
+				StringTokenizer st = new StringTokenizer(start, ":");
+				int start_hour = Integer.parseInt(st.nextToken());
+				double start_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
+				double start_position = ((start_hour - 9) + start_min) * 100;
+				st = new StringTokenizer(end, ":");
+				int end_hour = Integer.parseInt(st.nextToken());
+				double end_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
+				double height = ((end_hour - start_hour) + (end_min - start_min)) * 100;
+				tvo.setSecond_start(start_position);
+				tvo.setSecond_height(height);
+			}
+			if(mset.getSubjectVO().getThird_start().equals("NULL")) {
+				tvo.setThird_height(0);
+				tvo.setThird_start(0);
+			} else {
+				String start = mset.getSubjectVO().getThird_start();
+				String end = mset.getSubjectVO().getThird_end();
+				StringTokenizer st = new StringTokenizer(start, ":");
+				int start_hour = Integer.parseInt(st.nextToken());
+				double start_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
+				double start_position = ((start_hour - 9) + start_min) * 100;
+				st = new StringTokenizer(end, ":");
+				int end_hour = Integer.parseInt(st.nextToken());
+				double end_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
+				double height = ((end_hour - start_hour) + (end_min - start_min)) * 100;
+				tvo.setThird_start(start_position);
+				tvo.setThird_height(height);
+			}
+			
+			sub_datas.add(tvo);
 		}
 		System.out.println(total_credit_num);
-		System.out.println(avg_credit);
 		System.out.println(sub_datas);
-		request.setAttribute("grade", sdata.getGrade());
-		request.setAttribute("semester", sdata.getSemester());
+		request.setAttribute("grade", vo.getGrade());
+		request.setAttribute("semester", vo.getSemester());
 		request.setAttribute("table_datas", sub_datas);
 		request.setAttribute("total_credit_num", total_credit_num);
-		request.setAttribute("avg_credit", avg_credit);
 		forward = new ActionForward();
 		forward.setPath("timeTable.jsp");
 		forward.setRedirect(false);
 		
 		return forward;
 	}
-
 }

@@ -14,13 +14,14 @@ public class My_subjectDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO my_subject VALUES((select nvl(max(my_sub_id), 0) + 1 from my_subject),?,?,?,?,?)"; 
+//	private String sql_insert = "INSERT INTO my_subject VALUES((select nvl(max(my_sub_id), 0) + 1 from my_subject),?,?,?,?,?)"; // 오라클
+	private String sql_insert = "INSERT INTO my_subject VALUES((SELECT IFNULL_MY_SUB_ID FROM (SELECT IFNULL((SELECT MY_SUB_ID FROM (SELECT MAX(my_sub_id) AS MY_SUB_ID FROM my_subject) A), 0) + 1 AS IFNULL_MY_SUB_ID FROM DUAL) B),?,?,?,?,?)"; // mysql
 	private String sql_select = "SELECT * FROM my_subject WHERE my_sub_id=?"; 
 	private String sql_update = "UPDATE my_subject SET academic_number=?, credit=?, grade=?, semester=? WHERE my_sub_id=?";
 	private String sql_delete = "DELETE FROM my_subject WHERE my_sub_id=?";
 	private String sql_selectAll = "SELECT * FROM my_subject";
-	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
-//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
+//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
+	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
 	
 	private String sql_selectFilter = "";
 	
@@ -159,6 +160,9 @@ public class My_subjectDAO {
 				sdata.setSecond_date(rs.getString("second_date"));
 				sdata.setSecond_start(rs.getString("second_start"));
 				sdata.setSecond_end(rs.getString("second_end"));
+				sdata.setThird_date(rs.getString("third_date"));
+				sdata.setThird_start(rs.getString("third_start"));
+				sdata.setThird_end(rs.getString("third_end"));
 				My_subjectVO mdata = new My_subjectVO();
 				mdata.setMy_sub_id(rs.getInt("sub_id"));
 				mdata.setAcademic_number(rs.getString("academic_number"));

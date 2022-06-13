@@ -16,7 +16,7 @@ public class DeleteTimeTableAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		My_subjectDAO dao = new My_subjectDAO();
 		My_subjectVO vo = new My_subjectVO();
-		vo.setMy_sub_id(Integer.parseInt(request.getParameter("my_sub_id")));
+		vo.setAcademic_number(request.getParameter("academic_number"));
 		
 		ActionForward forward = null;
 		if(dao.delete(vo)) {

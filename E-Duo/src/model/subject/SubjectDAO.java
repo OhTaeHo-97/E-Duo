@@ -18,8 +18,8 @@ public class SubjectDAO {
 	private String sql_update = "UPDATE subject SET academic_number=?, subject_name=?, professor=?, credit_num=?, classroom=?, first_date=?, first_start=?, first_end=?, second_date=?, second_start=?, second_end=?, third_date=?, third_start=?, third_end=? WHERE sub_id=?";
 	private String sql_delete = "DELETE FROM subject WHERE sub_id=?";
 	private String sql_selectAll = "SELECT * FROM subject WHERE uni_id=?";
-	private String sql_searchSubject = "SELECT * FROM subject WHERE subject_name LIKE '%'||?||'%'"; // 오라클
-//	private String sql_searchSubject = "SELECT * FROM lecture WHERE subject_name LIKE ?"; // MySQL
+//	private String sql_searchSubject = "SELECT * FROM subject WHERE subject_name LIKE '%'||?||'%'"; // 오라클
+	private String sql_searchSubject = "SELECT * FROM lecture WHERE subject_name LIKE ?"; // MySQL
 	
 	public boolean insert(SubjectVO vo) {
 		int result = 0;
