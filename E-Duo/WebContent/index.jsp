@@ -22,7 +22,7 @@
 
 </head>
 <body>
-	<div class="site-wrap">  
+	<div class="site-wrap">
     <div class="site-section">
       <div class="container">
         <div class="row">

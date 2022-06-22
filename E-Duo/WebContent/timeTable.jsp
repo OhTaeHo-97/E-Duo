@@ -73,6 +73,21 @@
 		border: 1px solid lightgrey;
 		border-width: 1px 0;
 		z-index: 10;
+		background-color: yellow;
+	}
+	ul.status {
+		list-style: none;
+	}
+	ul.status li.remove {
+		background-image: url(images/remove.png);
+	}
+	ul.status li {
+		float: left;
+		width: 15px;
+		height: 15px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -157,7 +172,7 @@
           <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">About</strong></div>
         </div>
       </div>
-    </div>  
+    </div> 
 
     <div class="site-section border-bottom" data-aos="fade">
       <div class="container">
@@ -349,7 +364,7 @@
           <div class="col-md-12">
             <h3 style = "text-align:center;">시간표</h3>
             <div>
-            	<table border = "1" width = "100%" style="border-color: lightgrey;">
+            	<table id="time_table" border = "1" width = "100%" style="border-color: lightgrey;">
             		<tbody>
             			<tr class="dates">
             				<th></th>
@@ -523,13 +538,13 @@
         </div>
       </div>
     </div>
-    <div class="col-md-12" id="searchBtnTab" style="position: fixed; bottom: 0; display: block; width: 100%;">
-		    <div class="form-group row" style="margin-top: 20px;">
-		    	<div class="col-md-9" style="margin: 0 auto; text-align: center;">
-		    		<input type="button" id="open_searchTab" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; z-index: 99;" value="과목 추가하기" onclick="openSearchTab()">
-		    	</div>
-		    </div>
-    	</div>
+	<!-- <div class="col-md-12" id="searchBtnTab" style="position: fixed; bottom: 0; display: block; width: 100%;">
+	    <div class="form-group row" style="margin-top: 20px;">
+	    	<div class="col-md-9" style="margin: 0 auto; text-align: center;">
+	    		<input type="button" id="open_searchTab" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; z-index: 99;" value="과목 추가하기" onclick="openSearchTab()">
+	    	</div>
+	    </div>
+   	</div> -->
     <div class="col-md-12 border" id="subjects" style="position: fixed; display: none; width: 100%; overflow: scroll;">
       <div class="form-group row" style="margin-top: 20px;">
         <div class="col-md-9">
@@ -631,6 +646,15 @@
         </div>
       </div>
     </footer>
+    <div>
+	    <div id="searchBtnTab" style="position: fixed; bottom: 0; display: block; width: 100%;">
+		    <div class="form-group row" style="margin-top: 20px;">
+		    	<div style="margin: 0 auto; text-align: center;">
+		    		<input type="button" id="open_searchTab" class="btn btn-secondary btn-sm dropdown-toggle" style="display: inline-block; z-index: 99;" value="과목 추가하기" onclick="openSearchTab()">
+		    	</div>
+		    </div>
+	   	</div>
+   	</div>
   </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
@@ -692,281 +716,187 @@
   </script>
   <script language="javaScript">
   	let table_datas = JSON.parse(JSON.stringify('${table_datas}'));
-  	let newDiv;
-  	let newPTag;
-  	let parents;
+  	let newDiv, newDiv2, newDiv3;
+  	let newPTag, newPTag2, newPTag3;
+  	let parents, parents2, parents3;
+  	let newUlTag, newUlTag2, newUlTag3;
+  	let newHTag, newHTag2, newHTag3;
   	<c:forEach items="${table_datas}" var="item">
-  		<c:choose>
-  			<c:when test="${item.subjectVO.first_date eq 'MON'}">
-  				newDiv = document.createElement("div");
-  				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.first_height}" + "px";
-				newDiv.style.top = "${item.first_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#MON>div.col");
-				parents.appendChild(newDiv);
-  			</c:when>
-  			<c:when test="${item.subjectVO.second_date eq 'MON'}">
-				newDiv = document.createElement("div");
-  				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.second_height}" + "px";
-				newDiv.style.top = "${item.second_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#MON>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.third_date eq 'MON'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.third_height}" + "px";
-				newDiv.style.top = "${item.third_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#MON>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.first_date eq 'TUE'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.first_height}" + "px";
-				newDiv.style.top = "${item.first_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#TUE>div.col");
-				parents.appendChild(newDiv);
+ 		<c:if test="${not empty item.subjectVO.first_date}">
+  			newDiv = document.createElement("div");
+  	  		newDiv.setAttribute("id", "first_" + "${item.my_sub_id}");
+  	  		newDiv.setAttribute("class", "subject");
+  	  		newDiv.style.height = "${item.first_height}" + "px";
+  	  		newDiv.style.top = "${item.first_start}" + "px";
+  	  		newUlTag = document.createElement('ul');
+  	  		newUlTag.setAttribute("class", "status");
+  	  		newUlTag.style.display = "none";
+  	  		newUlTag.innerHTML = '<li title="삭제" class="remove" onclick="removeClass(${item.my_sub_id})"></li>';
+  	  		newHTag = document.createElement('h3');
+  	  		newHTag.innerHTML = "${item.subjectVO.subject_name}";
+  			newPTag = document.createElement('p');
+  			newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+  			newDiv.append(newUlTag, newHTag, newPTag);
+  			<c:choose>
+	  			<c:when test="${item.subjectVO.first_date eq 'MON'}">
+					parents = document.querySelector("td#MON>div.col");
+					parents.appendChild(newDiv);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.first_date eq 'TUE'}">
+					parents = document.querySelector("td#TUE>div.col");
+					parents.appendChild(newDiv);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.first_date eq 'WED'}">
+					parents = document.querySelector("td#WED>div.col");
+					parents.appendChild(newDiv);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.first_date eq 'THU'}">
+					parents = document.querySelector("td#THU>div.col");
+					parents.appendChild(newDiv);
 				</c:when>
-			<c:when test="${item.subjectVO.second_date eq 'TUE'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.second_height}" + "px";
-				newDiv.style.top = "${item.second_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#TUE>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.third_date eq 'TUE'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.third_height}" + "px";
-				newDiv.style.top = "${item.third_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#TUE>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.first_date eq 'WED'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.first_height}" + "px";
-				newDiv.style.top = "${item.first_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#WED>div.col");
-				parents.appendChild(newDiv);
+				<c:when test="${item.subjectVO.first_date eq 'FRI'}">
+					parents = document.querySelector("td#FRI>div.col");
+					parents.appendChild(newDiv);
+	  			</c:when>
+  				<c:when test="${item.subjectVO.first_date eq 'SAT'}">
+					parents = document.querySelector("td#SAT>div.col");
+					parents.appendChild(newDiv);
+	  			</c:when>
+  			</c:choose>
+ 		</c:if>
+ 		<c:if test="${not empty item.subjectVO.second_date}">
+  			newDiv2 = document.createElement("div");
+  	  		newDiv2.setAttribute("id", "second_" + "${item.my_sub_id}");
+  	  		newDiv2.setAttribute("class", "subject");
+  	  		newDiv2.style.height = "${item.second_height}" + "px";
+  	  		newDiv2.style.top = "${item.second_start}" + "px";
+  	  		newUlTag2 = document.createElement('ul');
+  	  		newUlTag2.setAttribute("class", "status");
+  	  		newUlTag2.style.display = "none";
+  	  		newUlTag2.innerHTML = '<li title="삭제" class="remove" onclick="removeClass(${item.my_sub_id})"></li>';
+  	  		newHTag2 = document.createElement('h3');
+  	  		newHTag2.innerHTML = "${item.subjectVO.subject_name}";
+  			newPTag2 = document.createElement('p');
+  			newPTag2.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+  			newDiv2.append(newUlTag2, newHTag2, newPTag2);
+  			<c:choose>
+	  			<c:when test="${item.subjectVO.second_date eq 'MON'}">
+					parents2 = document.querySelector("td#MON>div.col");
+					parents2.appendChild(newDiv2);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.second_date eq 'TUE'}">
+					parents2 = document.querySelector("td#TUE>div.col");
+					parents2.appendChild(newDiv2);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.second_date eq 'WED'}">
+					parents2 = document.querySelector("td#WED>div.col");
+					parents2.appendChild(newDiv2);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.second_date eq 'THU'}">
+					parents2 = document.querySelector("td#THU>div.col");
+					parents2.appendChild(newDiv2);
 				</c:when>
-			<c:when test="${item.subjectVO.second_date eq 'WED'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.second_height}" + "px";
-				newDiv.style.top = "${item.second_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#WED>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.third_date eq 'WED'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.third_height}" + "px";
-				newDiv.style.top = "${item.third_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#WED>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.first_date eq 'THU'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.first_height}" + "px";
-				newDiv.style.top = "${item.first_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#THU>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.second_date eq 'THU'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.second_height}" + "px";
-				newDiv.style.top = "${item.second_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#MON>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.third_date eq 'THU'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.third_height}" + "px";
-				newDiv.style.top = "${item.third_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#THU>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.first_date eq 'FRI'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.first_height}" + "px";
-				newDiv.style.top = "${item.first_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#FRI>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.second_date eq 'FRI'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.second_height}" + "px";
-				newDiv.style.top = "${item.second_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#FRI>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.third_date eq 'FRI'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.third_height}" + "px";
-				newDiv.style.top = "${item.third_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#FRI>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.first_date eq 'SAT'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.first_height}" + "px";
-				newDiv.style.top = "${item.first_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#SAT>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.second_date eq 'SAT'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.second_height}" + "px";
-				newDiv.style.top = "${item.second_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#SAT>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-			<c:when test="${item.subjectVO.third_date eq 'SAT'}">
-				newDiv = document.createElement("div");
-				newDiv.setAttribute("id", "${item.my_sub_id}");
-				newDiv.setAttribute("class", "subject");
-				newDiv.style.height = "${item.third_height}" + "px";
-				newDiv.style.top = "${item.third_start}" + "px";
-				newDiv.innerHTML = "<h3>" + "${item.subjectVO.subject_name}" + "</h3>";
-				newPTag = document.createElement('p');
-				newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
-				newDiv.appendChild(newPTag);
-				parents = document.querySelector("td#SAT>div.col");
-				parents.appendChild(newDiv);
-			</c:when>
-  		</c:choose>
-		console.log("${item.my_sub_id}");
-		console.log("${item.subjectVO.first_date}");
-		console.log("${item.subjectVO.first_start}");
-		console.log("${item.subjectVO.first_end}");
-		console.log("${item.subjectVO.second_date}");
-		console.log("${item.subjectVO.second_start}");
-		console.log("${item.subjectVO.second_end}");
-		console.log("${item.subjectVO.third_date}");
-		console.log("${item.subjectVO.third_start}");
-		console.log("${item.subjectVO.third_end}");
+				<c:when test="${item.subjectVO.second_date eq 'FRI'}">
+					parents2 = document.querySelector("td#FRI>div.col");
+					parents2.appendChild(newDiv2);
+	  			</c:when>
+  				<c:when test="${item.subjectVO.second_date eq 'SAT'}">
+					parents2 = document.querySelector("td#SAT>div.col");
+					parents2.appendChild(newDiv2);
+	  			</c:when>
+  			</c:choose>
+ 		</c:if>
+ 		<c:if test="${not empty item.subjectVO.third_date}">
+  			newDiv3 = document.createElement("div");
+  	  		newDiv3.setAttribute("id", "third_" + "${item.my_sub_id}");
+  	  		newDiv3.setAttribute("class", "subject");
+  	  		newDiv3.style.height = "${item.third_height}" + "px";
+  	  		newDiv3.style.top = "${item.third_start}" + "px";
+  	  		newUlTag3 = document.createElement('ul');
+  	  		newUlTag3.setAttribute("class", "status");
+  	  		newUlTag3.style.display = "none";
+  	  		newUlTag3.innerHTML = '<li title="삭제" class="remove" onclick="removeClass(${item.my_sub_id})"></li>';
+  	  		newHTag3 = document.createElement('h3');
+  	  		newHTag3.innerHTML = "${item.subjectVO.subject_name}";
+  			newPTag3 = document.createElement('p');
+  			newPTag3.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+  			newDiv3.append(newUlTag3, newHTag3, newPTag3);
+  			<c:choose>
+	  			<c:when test="${item.subjectVO.third_date eq 'MON'}">
+					parents3 = document.querySelector("td#MON>div.col");
+					parents3.appendChild(newDiv3);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.third_date eq 'TUE'}">
+					parents3 = document.querySelector("td#TUE>div.col");
+					parents3.appendChild(newDiv3);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.third_date eq 'WED'}">
+					parents3 = document.querySelector("td#WED>div.col");
+					parents3.appendChild(newDiv3);
+	  			</c:when>
+	  			<c:when test="${item.subjectVO.third_date eq 'THU'}">
+					parents3 = document.querySelector("td#THU>div.col");
+					parents3.appendChild(newDiv3);
+				</c:when>
+				<c:when test="${item.subjectVO.third_date eq 'FRI'}">
+					parents3 = document.querySelector("td#FRI>div.col");
+					parents3.appendChild(newDiv3);
+	  			</c:when>
+  				<c:when test="${item.subjectVO.third_date eq 'SAT'}">
+					parents3 = document.querySelector("td#SAT>div.col");
+					parents3.appendChild(newDiv3);
+	  			</c:when>
+  			</c:choose>
+  		</c:if>
 	</c:forEach>
-	
-	// 금요일 2시 시작
-	/* let newDiv = document.createElement("div");
-	newDiv.setAttribute("class", "subject");
-	newDiv.style.height = "101px";
-	newDiv.style.top = "500px";
-	newDiv.innerHTML = "<h3>" + "소프트웨어" + "</h3>";
-	let newPTag = document.createElement('p');
-	newPTag.innerHTML = "<em>" + "오태호" + "</em><span>" + "강의실 1호" + "</span>";
-	newDiv.appendChild(newPTag);
-	let parents = document.querySelector("td#FRI>div.col");
-	parents.appendChild(newDiv); */
-	// 금요일 오전 9시 시작
-	/* let newDiv = document.createElement("div");
-	newDiv.setAttribute("class", "subject");
-	newDiv.style.height = "101px";
-	newDiv.style.top = "0px";
-	newDiv.innerHTML = "<h3>" + "소프트웨어" + "</h3>";
-	let newPTag = document.createElement('p');
-	newPTag.innerHTML = "<em>" + "오태호" + "</em><span>" + "강의실 1호" + "</span>";
-	newDiv.appendChild(newPTag);
-	let parents = document.querySelector("td#FRI>div.col");
-	parents.appendChild(newDiv); */
 
+  </script>
+  <script>
+  	let subject = document.getElementsByClassName("subject");
+  	let divTag;
+  	let id;
+  	for(let index = 0; index < subject.length; index += 1) {
+  		subject[index].addEventListener('mouseover', function() {
+  			id = subject[index].getAttribute('id');
+  			$('#' + id).find('ul.status').css("display", "block");
+  		});
+  		subject[index].addEventListener('mouseout', function() {
+  			id = subject[index].getAttribute('id');
+  			$('#' + id).find('ul.status').css("display", "none");
+  		});
+  	}
+  </script>
+  <script>
+  	function removeClass(id) {
+  		$.ajax({
+  			url : "removeSubject.timetable",
+  			type : "post",
+  			data : {sub_id : id},
+  			dataType : 'json',
+  			success : function(result) {
+  				if(result == 0) {
+  					alert("해당 과목이 지워지지 않았습니다.");
+  				} else {
+  					$('div').remove('#' + 'first_' + id);
+  					$('div').remove('#' + 'second_' + id);
+  					$('div').remove('#' + 'third_' + id);
+  					/* $("#" + id).remove(); */
+  				}
+  			},
+  			error : function() {
+  				alert("서버요청실패");
+  			}
+  		});
+  	}
+  </script>
+  <script>
+  	// 창 크기 변화 감지
+  	// 이용하여 width 변화 진
+	  let size = document.getElementById("time_table");
+	  window.onresize = function(event){
+	    let innerWidth = window.innerWidth;
+	    console.log(innerWidth);
+	  }
   </script>
 </body>
 </html>

@@ -82,6 +82,13 @@ public class TimeTableFrontController extends HttpServlet {
 				System.out.println("InsertSubjectAction() 수행 중 문제 발생!");
 				e.printStackTrace();
 			}
+		} else if(command.equals("/removeSubject.timetable")) {
+			try {
+				forward = new RemoveSubjectAction().execute(request, response);
+			} catch (Exception e) {
+				System.out.println("RemoveSubjectAction() 수행 중 문제 발생!");
+				e.printStackTrace();
+			}
 		}
 		
 		if(forward != null) {

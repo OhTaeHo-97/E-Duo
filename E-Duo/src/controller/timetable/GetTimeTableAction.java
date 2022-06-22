@@ -54,6 +54,7 @@ public class GetTimeTableAction implements Action {
 		for(My_subjectSet mset : datas) {
 			total_credit_num += mset.getSubjectVO().getCredit_num();
 			TimeTableVO tvo = new TimeTableVO();
+			System.out.println(mset.getMy_subjectVO().getMy_sub_id());
 			tvo.setMy_sub_id(mset.getMy_subjectVO().getMy_sub_id());
 			tvo.setSubjectVO(mset.getSubjectVO());
 			

@@ -133,7 +133,7 @@
                       <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내가 작성한 댓글" onclick = "location.href = 'myReply.mem'">
                     </div>
                     <div style="clear:both; margin-top:10%;">
-                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내 시간표">
+                      <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내 시간표" onclick="location.href = 'timetablePage.timetable'">
                     </div>
                     <div style="clear:both; margin-top:10%;">
                       <input type = "button" class="btn btn-primary btn-lg btn-block" value = "내 학점관리">

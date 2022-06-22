@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.common.JDBCUtil;
+import model.loginInfo.LoginInfoVO;
 import model.subject.SubjectVO;
 
 public class My_subjectDAO {
@@ -22,6 +23,7 @@ public class My_subjectDAO {
 	private String sql_selectAll = "SELECT * FROM my_subject";
 //	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
 	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
+	private String sql_removeSubject = "DELETE FROM my_subject WHERE my_sub_id = ?";
 	
 	private String sql_selectFilter = "";
 	
@@ -164,7 +166,7 @@ public class My_subjectDAO {
 				sdata.setThird_start(rs.getString("third_start"));
 				sdata.setThird_end(rs.getString("third_end"));
 				My_subjectVO mdata = new My_subjectVO();
-				mdata.setMy_sub_id(rs.getInt("sub_id"));
+				mdata.setMy_sub_id(rs.getInt("my_sub_id"));
 				mdata.setAcademic_number(rs.getString("academic_number"));
 				mdata.setStu_id(rs.getString("stu_id"));
 				mdata.setCredit(rs.getFloat("credit"));
@@ -184,5 +186,23 @@ public class My_subjectDAO {
 		}
 		
 		return datas;
+	}
+	
+	public int removeSubject(My_subjectVO vo) {
+		int result = 0;
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_removeSubject);
+			//select * from member where member_id = ?
+			pstmt.setInt(1, vo.getMy_sub_id());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("My_subjectDAO removeSubject 진행 중 오류");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return result;
 	}
 }
