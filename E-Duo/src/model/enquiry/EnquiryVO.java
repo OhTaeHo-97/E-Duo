@@ -1,15 +1,15 @@
 package model.enquiry;
 
 public class EnquiryVO {
-	private int eid;
+	private int enq_id;
 	private String category;
 	private String title;
 	private String content;
-	public int getEid() {
-		return eid;
+	public int getEnq_id() {
+		return enq_id;
 	}
-	public void setEid(int eid) {
-		this.eid = eid;
+	public void setEnq_id(int enq_id) {
+		this.enq_id = enq_id;
 	}
 	public String getCategory() {
 		return category;
@@ -31,6 +31,6 @@ public class EnquiryVO {
 	}
 	@Override
 	public String toString() {
-		return "EnquiryVO [eid=" + eid + ", category=" + category + ", title=" + title + ", content=" + content + "]";
+		return "EnquiryVO [eid=" + enq_id + ", category=" + category + ", title=" + title + ", content=" + content + "]";
 	}
 }

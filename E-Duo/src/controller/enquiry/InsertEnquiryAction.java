@@ -23,7 +23,7 @@ public class InsertEnquiryAction implements Action {
 		ActionForward forward = null;
 		if(dao.insert(vo) ) {
 			forward = new ActionForward();
-			forward.setPath("#");	// 문의사항 작성 후 main페이지로 가던지, 다시 문의사항 페이지로 오던지 결정해야함
+			forward.setPath("main.do");	// 문의사항 작성 후 main페이지로 가던지, 다시 문의사항 페이지로 오던지 결정해야함
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

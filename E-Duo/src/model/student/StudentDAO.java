@@ -18,12 +18,13 @@ public class StudentDAO {
 	private String sql_select = "SELECT * FROM student WHERE stu_id=?"; 
 //	private String sql_update = "UPDATE student SET name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
 //			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
-//	private String sql_update = "UPDATE student SET s_name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
-//			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
 	private String sql_update = "UPDATE student SET s_name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
-			+ "ref=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
+			+ "reference=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
+//	private String sql_update = "UPDATE student SET s_name=?, cellphone=?, postcode=?, address=?, detail_address=?, "
+//			+ "ref=?, uni_id=?, email=?, grade=?, semester=?, obj_credit=?, graduate_credit=?, nickname=? WHERE stu_id = ?";
 	private String sql_delete = "DELETE FROM member WHERE mid=? AND mpw=?";
 	private String sql_checkNickname = "SELECT * FROM student WHERE nickname=?";
+	private String sql_update_obj_credit = "UPDATE student SET obj_credit=? where stu_id = ?";
 	
 	public boolean insert(StudentVO vo) {
 		int result = 0;
@@ -79,8 +80,8 @@ public class StudentDAO {
 				stu_data.setPostcode(rs.getInt("postcode"));
 				stu_data.setAddress(rs.getString("address"));
 				stu_data.setDetail_address(rs.getString("detail_address"));
-//				stu_data.setRefernece(rs.getString("reference"));
-				stu_data.setRefernece(rs.getString("ref"));
+				stu_data.setRefernece(rs.getString("reference"));
+//				stu_data.setRefernece(rs.getString("ref"));
 				stu_data.setUni_id(rs.getInt("uni_id"));
 				stu_data.setEmail(rs.getString("email"));
 				stu_data.setGender(rs.getString("gender"));
@@ -152,6 +153,24 @@ public class StudentDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return usable;
+	}
+	
+	public boolean update_obj_credit(StudentVO vo) {
+		int result = 0;
+		
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(sql_update);
+			pstmt.setFloat(1, vo.getObj_credit());
+			pstmt.setString(2, vo.getStu_id());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Student Update문 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return result == 1;
 	}
 	
 /*	public boolean delete() {		//인자로 login_info를 받을 예정

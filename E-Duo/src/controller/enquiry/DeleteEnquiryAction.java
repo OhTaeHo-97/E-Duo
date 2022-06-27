@@ -17,7 +17,7 @@ public class DeleteEnquiryAction implements Action {
 		// 관리지가 문의사항을 해결한 후에 DB에서 삭제하기 위한 Controller
 		EnquiryDAO dao = new EnquiryDAO();
 		EnquiryVO vo = new EnquiryVO();
-		vo.setEid(Integer.parseInt(request.getParameter("eid")));
+		vo.setEnq_id(Integer.parseInt(request.getParameter("eid")));
 		
 		ActionForward forward = null;
 		if(dao.delete(vo)) {
@@ -31,5 +31,4 @@ public class DeleteEnquiryAction implements Action {
 		}
 		return forward;
 	}
-
 }

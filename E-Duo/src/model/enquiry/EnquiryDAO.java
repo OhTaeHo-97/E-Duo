@@ -14,10 +14,10 @@ public class EnquiryDAO {
 	ResultSet rs;
 	
 	private String sql_selectAll = "select * from enquiry";
-	private String sql_selectOne = "select * from enquiry where eid = ?";
-	private String sql_insert = "insert into enquiry values((select nvl(max(eid), 0) + 1 from enquiry), ?, ?, ?)";
-	private String sql_delete = "delete from enquiry where eid = ?";
-	private String sql_update = "update enquiry set category = ?, title = ?, content = ? where eid = ?";
+	private String sql_selectOne = "select * from enquiry where enq_id = ?";
+	private String sql_insert = "insert into enquiry values((select nvl(max(enq_id), 0) + 1 from enquiry), ?, ?, ?)";
+	private String sql_delete = "delete from enquiry where enq_id = ?";
+	private String sql_update = "update enquiry set category = ?, title = ?, content = ? where enq_id = ?";
 	
 	public ArrayList<EnquiryVO> selectAll() {
 		conn = JDBCUtil.connect();
@@ -29,7 +29,7 @@ public class EnquiryDAO {
 				EnquiryVO vo = new EnquiryVO();
 				vo.setCategory(rs.getString("category"));
 				vo.setContent(rs.getString("content"));
-				vo.setEid(rs.getInt("eid"));
+				vo.setEnq_id(rs.getInt("enq_id"));
 				vo.setTitle(rs.getString("title"));
 				datas.add(vo);
 			}
@@ -48,13 +48,13 @@ public class EnquiryDAO {
 		EnquiryVO data = null;
 		try {
 			pstmt = conn.prepareStatement(sql_selectOne);
-			pstmt.setInt(1, vo.getEid());
+			pstmt.setInt(1, vo.getEnq_id());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				data = new EnquiryVO();
 				data.setCategory(rs.getString("category"));
 				data.setContent(rs.getString("content"));
-				data.setEid(rs.getInt("eid"));
+				data.setEnq_id(rs.getInt("enq_id"));
 				data.setTitle(rs.getString("title"));
 			}
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class EnquiryDAO {
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(sql_delete);
-			pstmt.setInt(1, vo.getEid());
+			pstmt.setInt(1, vo.getEnq_id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("EnquiryDAO delete() 수행 중 문제 발생");
@@ -110,7 +110,7 @@ public class EnquiryDAO {
 			pstmt.setString(1, vo.getCategory());
 			pstmt.setString(2, vo.getTitle());
 			pstmt.setString(3, vo.getContent());
-			pstmt.setInt(4, vo.getEid());
+			pstmt.setInt(4, vo.getEnq_id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("EnquiryDAO delete() 수행 중 문제 발생");

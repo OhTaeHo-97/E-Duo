@@ -19,13 +19,13 @@ public class UpdateEnquiryAction implements Action {
 		EnquiryVO vo = new EnquiryVO();
 		vo.setCategory(request.getParameter("category"));
 		vo.setContent(request.getParameter("content"));
-		vo.setEid(Integer.parseInt(request.getParameter("eid")));
+		vo.setEnq_id(Integer.parseInt(request.getParameter("eid")));
 		vo.setTitle(request.getParameter("title"));
 		
 		ActionForward forward = null;
 		if(dao.update(vo) ) {
 			forward = new ActionForward();
-			forward.setPath("#");
+			forward.setPath("main.do");
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

@@ -17,7 +17,8 @@ public class NoticeDAO {
 	private String sql_selectOne = "select * from notice where not_id = ?";
 	private String sql_insert = "insert into notice(not_id, title, content) values((select nvl(max(nid), 0) + 1 from notice), ?, ?)";
 	private String sql_delete = "delete from notice where not_id = ?";
-	private String sql_update = "update notice set title = ?, content = ?, regDate = now() where not_id = ?";
+//	private String sql_update = "update notice set title = ?, content = ?, regDate = now() where not_id = ?";
+	private String sql_update = "update notice set title = ?, content = ?, regDate = SYSDATE where not_id = ?";
 	
 	public ArrayList<NoticeVO> selectAll() {
 		conn = JDBCUtil.connect();

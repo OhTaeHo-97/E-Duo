@@ -1,4 +1,4 @@
-package controller.enquiry;
+package controller.bulletin;
 
 import java.io.PrintWriter;
 
@@ -7,26 +7,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Action;
 import controller.ActionForward;
-import model.enquiry.EnquiryDAO;
-import model.enquiry.EnquiryVO;
+import model.bulletin.BulletinDAO;
+import model.bulletin.BulletinSet;
+import model.bulletin.BulletinVO;
 
-public class SelectEnquiryAction implements Action {
+public class BulletinUpdatePageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 문의사항 목록에서 하나를 클릭하면 문의사항의 내용을 보여주도록 함
-		EnquiryDAO dao = new EnquiryDAO();
-		EnquiryVO vo = new EnquiryVO();
-		EnquiryVO enq_data = null;
-		vo.setEnq_id(Integer.parseInt(request.getParameter("eid")));
-		enq_data = dao.selectOne(vo);
+		BulletinDAO dao = new BulletinDAO();
+		BulletinVO vo = new BulletinVO();
+		vo.setBul_id(Integer.parseInt(request.getParameter("bul_id")));
+		BulletinSet bul_data = null;
+		bul_data = dao.selectOne(vo);
 		
 		ActionForward forward = null;
-		
-		if(enq_data != null) {
-			request.setAttribute("enq_data", enq_data);
+		if(bul_data != null) {
+			request.setAttribute("category", request.getParameter("category"));
+			request.setAttribute("bul_data", bul_data);
 			forward = new ActionForward();
-			forward.setPath("#"); 	// 문의사항 세부 보기 페이지로 이동 아직 존재하지 않음
+			forward.setPath("bulletin_update.jsp");	// 글 하나 세부로 보는 bulletin 세부 페이지로 갈 예정
 			forward.setRedirect(false);
 		} else {
 			response.setContentType("text/html; charset=UTF-8");

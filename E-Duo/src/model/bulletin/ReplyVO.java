@@ -5,6 +5,7 @@ import java.sql.Date;
 public class ReplyVO {
 	private int rep_id;
 	private String stu_id;
+	private String nickname;
 	private int bul_id;
 	private String content;
 	private String regDate;
@@ -13,6 +14,12 @@ public class ReplyVO {
 	}
 	public void setRep_id(int rep_id) {
 		this.rep_id = rep_id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getStu_id() {
 		return stu_id;
