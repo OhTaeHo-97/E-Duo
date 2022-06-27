@@ -18,16 +18,20 @@ public class GetNoticePageAction implements Action {
 		NoticeDAO dao = new NoticeDAO();
 		ArrayList<NoticeVO> datas = dao.selectAll();
 		ActionForward forward = null;
-		if(datas.size() == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('공지사항을 불러오는데에 실패했습니다.'); history.back(-1);</script>");
-		} else {
-			request.setAttribute("notice_datas", datas);
-			forward = new ActionForward();
-			forward.setPath("notice.jsp");
-			forward.setRedirect(false);
-		}
+		request.setAttribute("notice_datas", datas);
+		forward = new ActionForward();
+		forward.setPath("notice.jsp");
+		forward.setRedirect(false);
+//		if(datas.size() == 0) {
+//			response.setContentType("text/html; charset=UTF-8");
+//			PrintWriter out = response.getWriter();
+//			out.println("<script>alert('공지사항을 불러오는데에 실패했습니다.'); history.back(-1);</script>");
+//		} else {
+//			request.setAttribute("notice_datas", datas);
+//			forward = new ActionForward();
+//			forward.setPath("notice.jsp");
+//			forward.setRedirect(false);
+//		}
 		
 		return forward;
 	}

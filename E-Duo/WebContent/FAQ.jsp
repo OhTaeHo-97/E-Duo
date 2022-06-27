@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix = "mytag" tagdir = "/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
@@ -71,6 +72,30 @@
           		</c:otherwise>
           	</c:choose>
             <div class="col-md-12 ml-auto">
+            	<c:choose>
+            		<c:when test="${fn:length(faq_datas) == 0}">
+	            		현재 등록된 FAQ가 없습니다.
+	            	</c:when>
+	            	<c:otherwise>
+		            	<ul style = "list-style:none; padding:0;">
+		                	<c:forEach var = "data" items = "${faq_datas}">
+		                		<a href = "selectOneFAQ.faq?fid=${data.faq_id}" style = "color:#8c92a0;">
+		                			<li class = "faq_list1">
+		                  				<div class="border p-4 rounded mb-4" class = "faq_list">
+		                    				<div style = "margin-left: 7%;">
+		                      					<span style = "font-size: 1.5rem; font-weight: 500;">${data.title}</span>
+		                    				</div>
+		                      			</div>
+		                    		</li>
+		                		</a>
+		                	</c:forEach>
+		                </ul>
+	            	</c:otherwise>
+            	</c:choose>
+            	<%-- <c:if test="${fn:length(faq_datas) == 0}">
+            		현재 등록된 FAQ가 없습니다.
+            	</c:if>
+            	
                 <ul style = "list-style:none; padding:0;">
                 	<c:forEach var = "data" items = "${faq_datas}">
                 		<a href = "selectOneFAQ.faq?fid=${data.faq_id}" style = "color:#8c92a0;">
@@ -83,7 +108,7 @@
                     		</li>
                 		</a>
                 	</c:forEach>
-                </ul>
+                </ul> --%>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix = "mytag" tagdir = "/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
@@ -39,45 +40,52 @@
         <div class="container">
             <div class="row">
             	<c:choose>
-            		<c:when test = "${auto eq 'a'}">
-            			<div class="col-md-9 ml-auto">
-	                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
-	                    </div>
-	                   	<div class="col-md-3 ml-auto">
-	                        <input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 35%; height: 40px; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'noticeInsert.jsp'">
-	                    </div>
+            		<c:when test = "${fn:length(notice_datas) == 0}">
+            			등록된 공지사항이 없습니다.
             		</c:when>
             		<c:otherwise>
-            			<div class="col-md-12 ml-auto">
-	                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
+	            		<c:choose>
+		            		<c:when test = "${auto eq 'a'}">
+		            			<div class="col-md-9 ml-auto">
+			                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
+			                    </div>
+			                   	<div class="col-md-3 ml-auto">
+			                        <input type = "button" class="btn btn-primary btn-lg btn-block" style = "background-color: white; border-color: white; font-weight: 400; width: 35%; height: 40px; text-align: center; color: black; letter-spacing: -1px;" value = "추가하기" onclick = "location.href = 'noticeInsert.jsp'">
+			                    </div>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<div class="col-md-12 ml-auto">
+			                        <h3 class="mb-3 h3 text-uppercase text-black d-block">Notice</h3>
+			                    </div>
+		            		</c:otherwise>
+		            	</c:choose>
+	                    <div class="col-md-12 ml-auto">
+	                        <ul style = "list-style:none; padding:0;">
+	                        	<c:forEach var = "data" items = "${notice_datas}">
+	                        		<a href="noticeDetail.notice?nid=${data.not_id}" style = "color:#8c92a0;">
+		                                <li class = "faq_list1">
+		                                    <div class="border p-4 rounded mb-4 faq_list">
+		                                        <div style = "margin-left: 7%;">
+		                                            <span>${data.title}</span>
+		                                        </div>
+		                                    </div>
+		                                </li>
+		                            </a>
+	                        	</c:forEach>
+	<!--                             <a href="#" style = "color:#8c92a0;"> -->
+	<!--                                 <li class = "faq_list1"> -->
+	<!--                                     <div class="border p-4 rounded mb-4 faq_list"> -->
+	<!--                                         <div style = "margin-left: 7%;"> -->
+	<!--                                             <span>공지 제목</span> -->
+	<!--                                         </div> -->
+	<!--                                     </div> -->
+	<!--                                 </li> -->
+	<!--                             </a> -->
+	                        </ul>
 	                    </div>
+	<!--                 </div> -->
             		</c:otherwise>
             	</c:choose>
-                    <div class="col-md-12 ml-auto">
-                        <ul style = "list-style:none; padding:0;">
-                        	<c:forEach var = "data" items = "${notice_datas}">
-                        		<a href="noticeDetail.notice?nid=${data.not_id}" style = "color:#8c92a0;">
-	                                <li class = "faq_list1">
-	                                    <div class="border p-4 rounded mb-4 faq_list">
-	                                        <div style = "margin-left: 7%;">
-	                                            <span>${data.title}</span>
-	                                        </div>
-	                                    </div>
-	                                </li>
-	                            </a>
-                        	</c:forEach>
-<!--                             <a href="#" style = "color:#8c92a0;"> -->
-<!--                                 <li class = "faq_list1"> -->
-<!--                                     <div class="border p-4 rounded mb-4 faq_list"> -->
-<!--                                         <div style = "margin-left: 7%;"> -->
-<!--                                             <span>공지 제목</span> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                 </li> -->
-<!--                             </a> -->
-                        </ul>
-                    </div>
-<!--                 </div> -->
             </div>
         </div>
     </div>

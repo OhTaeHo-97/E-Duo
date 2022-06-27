@@ -19,16 +19,20 @@ public class SelectAllFAQAction implements Action {
 		ArrayList<FAQVO> faq_datas = new ArrayList<FAQVO>();
 		faq_datas = dao.selectAll();
 		ActionForward forward = null;
-		if(faq_datas.size() != 0) {
-			request.setAttribute("faq_datas", faq_datas);
-			forward = new ActionForward();
-			forward.setPath("FAQ.jsp");
-			forward.setRedirect(false);
-		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('데이터를 불러오는 도중 문제가 발생하였습니다.'); history.back(-1);</script>");
-		}
+		request.setAttribute("faq_datas", faq_datas);
+		forward = new ActionForward();
+		forward.setPath("FAQ.jsp");
+		forward.setRedirect(false);
+//		if(faq_datas.size() != 0) {
+//			request.setAttribute("faq_datas", faq_datas);
+//			forward = new ActionForward();
+//			forward.setPath("FAQ.jsp");
+//			forward.setRedirect(false);
+//		} else {
+//			response.setContentType("text/html; charset=UTF-8");
+//			PrintWriter out = response.getWriter();
+//			out.println("<script>alert('현재 등록된 FAQ가 없습니다.'); history.back(-1);</script>");
+//		}
 		return forward;
 	}
 
