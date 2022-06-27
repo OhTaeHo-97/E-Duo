@@ -1,4 +1,4 @@
-package controller;
+package model.university;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
