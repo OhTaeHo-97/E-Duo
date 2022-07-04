@@ -80,10 +80,15 @@ public class ShowCreditManageAction implements Action {
       // 들은 학점수
       request.setAttribute("credit_num_sum", credit_num_sum);
       
-      // 이번학기 수강과목 데이터
-      int grade = Integer.parseInt(request.getParameter("grade"));
-      int semester = Integer.parseInt(request.getParameter("semester"));
-      request.setAttribute("now_sub_datas", sort[(grade-1)*2 + semester - 1]);
+      if(request.getParameter("grade") == null || request.getParameter("grade").equals("")) {
+    	  stu_data.getGrade();
+    	  stu_data.getSemester();
+      } else {    	  
+    	  // 이번학기 수강과목 데이터
+    	  int grade = Integer.parseInt(request.getParameter("grade"));
+    	  int semester = Integer.parseInt(request.getParameter("semester"));
+    	  request.setAttribute("now_sub_datas", sort[(grade-1)*2 + semester - 1]);
+      }
       
       ActionForward forward = new ActionForward();
       forward.setPath("CreditManagement.jsp");

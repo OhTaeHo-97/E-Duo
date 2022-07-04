@@ -9,9 +9,11 @@
             </div>
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-              <div class="site-logo">
-                <a href="main.do" class="js-logo-clone">Shoppers</a>
-              </div>
+              <!-- <div class="site-logo"> -->
+              <a href="main.do" class="js-logo-clone">
+              	<img src="images/logo.png" alt="로고">
+              </a>
+              <!-- </div> -->
             </div>
 
             <div class="col-6 col-md-4 order-3 order-md-3 text-right">
@@ -34,10 +36,10 @@
           </div>
         </div>
       </div> 
-      <nav class="site-navigation text-right text-md-center" role="navigation">
+      <nav class="site-navigation text-right text-md-center" role="navigation" style="background: rgba(10, 237, 245, 0.3);">
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
-            <li class="active"><a href="showCreditManage.cre">학점 관리</a></li>
+            <li><a href="showCreditManage.cre">학점 관리</a></li>
             <li><a href="timetablePage.timetable">시간표</a></li>
             <li class = "has-children">
             	<a href="bulletin_main.bul">게시판</a>

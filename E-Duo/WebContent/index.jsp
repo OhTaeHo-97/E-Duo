@@ -51,12 +51,14 @@
               <div class="p-3 p-lg-5 border" style="position: fixed;">
                 <div class="form-group row">
                   <div class="col-md-12">
-                    <a href="register" class="btn btn-primary btn-lg btn-block"><br><br><br>로고가 들어갈 공간<br><br><br>.</a>
+<!--                     <a href="register" class="btn btn-primary btn-lg btn-block"> -->
+                    	<img src="images/logo.png" alt="로고">
+<!--                     </a> -->
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-md-12">
-                    <a href="login.jsp" class="btn btn-primary btn-lg btn-block">로그인</a>
+                    <a href="login.jsp" class="btn btn-primary btn-lg btn-block" style="background-color: rgba(10, 237, 245, 0.3); border: rgba(10, 237, 245, 0.3); color: black;">로그인</a>
                   </div>
                 </div>
                 <div class="form-group row">

@@ -26,25 +26,40 @@
 <body>
   
   <div class="site-wrap">
-    <mytag:header />
+<%--     <mytag:header /> --%>
+	<div style = "position:relative; left:25%; width:50%;">
+	<div class="p-3 p-lg-5" style="margin-top: 100px;">
+		<div style="width:100%;">
+			<div style="text-align:center; float: left;">
+				<img src="images/logo.png">
+			</div>
+		</div>
+		
+		<div style="float: right; margin-top: 90px;">
+			<div style="text-align:center;">
+				<span style="font-size: 15pt; font-weight: bold; color: black;">학교생활의 도우미</span>
+			</div>
+		</div>
+	</div>
+	</div>
 
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Login</strong></div>
-        </div>
-      </div>
-    </div>  
+<!--     <div class="bg-light py-3"> -->
+<!--       <div class="container"> -->
+<!--         <div class="row"> -->
+<!--           <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Login</strong></div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div>   -->
 
     <div class="site-section">
-      <div class="container">
+      <div class="container" style="margin-top: 40px;">
         <!-- <div class="row"> -->
         <div>
-          <div class="col-md-12">
-            <h2 class="h3 mb-3 text-black" style = "text-align:center;">Login</h2>
-          </div>
+<!--           <div class="col-md-12"> -->
+<!--             <h2 class="h3 mb-3 text-black" style = "text-align:center;">Login</h2> -->
+<!--           </div> -->
           <!-- <div class="col-md-7" style = "width:100%;"> -->
-          <div style = "position:relative; left:25%; width:50%;">
+          <div style = "position:relative; left:25%; width:50%; float: none;">
 
             <form action="login.mem" method="POST" name = "loginForm" id = "loginForm" onsubmit = "return login_check()">
               
@@ -74,7 +89,7 @@
                     <input type="submit" class="btn btn-primary btn-lg btn-block" value="로그인">
                   </div>
                   <div class="col-md-6">
-                    <input type="button" class="btn btn-primary btn-lg btn-block" value="메인으로 돌아가기" onClick = "location.href='index.jsp'">
+                    <input type="button" class="btn btn-primary btn-lg btn-block" value="메인으로" onClick = "location.href='index.jsp'">
                   </div>
                 </div>
                 <!-- <div class="form-group row">
@@ -104,7 +119,7 @@
       </div>
     </div>
 
-    <mytag:footer />
+<%--     <mytag:footer /> --%>
   </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
