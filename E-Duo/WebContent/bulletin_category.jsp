@@ -32,7 +32,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-          	<a href="index.html">게시판</a>
+          	<a href="bulletin_main.bul">게시판</a>
           	<span class="mx-2 mb-0">/</span>
           	<strong class="text-black">
           		<c:set var = "category" value = "${category}" scope="page"/>
@@ -111,8 +111,8 @@
               </div>
             </div>
              <c:forEach var="data" items="${bul_datas}">           	
-	            <div class="col-sm-6 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer" 
-	            onclick = "location.href = 'bulletin_detail.bul?bul_id=${data.bul_id}'";>
+	            <div class="col-sm-12 col-lg-12 mb-4" data-aos="fade-up" style="cursor:pointer" 
+	            onclick = "location.href = 'bulletin_detail.bul?bul_id=${data.bul_id}'">
 	                <div class="block-4 border" style = "padding: 5%;">
 	                  <div style = "width: 70%; height: 2rem; overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">
 	                    <span style = "font-weight: bold; font-size:1.5rem;">${data.title}</span>

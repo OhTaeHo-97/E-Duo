@@ -47,9 +47,6 @@ public class GetTimeTableAction implements Action {
 		ArrayList<My_subjectSet> datas = dao.getMyTimetable(set);
 		ActionForward forward = null;
 		int total_credit_num = 0;
-//		for(My_subjectSet mset : datas) {
-//			total_credit_num += mset.getSubjectVO().getCredit_num();
-//		}
 		ArrayList<TimeTableVO> sub_datas = new ArrayList<TimeTableVO>();
 		for(My_subjectSet mset : datas) {
 			total_credit_num += mset.getSubjectVO().getCredit_num();
@@ -72,9 +69,6 @@ public class GetTimeTableAction implements Action {
 				int end_hour = Integer.parseInt(st.nextToken());
 				double end_min = (double)Math.round((Double.parseDouble(st.nextToken()) / 60) * 100) / 100;
 				double height = ((end_hour - start_hour) + (end_min - start_min)) * 100;
-//				System.out.println("start_hour: " + start_hour + ", end_hour: " + end_hour + ", start_min: " + start_min + ", end_min: " + end_min);
-//				System.out.println("result: " + (end_hour - start_hour) + (end_min - start_min));
-//				System.out.println("height: " + height);
 				tvo.setFirst_start(start_position);
 				tvo.setFirst_height(height);
 			}

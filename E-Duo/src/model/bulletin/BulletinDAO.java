@@ -30,7 +30,7 @@ public class BulletinDAO {
    private String sql_searchBulletinByContent = "SELECT * FROM bulletin where category = ? and content LIKE '%'||?||'%' order by bul_id desc";
    private String sql_searchBulletinByContent_Title = "SELECT * FROM bulletin where category = ? and (content LIKE '%'||?||'%' or title LIKE '%'||?||'%') order by bul_id desc";
    private String sql_selectMyBulletin = "SELECT * FROM bulletin WHERE stu_id = ? order by bul_id desc";
-   private String sql_selectTop3 = "SELECT * FROM bulletin where category = ? and rownum < 5 order by bul_id desc";
+   private String sql_selectTop3 = "SELECT * FROM bulletin where category = ? LIMIT 3";
 
    public ArrayList<BulletinVO> selectTop3(BulletinVO vo) {
       ArrayList<BulletinVO> bul_datas = new ArrayList<BulletinVO>();

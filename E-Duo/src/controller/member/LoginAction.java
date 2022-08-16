@@ -32,6 +32,7 @@ public class LoginAction implements Action {
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", data.getStu_id());
 				session.setAttribute("auth", data.getAuth());
+				session.setAttribute("menu", "");
 				forward = new ActionForward();
 				forward.setPath("main.do");
 				forward.setRedirect(false);
@@ -46,6 +47,7 @@ public class LoginAction implements Action {
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", data.getStu_id());
 				session.setAttribute("auth", data.getAuth());
+				session.setAttribute("menu", "");
 				forward = new ActionForward();
 				forward.setPath("main.do");
 				forward.setRedirect(false);

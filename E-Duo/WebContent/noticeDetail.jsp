@@ -27,14 +27,6 @@
 <div class="site-wrap">
     <mytag:header />
 
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Login</strong></div>
-        </div>
-      </div>
-    </div>  
-
     <div class="site-section">
       <div class="container">
         <!-- <div class="row"> -->
@@ -69,7 +61,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-3">
-                <input type="button" class="btn btn-primary btn-lg btn-block" value="메인으로 돌아가기" onClick = "location.href = 'noticePage.notice'">
+                <input type="button" class="btn btn-primary btn-lg btn-block" style="font-size: 1rem;" value="메인으로 돌아가기" onClick = "location.href = 'noticePage.notice'">
                 </div>
             </div>
             <!-- <div class="form-group row">

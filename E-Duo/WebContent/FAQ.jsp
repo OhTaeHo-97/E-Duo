@@ -28,14 +28,6 @@
 	<div class="site-wrap">
     <mytag:header />
 
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Contact</strong></div>
-        </div>
-      </div>
-    </div>  
-
     <div class="site-section">
       <div class="container">
         <div class="row">
@@ -83,7 +75,7 @@
 		                			<li class = "faq_list1">
 		                  				<div class="border p-4 rounded mb-4" class = "faq_list">
 		                    				<div style = "margin-left: 7%;">
-		                      					<span style = "font-size: 1.5rem; font-weight: 500;">${data.title}</span>
+		                      					<span style = "font-size: 1.2rem; font-weight: 500;">${data.title}</span>
 		                    				</div>
 		                      			</div>
 		                    		</li>

@@ -9,11 +9,9 @@
             </div>
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-              <!-- <div class="site-logo"> -->
-              <a href="main.do" class="js-logo-clone">
-              	<img src="images/logo.png" alt="로고">
-              </a>
-              <!-- </div> -->
+                <a href="main.do" class="js-logo-clone">
+                	<img src="images/logo.png" alt="로고" style="width: 10rem; heigh: 4rem;">
+                </a>
             </div>
 
             <div class="col-6 col-md-4 order-3 order-md-3 text-right">
@@ -36,31 +34,33 @@
           </div>
         </div>
       </div> 
-      <nav class="site-navigation text-right text-md-center" role="navigation" style="background: rgba(10, 237, 245, 0.3);">
+      <nav class="site-navigation text-right text-md-center" role="navigation" style="background-color: rgba(0, 247, 255, 0.3);">
         <div class="container">
           <ul class="site-menu js-clone-nav d-none d-md-block">
-            <li><a href="showCreditManage.cre">학점 관리</a></li>
-            <li><a href="timetablePage.timetable">시간표</a></li>
-            <li class = "has-children">
+          	<c:if test="${auth eq 's'}">
+          		<li id = "cre_manage"><a href="showCreditManage.cre">학점 관리</a></li>
+            	<li id = "timetable"><a href="timetablePage.timetable">시간표</a></li>
+          	</c:if>
+            <li id="bulletin" class = "has-children">
             	<a href="bulletin_main.bul">게시판</a>
             	<ul class="dropdown">
-	                <li><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
-	                <li><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
-	                <li><a href="selectCategoryFilterAll.bul?category=fresh">새내기게시판</a></li>
-	                <li><a href="selectCategoryFilterAll.bul?category=ad">홍보게시판</a></li>
-	                <li><a href="selectCategoryFilterAll.bul?category=job">취업·진로</a></li>
-	                <li><a href="selectCategoryFilterAll.bul?category=market">장터게시판</a></li>
+	                <li id="free"><a href="selectCategoryFilterAll.bul?category=free">자유게시판</a></li>
+	                <li id="info"><a href="selectCategoryFilterAll.bul?category=info">정보게시판</a></li>
+	                <li id="fresh"><a href="selectCategoryFilterAll.bul?category=fresh">새내기게시판</a></li>
+	                <li id="ad"><a href="selectCategoryFilterAll.bul?category=ad">홍보게시판</a></li>
+	                <li id="job"><a href="selectCategoryFilterAll.bul?category=job">취업·진로</a></li>
+	                <li id="market"><a href="selectCategoryFilterAll.bul?category=market">장터게시판</a></li>
               	</ul>
             </li>
-            <li><a href="noticePage.notice">공지사항</a></li>
-            <li class = "has-children">
+            <li id="notice"><a href="noticePage.notice">공지사항</a></li>
+            <li id="enquiry" class = "has-children">
             	<a href="selectAllFAQ.faq">문의하기</a>
             	<ul class="dropdown">
-	                <li><a href="selectAllFAQ.faq">FAQ</a></li>
-	                <li><a href="question.jsp">문의하기</a></li>
-	                <li><a href="#">이용약관</a></li>
-	                <li><a href="#">개인정보 처리방침</a></li>
-	                <li><a href="#">커뮤니티 이용규칙</a></li>
+	                <li id="FAQ"><a href="selectAllFAQ.faq">FAQ</a></li>
+	                <li id="enq"><a href="question.jsp">문의하기</a></li>
+	                <li id="terms"><a href="#">이용약관</a></li>
+	                <li id="private"><a href="#">개인정보 처리방침</a></li>
+	                <li id="community_rule"><a href="#">커뮤니티 이용규칙</a></li>
               	</ul>
             </li>
             <!-- <li><a href="contact.html">Contact</a></li> -->
@@ -68,3 +68,8 @@
         </div>
       </nav>
     </header>
+    
+<script>
+	let ids = ['cre_manage', 'timetable', 'bulletin', 'free', 'info', 'fresh', 'ad', 'job', 'market', 'notice', 'enquiry', 'FAQ', 'enq', 'terms', 'private', 'community_rule'];
+	
+</script>

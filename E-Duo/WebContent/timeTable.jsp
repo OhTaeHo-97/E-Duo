@@ -30,6 +30,15 @@
 		background-color: #fff;
 		overflow: hidden;
 	}
+	#menu {
+		position: absolute;
+		margin: 0 auto;
+		width: 100%;
+	}
+	#selectMenu {
+		position: absolute;
+		display: none;
+	}
 	th {
 		width: 80px;
 	}
@@ -65,6 +74,7 @@
 		position: absolute;
 		z-index: 20;
 		padding: 0;
+		width: 204px;
 	}
 	.subject {
 		position: absolute;
@@ -78,17 +88,92 @@
 	}
 	ul.status {
 		list-style: none;
+		padding: 0;
 	}
 	ul.status li.remove {
 		background-image: url(images/remove.png);
 	}
 	ul.status li {
-		float: left;
+		float: right;
 		width: 15px;
 		height: 15px;
 		background-repeat: no-repeat;
 		background-position: center center;
 		cursor: pointer;
+	}
+	#subject_table {
+		text-align: center;
+	}
+	#class_title {
+		background: rgba(10, 237, 245, 0.3);
+	}
+	.color1 {
+		background-color: rgba(10, 237, 245, 0.3);
+	}
+	.color2 {
+		background-color: rgba(20, 30, 50, 0.2);
+	}
+	.color3 {
+		background-color: rgba(123, 230, 20, 0.5);
+	}
+	.color4 {
+		background-color: rgba(233, 3, 203, 0.2);
+	}
+	.color5 {
+		background-color: rgba(23, 94, 123, 0.2);
+	}
+	.color6 {
+		background-color: rgba(102, 150, 112, 0.3);
+	}
+	.color7 {
+		background-color: rgba(123, 99, 1, 0.2);
+	}
+	.color8 {
+		background-color: rgba(28, 233, 98, 0.3);
+	}
+	.color9 {
+		background-color: rgba(202, 20, 123, 0.2);
+	}
+	.color10 {
+		background-color: rgba(200, 232, 33, 0.4);
+	}
+	.color11 {
+		background-color: rgba(123, 213, 221, 0.3);
+	}
+	.color12 {
+		background-color: rgba(12, 23, 43, 0.2);
+	}
+	.color13 {
+		background-color: rgba(122, 32, 43, 0.3);
+	}
+	.color14 {
+		background-color: rgba(32, 232, 34, 0.5);
+	}
+	.color15 {
+		background-color: rgba(123, 32, 34, 0.2);
+	}
+	@media(max-width: 1199px) {
+		.col {
+			width: 168px;
+		}
+	}
+	@media(max-width: 991px) {
+		.col {
+			width: 120px;
+		}
+		#menu {
+			display: none;
+		}
+		#selectMenu {
+			display: block;
+			top: 50px;
+			right: 20px;
+		}
+	}
+	@media(max-width: 767px) {
+		.col {
+			width: 84px;
+		}
 	}
 </style>
 </head>
@@ -96,196 +181,200 @@
 	<div class="site-wrap">
     <mytag:header />
 
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">About</strong></div>
-        </div>
-      </div>
-    </div> 
-
     <div class="site-section border-bottom" data-aos="fade">
       <div class="container">
       <div class="row">
           <div class="col-md-12">
             <div class="site-section site-blocks-2">
-                <div class="row" style = "margin: 0 auto;">
-                  <c:choose>
-                  	<c:when test = "${grade eq 1 and semester eq 1}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=1&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">1학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=1&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">1학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 1 and semester eq 2}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=1&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">1학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=1&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">1학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 2 and semester eq 1}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=2&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">2학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=2&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">2학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 2 and semester eq 2}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=2&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">2학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=2&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">2학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 3 and semester eq 1}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=3&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">3학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=3&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">3학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 3 and semester eq 2}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=3&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">3학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=3&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">3학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 4 and semester eq 1}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=4&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">4학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=4&semester=1">
-		                    <div>
-		                      <span class="text-uppercase text-black">4학년 1학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
-                  <c:choose>
-                  	<c:when test = "${grade eq 4 and semester eq 2}">
-	                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
-		                  <a href="timetablePage.timetable?grade=4&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">4학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:when>
-                  	<c:otherwise>
-                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
-		                  <a href="timetablePage.timetable?grade=4&semester=2">
-		                    <div>
-		                      <span class="text-uppercase text-black">4학년 2학기</span>
-		                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
-		                    </div>
-		                  </a>
-	                  </div>
-                  	</c:otherwise>
-                  </c:choose>
+                <div id = "menu" class="row">
+             		<c:choose>
+	                  	<c:when test = "${grade eq 1 and semester eq 1}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=1&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">1학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=1&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">1학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 1 and semester eq 2}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=1&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">1학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g1s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=1&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">1학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 2 and semester eq 1}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=2&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">2학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=2&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">2학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 2 and semester eq 2}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=2&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">2학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g2s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=2&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">2학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 3 and semester eq 1}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=3&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">3학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=3&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">3학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 3 and semester eq 2}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=3&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">3학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g3s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=3&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">3학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 4 and semester eq 1}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=4&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">4학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s1" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=4&semester=1">
+			                    <div>
+			                      <span class="text-uppercase text-black">4학년 1학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                  </c:choose>
+	                  <c:choose>
+	                  	<c:when test = "${grade eq 4 and semester eq 2}">
+		                  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%; background-color: #dee2e6;">
+			                  <a href="timetablePage.timetable?grade=4&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">4학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:when>
+	                  	<c:otherwise>
+	                  	  <div class="col-sm-6 col-md-6 col-lg-3-2 mb-4 mb-lg-0" id="g4s2" data-aos="fade" data-aos-delay="" style = "height: 40px; text-align: center; line-height: 40px; margin-right: 0.5%;">
+			                  <a href="timetablePage.timetable?grade=4&semester=2">
+			                    <div>
+			                      <span class="text-uppercase text-black">4학년 2학기</span>
+			                      <!-- <h3><span class = "text-black">1학년 1학기</span></h3> -->
+			                    </div>
+			                  </a>
+		                  </div>
+	                  	</c:otherwise>
+	                 </c:choose>
+                </div>
+                <div id="selectMenu" class="row" style = "margin: 0 auto;">
+                	<select onchange="if(this.value) location.href=('timetablePage.timetable?' + this.value);">
+                		<option value="grade=1&semester=1" <c:if test="${grade eq 1 and semester eq 1}"> selected </c:if>>1학년 1학기</option>
+                		<option value="grade=1&semester=2" <c:if test="${grade eq 1 and semester eq 2}"> selected </c:if>>1학년 2학기</option>
+                		<option value="grade=2&semester=1" <c:if test="${grade eq 2 and semester eq 1}"> selected </c:if>>2학년 1학기</option>
+                		<option value="grade=2&semester=2" <c:if test="${grade eq 2 and semester eq 2}"> selected </c:if>>2학년 2학기</option>
+                		<option value="grade=3&semester=1" <c:if test="${grade eq 3 and semester eq 1}"> selected </c:if>>3학년 1학기</option>
+                		<option value="grade=3&semester=2" <c:if test="${grade eq 3 and semester eq 2}"> selected </c:if>>3학년 2학기</option>
+                		<option value="grade=4&semester=1" <c:if test="${grade eq 4 and semester eq 1}"> selected </c:if>>4학년 1학기</option>
+                		<option value="grade=4&semester=2" <c:if test="${grade eq 4 and semester eq 2}"> selected </c:if>>4학년 2학기</option>
+                	</select>
                 </div>
             </div>
           </div>
@@ -332,7 +421,7 @@
            						</div>
            					</th>
            					<td id="MON">
-           						<div class="col" style="width: 168px;"></div>
+           						<div class="col"></div>
            						<div>
            							<div class="area"></div>
            							<div class="area"></div>
@@ -352,7 +441,7 @@
            						</div>
            					</td>
            					<td id="TUE">
-           						<div class="col" style="width: 168px;"></div>
+           						<div class="col"></div>
            						<div>
            							<div class="area"></div>
            							<div class="area"></div>
@@ -372,7 +461,7 @@
            						</div>
            					</td>
            					<td id="WED">
-           						<div class="col" style="width: 168px;"></div>
+           						<div class="col"></div>
            						<div>
            							<div class="area"></div>
            							<div class="area"></div>
@@ -392,7 +481,7 @@
            						</div>
            					</td>
            					<td id="THU">
-           						<div class="col" style="width: 168px;"></div>
+           						<div class="col"></div>
            						<div>
            							<div class="area"></div>
            							<div class="area"></div>
@@ -412,7 +501,7 @@
            						</div>
            					</td>
            					<td id="FRI">
-           						<div class="col" style="width: 168px;"></div>
+           						<div class="col"></div>
            						<div>
            							<div class="area"></div>
            							<div class="area"></div>
@@ -432,7 +521,7 @@
            						</div>
            					</td>
            					<td id="SAT" style="display: none;">
-           						<div class="col" style="width: 168px;"></div>
+           						<div class="col"></div>
            						<div>
            							<div class="area"></div>
            							<div class="area"></div>
@@ -488,7 +577,7 @@
       <div class="form-group" style="height: 150px; margin-top: 20px;">
         <div class="col-md-10" style="margin: 0 auto;">
           <table style="width: 100%;" id="subject_table" border="1">
-            <tr>
+            <tr id="class_title">
               <th>학수번호</th>
               <th>과목명</th>
               <th>이수</th>
@@ -549,15 +638,30 @@
 				$("table#subject_table").children().remove();
 				$('<tr><th>학수번호</th><th>과목명</th><th>이수</th><th>학점</th><th>교수</th><th>시간</th><th>강의실</th></tr>').appendTo($("#subject_table"));
 				$.each(data, function(k, d) {
-					$('<tr class="content" onclick=location.href="insertSubject.timetable?aca=' + d.academic_number
-							+ '&grade=' + <%= request.getAttribute("grade") %> + '&semester=' + <%= request.getAttribute("semester") %> + '"><td>' + d.academic_number + '</td><td>' + d.subject_name + '</td>'
-							+ '<td>' + d.sub_sort + '</td><td>' + d.credit_num + '</td><td>' + d.professor + '</td>'
-							+ '<td>' + d.first_date + ' ' + d.first_start + '~' + d.first_end + '<br>'
-							+ d.second_date + ' ' + d.second_start + '~' + d.second_end + '<br>'
-							+ d.third_date + ' ' + d.third_start + '~' + d.third_end + '</td>'
-							+ '<td>' + d.classroom + '</td>' + '</tr>').appendTo($("#subject_table"));
-					/* $('<li><a href="javascript:void(0);" onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</a></li>').val(k).text(v).appendTo($("#univ_list")); */
-					/* $('<li onclick="findUniv(\'' + k + '\',\'' + v + '\');">' + v + '</li>').val(k).text(v).appendTo($("#sub_list")); */
+					if(d.first_date == 'NULL') {
+						
+					} else if(d.second_date == 'NULL') {
+						$('<tr class="content" onclick=location.href="insertSubject.timetable?aca=' + d.academic_number
+								+ '&grade=' + <%= request.getAttribute("grade") %> + '&semester=' + <%= request.getAttribute("semester") %> + '"><td>' + d.academic_number + '</td><td>' + d.subject_name + '</td>'
+								+ '<td>' + d.sub_sort + '</td><td>' + d.credit_num + '</td><td>' + d.professor + '</td>'
+								+ '<td>' + d.first_date + ' ' + d.first_start + '~' + d.first_end + '<br>'
+								+ '<td>' + d.classroom + '</td>' + '</tr>').appendTo($("#subject_table"));
+					} else if(d.third_date == 'NULL') {
+						$('<tr class="content" onclick=location.href="insertSubject.timetable?aca=' + d.academic_number
+								+ '&grade=' + <%= request.getAttribute("grade") %> + '&semester=' + <%= request.getAttribute("semester") %> + '"><td>' + d.academic_number + '</td><td>' + d.subject_name + '</td>'
+								+ '<td>' + d.sub_sort + '</td><td>' + d.credit_num + '</td><td>' + d.professor + '</td>'
+								+ '<td>' + d.first_date + ' ' + d.first_start + '~' + d.first_end + '<br>'
+								+ d.second_date + ' ' + d.second_start + '~' + d.second_end + '<br>'
+								+ '<td>' + d.classroom + '</td>' + '</tr>').appendTo($("#subject_table"));
+					} else {
+						$('<tr class="content" onclick=location.href="insertSubject.timetable?aca=' + d.academic_number
+								+ '&grade=' + <%= request.getAttribute("grade") %> + '&semester=' + <%= request.getAttribute("semester") %> + '"><td>' + d.academic_number + '</td><td>' + d.subject_name + '</td>'
+								+ '<td>' + d.sub_sort + '</td><td>' + d.credit_num + '</td><td>' + d.professor + '</td>'
+								+ '<td>' + d.first_date + ' ' + d.first_start + '~' + d.first_end + '<br>'
+								+ d.second_date + ' ' + d.second_start + '~' + d.second_end + '<br>'
+								+ d.third_date + ' ' + d.third_start + '~' + d.third_end + '</td>'
+								+ '<td>' + d.classroom + '</td>' + '</tr>').appendTo($("#subject_table"));
+					}
 					console.log(d.sub_id);
 				});
 			},
@@ -578,11 +682,14 @@
   	let parents, parents2, parents3;
   	let newUlTag, newUlTag2, newUlTag3;
   	let newHTag, newHTag2, newHTag3;
+  	let index = 1;
+  	
   	<c:forEach items="${table_datas}" var="item">
  		<c:if test="${not empty item.subjectVO.first_date}">
   			newDiv = document.createElement("div");
   	  		newDiv.setAttribute("id", "first_" + "${item.my_sub_id}");
-  	  		newDiv.setAttribute("class", "subject");
+  	  		newDiv.setAttribute("class", "subject color" + index);
+  	  		newDiv.setAttribute("style", "overflow: hidden;");
   	  		newDiv.style.height = "${item.first_height}" + "px";
   	  		newDiv.style.top = "${item.first_start}" + "px";
   	  		newUlTag = document.createElement('ul');
@@ -591,8 +698,9 @@
   	  		newUlTag.innerHTML = '<li title="삭제" class="remove" onclick="removeClass(${item.my_sub_id})"></li>';
   	  		newHTag = document.createElement('h3');
   	  		newHTag.innerHTML = "${item.subjectVO.subject_name}";
+  	  		newHTag.style.cssText = "font-size: 1.3rem;";
   			newPTag = document.createElement('p');
-  			newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+  			newPTag.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><br><span>" + "${item.subjectVO.classroom}" + "</span>";
   			newDiv.append(newUlTag, newHTag, newPTag);
   			<c:choose>
 	  			<c:when test="${item.subjectVO.first_date eq 'MON'}">
@@ -624,7 +732,7 @@
  		<c:if test="${not empty item.subjectVO.second_date}">
   			newDiv2 = document.createElement("div");
   	  		newDiv2.setAttribute("id", "second_" + "${item.my_sub_id}");
-  	  		newDiv2.setAttribute("class", "subject");
+  	  		newDiv2.setAttribute("class", "subject color" + index);
   	  		newDiv2.style.height = "${item.second_height}" + "px";
   	  		newDiv2.style.top = "${item.second_start}" + "px";
   	  		newUlTag2 = document.createElement('ul');
@@ -633,8 +741,9 @@
   	  		newUlTag2.innerHTML = '<li title="삭제" class="remove" onclick="removeClass(${item.my_sub_id})"></li>';
   	  		newHTag2 = document.createElement('h3');
   	  		newHTag2.innerHTML = "${item.subjectVO.subject_name}";
+  	  		newHTag2.style.cssText = "font-size: 1.3rem;";
   			newPTag2 = document.createElement('p');
-  			newPTag2.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+  			newPTag2.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><br><span>" + "${item.subjectVO.classroom}" + "</span>";
   			newDiv2.append(newUlTag2, newHTag2, newPTag2);
   			<c:choose>
 	  			<c:when test="${item.subjectVO.second_date eq 'MON'}">
@@ -666,7 +775,7 @@
  		<c:if test="${not empty item.subjectVO.third_date}">
   			newDiv3 = document.createElement("div");
   	  		newDiv3.setAttribute("id", "third_" + "${item.my_sub_id}");
-  	  		newDiv3.setAttribute("class", "subject");
+  	  		newDiv3.setAttribute("class", "subject color" + index);
   	  		newDiv3.style.height = "${item.third_height}" + "px";
   	  		newDiv3.style.top = "${item.third_start}" + "px";
   	  		newUlTag3 = document.createElement('ul');
@@ -675,8 +784,9 @@
   	  		newUlTag3.innerHTML = '<li title="삭제" class="remove" onclick="removeClass(${item.my_sub_id})"></li>';
   	  		newHTag3 = document.createElement('h3');
   	  		newHTag3.innerHTML = "${item.subjectVO.subject_name}";
+  	  		newHTag3.style.cssText = "font-size: 1.3rem;";
   			newPTag3 = document.createElement('p');
-  			newPTag3.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><span>" + "${item.subjectVO.classroom}" + "</span>";
+  			newPTag3.innerHTML = "<em>" + "${item.subjectVO.professor}" + "</em><br><span>" + "${item.subjectVO.classroom}" + "</span>";
   			newDiv3.append(newUlTag3, newHTag3, newPTag3);
   			<c:choose>
 	  			<c:when test="${item.subjectVO.third_date eq 'MON'}">
@@ -705,6 +815,7 @@
 	  			</c:when>
   			</c:choose>
   		</c:if>
+  		index += 1
 	</c:forEach>
 
   </script>

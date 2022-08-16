@@ -35,18 +35,18 @@
             <div class="row mb-5">
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
-                  <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "selectCategoryFilterAll.bul?category=free">
-                  		<h3 class="mb-3 h6 text-uppercase text-black d-block">자유게시판</h3>
-                  	</a>          
+                  <div style = "height: 45px; padding-left: 1rem; border-bottom: 1px solid #dee2e6; background-color: rgba(0, 247, 255, 0.3);">
+                  	<a href = "bulletin_category.bul?category=free">
+                  		<h3 class="mb-3 h6 text-uppercase text-black d-block" style="color: rgba(100, 100, 100, 0.6); line-height: 45px;">자유게시판</h3>
+                  	</a>
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
 	                    <c:forEach var = "data" items="${free_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
-	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
-	                          		<h5 class = "text-black">${data.title}</h4>
-	                         			${data.content}
+	                        	<li style = "padding: 10px 10px 5px 20px; border-bottom: 1px solid #dee2e6;">
+	                          		<h5 class = "text-black" style="font-size: 1rem;">${data.title}</h4>
+	                         			<span style="font-size: 0.8rem;">${data.content}</span>
 	                        	</li>
 	                      	</a>
 	                    </c:forEach>                    
@@ -56,18 +56,18 @@
               </div>
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
-                  <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "selectCategoryFilterAll.bul?category=info">
-                  		<h3 class="mb-3 h6 text-uppercase text-black d-block">정보게시판</h3>
+                  <div style = "height: 45px; padding-left: 1rem; border-bottom: 1px solid #dee2e6; background-color: rgba(0, 247, 255, 0.3);">
+                  	<a href = "bulletin_category.bul?category=info">
+                  		<h3 class="mb-3 h6 text-uppercase text-black d-block" style="color: rgba(100, 100, 100, 0.6); line-height: 45px;">정보게시판</h3>
                   	</a>          
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
 	                    <c:forEach var = "data" items="${info_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
-	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
-	                          		<h5 class = "text-black">${data.title}</h4>
-	                         			${data.content}
+	                        	<li style = "padding: 10px 10px 5px 20px; border-bottom: 1px solid #dee2e6;">
+	                          		<h5 class = "text-black" style="font-size: 1rem;">${data.title}</h4>
+	                         			<span style="font-size: 0.8rem;">${data.content}</span>
 	                        	</li>
 	                      	</a>
 	                    </c:forEach>                    
@@ -77,18 +77,18 @@
               </div>
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
-                  <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "selectCategoryFilterAll.bul?category=fresh">
-                  		<h3 class="mb-3 h6 text-uppercase text-black d-block">새내기게시판</h3>
+                  <div style = "height: 45px; padding-left: 1rem; border-bottom: 1px solid #dee2e6; background-color: rgba(0, 247, 255, 0.3);">
+                  	<a href = "bulletin_category.bul?category=fresh">
+                  		<h3 class="mb-3 h6 text-uppercase text-black d-block" style="color: rgba(100, 100, 100, 0.6); line-height: 45px;">새내기게시판</h3>
                   	</a>          
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
 	                    <c:forEach var = "data" items="${fresh_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
-	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
-	                          		<h5 class = "text-black">${data.title}</h4>
-	                         			${data.content}
+	                        	<li style = "padding: 10px 10px 5px 20px; border-bottom: 1px solid #dee2e6;">
+	                          		<h5 class = "text-black" style="font-size: 1rem;">${data.title}</h4>
+	                         			<span style="font-size: 0.8rem;">${data.content}</span>
 	                        	</li>
 	                      	</a>
 	                    </c:forEach>                    
@@ -98,18 +98,18 @@
               </div>
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
-                  <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "selectCategoryFilterAll.bul?category=ad">
-                  		<h3 class="mb-3 h6 text-uppercase text-black d-block">홍보게시판</h3>
+                  <div style = "height: 45px; padding-left: 1rem; border-bottom: 1px solid #dee2e6; background-color: rgba(0, 247, 255, 0.3);">
+                  	<a href = "bulletin_category.bul?category=ad">
+                  		<h3 class="mb-3 h6 text-uppercase text-black d-block" style="color: rgba(100, 100, 100, 0.6); line-height: 45px;">홍보게시판</h3>
                   	</a>          
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
 	                    <c:forEach var = "data" items="${ad_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
-	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
-	                          		<h5 class = "text-black">${data.title}</h4>
-	                         			${data.content}
+	                        	<li style = "padding: 10px 10px 5px 20px; border-bottom: 1px solid #dee2e6;">
+	                          		<h5 class = "text-black" style="font-size: 1rem;">${data.title}</h4>
+	                         			<span style="font-size: 0.8rem;">${data.content}</span>
 	                        	</li>
 	                      	</a>
 	                    </c:forEach>                    
@@ -119,18 +119,18 @@
               </div>
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
-                  <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "selectCategoryFilterAll.bul?category=job">
-                  		<h3 class="mb-3 h6 text-uppercase text-black d-block">취업 진로게시판</h3>
+                  <div style = "height: 45px; padding-left: 1rem; border-bottom: 1px solid #dee2e6; background-color: rgba(0, 247, 255, 0.3);">
+                  	<a href = "bulletin_category.bul?category=job">
+                  		<h3 class="mb-3 h6 text-uppercase text-black d-block" style="color: rgba(100, 100, 100, 0.6); line-height: 45px;">취업 진로게시판</h3>
                   	</a>          
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
 	                    <c:forEach var = "data" items="${job_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
-	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
-	                          		<h5 class = "text-black">${data.title}</h4>
-	                         			${data.content}
+	                        	<li style = "padding: 10px 10px 5px 20px; border-bottom: 1px solid #dee2e6;">
+	                          		<h5 class = "text-black" style="font-size: 1rem;">${data.title}</h4>
+	                         			<span style="font-size: 0.8rem;">${data.content}</span>
 	                        	</li>
 	                      	</a>
 	                    </c:forEach>                    
@@ -140,18 +140,18 @@
               </div>
               <div class="col-sm-6 col-lg-6 mb-4" data-aos="fade-up">
                 <div class="block-4 border">
-                  <div style = "padding: 20px 20px 10px 20px; border-bottom: 1px solid #dee2e6;">
-                  	<a href = "selectCategoryFilterAll.bul?category=market">
-                  		<h3 class="mb-3 h6 text-uppercase text-black d-block">장터게시판</h3>
+                  <div style = "height: 45px; padding-left: 1rem; border-bottom: 1px solid #dee2e6; background-color: rgba(0, 247, 255, 0.3);">
+                  	<a href = "bulletin_category.bul?category=market">
+                  		<h3 class="mb-3 h6 text-uppercase text-black d-block" style="color: rgba(100, 100, 100, 0.6); line-height: 45px;">장터게시판</h3>
                   	</a>          
                   </div>
                   <div>
                     <ul style = "list-style:none; padding-left:0; margin: 0;">
 	                    <c:forEach var = "data" items="${market_datas}">
 	                    	<a href = "bulletin_detail.bul?bul_id=${data.bul_id}" style = "color:black;">
-	                        	<li style = "padding: 20px; border-bottom: 1px solid #dee2e6;">
-	                          		<h5 class = "text-black">${data.title}</h4>
-	                         			${data.content}
+	                        	<li style = "padding: 10px 10px 5px 20px; border-bottom: 1px solid #dee2e6;">
+	                          		<h5 class = "text-black" style="font-size: 1rem;">${data.title}</h4>
+	                         			<span style="font-size: 0.8rem;">${data.content}</span>
 	                        	</li>
 	                      	</a>
 	                    </c:forEach>                    

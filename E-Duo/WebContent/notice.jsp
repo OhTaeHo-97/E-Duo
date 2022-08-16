@@ -26,15 +26,7 @@
 </head>
 <body>
 <div class="site-wrap">
-    <mytag:header />
-
-    <div class="bg-light py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 mb-0"><a href="index.js">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Contact</strong></div>
-            </div>
-        </div>
-    </div>  
+    <mytag:header /> 
 
     <div class="site-section">
         <div class="container">

@@ -15,16 +15,16 @@ public class My_subjectDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	private String sql_insert = "INSERT INTO my_subject VALUES((select nvl(max(my_sub_id), 0) + 1 from my_subject),?,?,?,?,?)"; // 오라클
-//	private String sql_insert = "INSERT INTO my_subject VALUES((SELECT IFNULL_MY_SUB_ID FROM (SELECT IFNULL((SELECT MY_SUB_ID FROM (SELECT MAX(my_sub_id) AS MY_SUB_ID FROM my_subject) A), 0) + 1 AS IFNULL_MY_SUB_ID FROM DUAL) B),?,?,?,?,?)"; // mysql
+//	private String sql_insert = "INSERT INTO my_subject VALUES((select nvl(max(my_sub_id), 0) + 1 from my_subject),?,?,?,?,?)"; // 오라클
+	private String sql_insert = "INSERT INTO my_subject VALUES((SELECT IFNULL_MY_SUB_ID FROM (SELECT IFNULL((SELECT MY_SUB_ID FROM (SELECT MAX(my_sub_id) AS MY_SUB_ID FROM my_subject) A), 0) + 1 AS IFNULL_MY_SUB_ID FROM DUAL) B),?,?,?,?,?)"; // mysql
 	private String sql_select = "SELECT * FROM my_subject WHERE my_sub_id=?";
 	private String sql_update = "UPDATE my_subject SET academic_number=?, credit=?, grade=?, semester=? WHERE my_sub_id=?";
 	private String sql_delete = "DELETE FROM my_subject WHERE my_sub_id=?";
 	private String sql_selectAll = "SELECT * FROM my_subject";
 	private String sql_selectAllMy_subject = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number where stu_id = ?";
-	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
+//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN subject s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
 	private String sql_getMySubject = "SELECT * FROM my_subject m JOIN subject s ON m.my_sub_id = s.sub_id WHERE m.stu_id=? AND m.grade=? AND m.semester=?";
-//	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
+	private String sql_getMyTimetable = "SELECT * FROM my_subject m JOIN lecture s ON m.academic_number = s.academic_number WHERE m.stu_id=? AND m.grade=? AND m.semester=? AND s.uni_id=?";
 	private String sql_removeSubject = "DELETE FROM my_subject WHERE my_sub_id = ?";
 	
 	private String sql_selectFilter = "";
